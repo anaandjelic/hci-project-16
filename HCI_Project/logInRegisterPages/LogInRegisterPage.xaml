@@ -1,0 +1,58 @@
+﻿<Page x:Class="HCI_Project.LogInRegister.LogInRegisterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HCI_Project.LogInRegister"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="LogInRegisterPage">
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="LeftRoundButton">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10, 0, 0, 0" />
+                    <Setter Property="BorderBrush" Value="Gray" />
+                </Style>
+            </Style.Resources>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1, 1, 0, 0"/>
+        </Style>
+        <Style TargetType="Button" x:Key="RightRoundButton">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="0, 10, 0, 0" />
+                    <Setter Property="BorderBrush" Value="Gray" />
+                </Style>
+            </Style.Resources>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1, 1, 1, 0"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="1" Grid.Column="1" Style="{DynamicResource LeftRoundButton}" Click="LogInPageClick">
+                <Viewbox>
+                    <TextBlock Text="LogIn"/>
+                </Viewbox>
+            </Button>
+        <Button Grid.Row="1" Grid.Column="2" Style="{DynamicResource RightRoundButton}" Click="RegisterPageClick">
+            <Viewbox>
+                <TextBlock Text="Register"/>
+            </Viewbox>
+        </Button>
+        <Frame Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Name="LogInRegisterFrame" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Page>
