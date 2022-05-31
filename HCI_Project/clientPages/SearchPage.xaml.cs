@@ -1,6 +1,4 @@
-﻿using HCI_Project.LogInRegister;
-using HCI_Project.utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,25 +13,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HCI_Project.managerPages
+namespace HCI_Project.clientPages
 {
-    /// <summary>
-    /// Interaction logic for ManagerPage.xaml
-    /// </summary>
-    public partial class ManagerPage : Page
+    public partial class SearchPage : Page
     {
-        private readonly Frame MainFrame;
-        public ManagerPage(Frame mainFrame)
+        public SearchPage()
         {
             InitializeComponent();
-            MainFrame = mainFrame;
+            SearchFrame.Content = new SearchContent();
             Style = (Style)FindResource(typeof(Page));
         }
 
-        private void LogOutClick(object sender, RoutedEventArgs e)
+        private void SearchClick(object sender, RoutedEventArgs e)
         {
-            Database.LogOut();
-            MainFrame.Content = new LogInPage(MainFrame);
+
         }
     }
 }

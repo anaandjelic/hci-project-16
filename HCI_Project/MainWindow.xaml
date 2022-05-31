@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCI_Project"
-        mc:Ignorable="d" Background="DodgerBlue"
-        Title="Railsy" Height="450" Width="800" Icon="images/icon.png">
+        mc:Ignorable="d" Background="DodgerBlue" FontFamily="Segoe UI"
+        Title="Railsy" MinHeight="450" MinWidth="800" Icon="images/icon.png">
     <Window.Resources>
         <Style TargetType="Button" x:Key="RoundButton">
             <Style.Resources>

@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Maps.MapControl.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Maps.MapControl.WPF.1.0.0.3\lib\net40-Client\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,24 +58,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="clientPages\MapPage.xaml.cs">
+      <DependentUpon>MapPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="clientPages\SearchPage.xaml.cs">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="clientPages\SearchContent.xaml.cs">
+      <DependentUpon>SearchContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="clientPages\TicketsPage.xaml.cs">
+      <DependentUpon>TicketsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="utils\Database.cs" />
     <Compile Include="utils\Exceptions.cs" />
+    <Compile Include="utils\Reservation.cs" />
+    <Compile Include="utils\Ticket.cs" />
     <Compile Include="utils\Train.cs" />
     <Compile Include="utils\TrainLine.cs" />
+    <Compile Include="utils\TrainTimeTable.cs" />
     <Compile Include="utils\User.cs" />
     <Page Include="clientPages\ClientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="logInRegisterPages\LogIn.xaml">
+    <Page Include="clientPages\MapPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="logInRegisterPages\LogInRegisterPage.xaml">
+    <Page Include="clientPages\SearchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="logInRegisterPages\Registration.xaml">
+    <Page Include="clientPages\SearchContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="clientPages\TicketsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LogInPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -87,14 +113,8 @@
     <Compile Include="clientPages\ClientPage.xaml.cs">
       <DependentUpon>ClientPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="logInRegisterPages\LogIn.xaml.cs">
-      <DependentUpon>LogIn.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="logInRegisterPages\LogInRegisterPage.xaml.cs">
-      <DependentUpon>LogInRegisterPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="logInRegisterPages\Registration.xaml.cs">
-      <DependentUpon>Registration.xaml</DependentUpon>
+    <Compile Include="LogInPage.xaml.cs">
+      <DependentUpon>LogInPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -127,6 +147,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

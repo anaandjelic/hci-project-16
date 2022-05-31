@@ -10,36 +10,22 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Background="DodgerBlue">
-            <Button Style="{DynamicResource MenuButton}">
-                <Viewbox>
-                    <TextBlock Padding="10, 5" Text="Home"/>
-                </Viewbox>
-            </Button>
-            <Button Style="{DynamicResource MenuButton}">
-                <Viewbox>
-                    <TextBlock Text="Search" Padding="10, 5"/>
-                </Viewbox>
-            </Button>
-            <Button Style="{DynamicResource MenuButton}">
-                <Viewbox>
-                    <TextBlock Text="Map" Padding="10, 5"/>
-                </Viewbox>
-            </Button>
-            <Button Style="{DynamicResource MenuButton}">
-                <Viewbox>
-                    <TextBlock Text="My tickets" Padding="10, 5"/>
-                </Viewbox>
-            </Button>
-            <Button Style="{DynamicResource MenuButton}" HorizontalAlignment="Right">
-                <Viewbox>
-                    <TextBlock Text="Log out" Padding="5"/>
-                </Viewbox>
-            </Button>
+            <Menu Background="DodgerBlue" Foreground="AliceBlue" FontSize="24">
+                <MenuItem Header="Search" Style="{StaticResource MenuStyle}">
+                    <MenuItem Header="TrainLine" Style="{StaticResource MenuItemStyle}" Click="ShowMap"/>
+                    <MenuItem Header="Timetable" Style="{StaticResource MenuItemStyle}" Click="ShowSearch"/>
+                </MenuItem>
+                <MenuItem Header="History" Style="{StaticResource MenuStyle}">
+                    <MenuItem Header="Tickets" Style="{StaticResource MenuItemStyle}" Click="ShowTickets"/>
+                    <MenuItem Header="Reservations" Style="{StaticResource MenuItemStyle}"/>
+                </MenuItem>
+                <MenuItem Header="Log Out" Style="{StaticResource MenuStyle}" Click="LogOutClick"/>
+            </Menu>
         </DockPanel>
-        <Frame x:Name="ManagerFrame" Grid.Row="2"/>
+        <Frame x:Name="ClientFrame" Grid.Row="2"/>
     </Grid>
 </Page>
