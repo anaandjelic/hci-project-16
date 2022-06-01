@@ -5,19 +5,35 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HCI_Project.clientPages"
-      mc:Ignorable="d" 
+      mc:Ignorable="d" Background="White"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MapPage">
 
+    <Page.Resources>
+        <ControlTemplate x:Key="CustomPushpinTemplate" TargetType="m:Pushpin">
+            <Rectangle Height="70">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource= "/HCI_Project;component/images/pin.png">
+                    </ImageBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </ControlTemplate>
+    </Page.Resources>
+    
     <Grid>
-        <Grid>
-            <m:Map CredentialsProvider="jcN70CoOBDnsrAlWKqWM~KGgDd7HLbAy2iRafyB9ytw~ApXB3OvpKS1Loo6XUCGodM0rf6U6ph0Jtc-kt3pk3FWMZ8zZVBhOxxMSViza80RG"
-                   Center="45.2461818273899, 19.85138567223834" ZoomLevel="10">
-                
-                <m:MapPolyline Stroke="Blue" StrokeThickness="5" 
-                 Locations="19.85,19.9 45.0,19.6 45.1,45.25" 
-                 Opacity="0.7"/>
-            </m:Map>
-        </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <m:Map CredentialsProvider="jcN70CoOBDnsrAlWKqWM~KGgDd7HLbAy2iRafyB9ytw~ApXB3OvpKS1Loo6XUCGodM0rf6U6ph0Jtc-kt3pk3FWMZ8zZVBhOxxMSViza80RG"
+               Center="45.2461818273899, 19.85138567223834" ZoomLevel="10" Name="MyMap"
+               AllowDrop="True" DragEnter="MapView_DragEnter" Drop="MapView_Drop" Grid.Column="1">
+
+            <Image Source="/HCI_Project;component/images/pin.png" Height="50" m:MapLayer.PositionOffset="15,0"
+                   m:MapLayer.Position="47.620574,-122.34942" m:MapLayer.PositionOrigin="BottomCenter"/>
+        </m:Map>
+        <Image Source="/HCI_Project;component/images/pin.png" Grid.Column="0" Height="70"
+               PreviewMouseLeftButtonDown="MapView_PreviewMouseLeftButtonDown"
+               MouseMove="Image_MouseMove"/>
     </Grid>
 </Page>

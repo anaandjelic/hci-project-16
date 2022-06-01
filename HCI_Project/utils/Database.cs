@@ -75,10 +75,10 @@ namespace HCI_Project.utils
         }
 
         // TrainLine CRUD
-        public static void AddTrainLine(List<string> stops, string departure, string destination, double price, Train train)
+        public static void AddTrainLine(List<Station> stations, double price, Train train)
         {
             int id = TrainLines.Count == 0 ? -1 : TrainLines.OrderByDescending(x => x.ID).First().ID;
-            TrainLines.Add(new TrainLine(++id, stops, departure, destination, price, train));
+            TrainLines.Add(new TrainLine(++id, stations, price, train));
         }
         public static TrainLine GetTrainLine(int ID)
         {

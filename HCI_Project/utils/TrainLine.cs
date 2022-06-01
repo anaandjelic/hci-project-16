@@ -9,28 +9,29 @@ namespace HCI_Project.utils
     public class TrainLine
     {
         public int ID { get; private set; }
-        public List<string> Stops { get; private set; }
-        public string Departure { get; private set; }
-        public string Destination { get; private set; }
+        public List<Station> Stations { get; private set; }
         public double Price { get; private set; }
         public Train Train { get; private set; }
 
-        public TrainLine(int iD, List<string> stops, string departure, string destination, double price, Train train)
+        public TrainLine(int iD, List<Station> stations, double price, Train train)
         {
             ID = iD;
-            Stops = stops;
-            Departure = departure;
-            Destination = destination;
+            Stations = stations;
             Price = price;
             Train = train;
         }
-        public void AddStop(string stop)
+        public void AddStation(Station station, int position)
         {
-            Stops.Add(stop);
+            Stations.Insert(position, station);
         }
-        public void RemoveStop(string stop)
+        public void RemoveStop(Station station)
         {
-            Stops.Remove(stop);
+            Station res = (Station)(from s in Stations where s.Name == station.Name select s).FirstOrDefault();
+            Stations.Remove(res);
+        }
+        public void RemoveStop(int index)
+        {
+            Stations.RemoveAt(index);
         }
     }
 }
