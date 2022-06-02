@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HCI_Project.utils
+﻿namespace HCI_Project.utils
 {
     public enum UserRole { CLIENT, MANAGER }
     public class User

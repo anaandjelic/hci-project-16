@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HCI_Project.clientPages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ClientPage">
@@ -13,19 +14,19 @@
             <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" Background="DodgerBlue">
-            <Menu Background="DodgerBlue" Foreground="AliceBlue" FontSize="24">
-                <MenuItem Header="Search" Style="{StaticResource MenuStyle}">
-                    <MenuItem Header="TrainLine" Style="{StaticResource MenuItemStyle}" Click="ShowMap"/>
-                    <MenuItem Header="Timetable" Style="{StaticResource MenuItemStyle}" Click="ShowSearch"/>
-                </MenuItem>
-                <MenuItem Header="History" Style="{StaticResource MenuStyle}">
-                    <MenuItem Header="Tickets" Style="{StaticResource MenuItemStyle}" Click="ShowTickets"/>
-                    <MenuItem Header="Reservations" Style="{StaticResource MenuItemStyle}"/>
-                </MenuItem>
-                <MenuItem Header="Log Out" Style="{StaticResource MenuStyle}" Click="LogOutClick"/>
-            </Menu>
-        </DockPanel>
+        <Menu materialDesign:MenuAssist.TopLevelMenuItemHeight="35" Foreground="White" Background="{DynamicResource PrimaryHueMidBrush}">
+            <MenuItem Header="Main"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+                <MenuItem Header="Log Out" FontFamily="Bahnschrift Light" Click="LogOutClick"/>
+            </MenuItem>
+            <MenuItem Header="Search"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+                <MenuItem Header="TrainLine" FontFamily="Bahnschrift Light" Click="ShowMap"/>
+                <MenuItem Header="Timetable" FontFamily="Bahnschrift Light" Click="ShowSearch"/>
+            </MenuItem>
+            <MenuItem Header="History"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+                <MenuItem Header="Tickets" FontFamily="Bahnschrift Light" Click="ShowTickets"/>
+                <MenuItem Header="Reservations" FontFamily="Bahnschrift Light"/>
+            </MenuItem>
+        </Menu>
         <Frame x:Name="ClientFrame" Grid.Row="2"/>
     </Grid>
 </Page>

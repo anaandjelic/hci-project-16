@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HCI_Project.utils;
+using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using HCI_Project.utils;
-using Microsoft.Maps.MapControl.WPF;
 
 namespace HCI_Project.clientPages
 {
@@ -24,7 +15,7 @@ namespace HCI_Project.clientPages
         public MapPage()
         {
             InitializeComponent();
-            BingMapRESTServices.SendRequest(MyMap);
+            //BingMapRESTServices.SendRequest(MyMap);
         }
 
         private void MapView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

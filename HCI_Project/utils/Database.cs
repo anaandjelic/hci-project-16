@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HCI_Project.utils
 {
@@ -61,10 +59,10 @@ namespace HCI_Project.utils
                 throw new TrainNotFoundException();
             Trains.Remove(train);
         }
-        public static void AddTrain(int capacity)
+        public static void AddTrain(int capacity, string name)
         {
             int id = Trains.Count == 0 ? -1 : Trains.OrderByDescending(x => x.ID).First().ID;
-            Trains.Add(new Train(++id, capacity));
+            Trains.Add(new Train(++id, name, capacity));
         }
         public static Train GetTrain(int ID)
         {
@@ -75,10 +73,10 @@ namespace HCI_Project.utils
         }
 
         // TrainLine CRUD
-        public static void AddTrainLine(List<Station> stations, double price, Train train)
+        public static void AddTrainLine(List<Station> stations, Train train)
         {
             int id = TrainLines.Count == 0 ? -1 : TrainLines.OrderByDescending(x => x.ID).First().ID;
-            TrainLines.Add(new TrainLine(++id, stations, price, train));
+            TrainLines.Add(new TrainLine(++id, stations, train));
         }
         public static TrainLine GetTrainLine(int ID)
         {

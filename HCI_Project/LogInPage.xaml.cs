@@ -1,11 +1,10 @@
 ﻿using HCI_Project.clientPages;
 using HCI_Project.managerPages;
 using HCI_Project.utils;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace HCI_Project.LogInRegister
+namespace HCI_Project
 {
     public partial class LogInPage : Page
     {

@@ -1,19 +1,6 @@
-﻿using HCI_Project.LogInRegister;
-using HCI_Project.utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HCI_Project.utils;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HCI_Project.managerPages
 {
@@ -34,6 +21,11 @@ namespace HCI_Project.managerPages
         {
             Database.LogOut();
             MainFrame.Content = new LogInPage(MainFrame);
+        }
+
+        private void ShowNewTrainLine(object sender, RoutedEventArgs e)
+        {
+            ManagerFrame.Content = new NewTrainLinePage();
         }
     }
 }

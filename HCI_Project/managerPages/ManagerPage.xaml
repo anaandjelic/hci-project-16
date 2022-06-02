@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HCI_Project.managerPages"
-      mc:Ignorable="d" Background="White"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManagerPage">
 
@@ -13,25 +14,27 @@
             <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" Background="DodgerBlue">
-            <Menu Background="DodgerBlue" Foreground="AliceBlue" FontSize="23">
-                <MenuItem Header="Edit" Style="{StaticResource MenuStyle}">
-                    <MenuItem Header="Train" Style="{StaticResource MenuItemStyle}"/>
-                    <MenuItem Header="TrainLine" Style="{StaticResource MenuItemStyle}"/>
-                    <MenuItem Header="Timetable" Style="{StaticResource MenuItemStyle}"/>
-                </MenuItem>
-                <MenuItem Header="New" Style="{StaticResource MenuStyle}">
-                    <MenuItem Header="Train" Style="{StaticResource MenuItemStyle}"/>
-                    <MenuItem Header="TrainLine" Style="{StaticResource MenuItemStyle}"/>
-                    <MenuItem Header="Timetable" Style="{StaticResource MenuItemStyle}"/>
-                </MenuItem>
-                <MenuItem Header="Reports" Style="{StaticResource MenuStyle}">
-                    <MenuItem Header="Monthly" Style="{StaticResource MenuItemStyle}"/>
-                    <MenuItem Header="Per timetable" Style="{StaticResource MenuItemStyle}"/>
-                </MenuItem>
-                <MenuItem Header="Log Out" Style="{StaticResource MenuStyle}" Click="LogOutClick"/>
-            </Menu>
-        </DockPanel>
+
+        <Menu materialDesign:MenuAssist.TopLevelMenuItemHeight="35" Foreground="White" Background="{DynamicResource PrimaryHueMidBrush}">
+            <MenuItem Header="Main" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+                <MenuItem Header="Log Out" FontFamily="Bahnschrift Light" Click="LogOutClick"/>
+            </MenuItem>
+            <MenuItem Header="Edit" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+                <MenuItem Header="Train" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="TrainLine" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Timetable" FontFamily="Bahnschrift Light"/>
+            </MenuItem>
+            <MenuItem Header="New" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+                <MenuItem Header="Train" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="TrainLine" FontFamily="Bahnschrift Light" Click="ShowNewTrainLine"/>
+                <MenuItem Header="Timetable" FontFamily="Bahnschrift Light"/>
+            </MenuItem>
+            <MenuItem Header="Reports" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+                <MenuItem Header="Monthly" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Per timetable" FontFamily="Bahnschrift Light"/>
+            </MenuItem>
+        </Menu>
+
         <Frame x:Name="ManagerFrame" Grid.Row="2"/>
     </Grid>
 </Page>
