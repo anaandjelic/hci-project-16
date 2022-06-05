@@ -1,21 +1,26 @@
 ﻿using HCI_Project.utils;
 using Microsoft.Maps.MapControl.WPF;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Collections.Generic;
 
 namespace HCI_Project.clientPages
 {
     public partial class MapPage : Page
     {
         Point StartPoint;
+        private TrainLine trainLine;
 
         public MapPage()
         {
             InitializeComponent();
             //BingMapRESTServices.SendRequest(MyMap);
+
+            TrainLineSelect.ItemsSource = Database.GetTrainLinesStringWithID();
         }
 
         private void MapView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -66,6 +71,33 @@ namespace HCI_Project.clientPages
             //Coordinates.Text = pinLocation.Longitude.ToString();
             //Coordinates1.Text = pinLocation.Latitude.ToString();
             MyMap.Children.Add(pin);
+        }
+
+        private int getTrainLineID()
+        {
+            string trainLineString = TrainLineSelect.SelectedValue.ToString();
+            string trainLineID_String = trainLineString.Split('>')[0];
+            trainLineID_String = trainLineID_String.Substring(0, trainLineID_String.Length - 2);
+            int trainLineID = Convert.ToInt32(trainLineID_String.Trim());
+            return trainLineID;
+        }
+
+        private void TrainLine_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MyMap.Children.Clear();
+            int trainLineID = getTrainLineID();
+            trainLine = Database.GetTrainLineByID(trainLineID);
+            DrawLine();
+        }
+
+        private void DrawLine()
+        {
+            List<double[]> locations = new List<double[]>();
+            foreach(Station s in trainLine.Stations)
+            {
+                locations.Add(new double[] { s.Latitude, s.Longitude });
+            }
+            BingMapRESTServices.SendRequest(MyMap, locations);
         }
     }
 }

@@ -29,24 +29,24 @@ namespace HCI_Project
             List<Station> stations2 = new List<Station>()
             {
                 new Station("Subotica", 100, 46.094150, 19.66, new TimeSpan(0)),
-                new Station("Novi Sad", 450, 45.254410, 19.842550, new TimeSpan(1, 25, 0)),
-                new Station("Belgrade", 640, 44.794043, 20.461006, new TimeSpan(2, 10, 0)),
+                new Station("Novi Sad", 500, 45.254410, 19.842550, new TimeSpan(2, 0, 0)),
+                new Station("Belgrade", 1000, 44.794043, 20.461006, new TimeSpan(3, 20, 0)),
                 new Station("Valjevo", 980, 44.273660, 19.884121, new TimeSpan(3, 30, 0))
             };
             List<Station> stations3 = new List<Station>()
             {
-                new Station("Sabac", 100, 49.094150, 13.66, new TimeSpan(0)),
-                new Station("Zagreb", 450, 49.254410, 13.842550, new TimeSpan(1, 25, 0)),
-                new Station("Belgrade", 640, 49.794043, 23.461006, new TimeSpan(2, 10, 0)),
-                new Station("Valjevo", 980, 49.273660, 13.884121, new TimeSpan(3, 30, 0))
+                new Station("Sabac", 100, 44.7553, 19.6923, new TimeSpan(0)),
+                new Station("Zagreb", 450, 45.8150, 15.9819, new TimeSpan(1, 25, 0)),
+                new Station("Belgrade", 1000, 44.794043, 20.461006, new TimeSpan(3, 20, 0)),
+                new Station("Valjevo", 980, 44.273660, 19.884121, new TimeSpan(3, 30, 0))
             };
 
             List<Station> stations4 = new List<Station>()
             {
-                new Station("Loznica", 100, 43.094150, 15.66, new TimeSpan(0)),
-                new Station("Pristina", 450, 43.254410, 15.842550, new TimeSpan(1, 25, 0)),
+                new Station("Loznica", 100, 44.5338, 19.2238, new TimeSpan(0)),
+                new Station("Pristina", 450, 42.6629, 21.1655, new TimeSpan(1, 25, 0)),
                 new Station("Belgrade", 640, 43.794043, 25.461006, new TimeSpan(2, 10, 0)),
-                new Station("Valjevo", 980, 43.273660, 15.884121, new TimeSpan(3, 30, 0))
+                new Station("Valjevo", 980, 44.273660, 19.884121, new TimeSpan(3, 30, 0))
             };
 
             Database.AddTrainLine(stations1, Database.GetTrain(0));

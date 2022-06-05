@@ -14,6 +14,8 @@ namespace HCI_Project.utils
 
         //dodato
         private static readonly List<TTT_DTO> TTDTOs = new List<TTT_DTO>();
+        private static readonly List<String> TrainLinesString = new List<string>();
+        private static readonly List<String> TrainLinesStringWithID = new List<string>();
 
         public static void LogOut()
         {
@@ -36,6 +38,15 @@ namespace HCI_Project.utils
         public static List<TrainLine> GetTrainLines()
         {
             return TrainLines;
+        }
+        public static List<string> GetTrainLinesString()
+        {
+            return TrainLinesString;
+        }
+
+        public static List<string> GetTrainLinesStringWithID()
+        {
+            return TrainLinesStringWithID;
         }
 
         // User CRUD
@@ -79,7 +90,11 @@ namespace HCI_Project.utils
         public static void AddTrainLine(List<Station> stations, Train train)
         {
             int id = TrainLines.Count == 0 ? -1 : TrainLines.OrderByDescending(x => x.ID).First().ID;
-            TrainLines.Add(new TrainLine(++id, stations, train));
+            id += 1;
+            TrainLines.Add(new TrainLine(id, stations, train));
+            //dodato
+            TrainLinesString.Add(new TrainLine(id, stations, train).stationsToString());
+            TrainLinesStringWithID.Add(new TrainLine(id, stations, train).stationsToStringWithID());
         }
         public static TrainLine GetTrainLine(int ID)
         {
@@ -93,16 +108,32 @@ namespace HCI_Project.utils
         public static void AddTimeTable(DateTime departureTime, DateTime arrivalTime, TrainLine trainLine)
         {
             int id = TimeTables.Count == 0 ? -1 : TimeTables.OrderByDescending(x => x.ID).First().ID;
-            TimeTables.Add(new TrainTimeTable(++id, departureTime, arrivalTime, trainLine));
-            TTDTOs.Add(new TTT_DTO(new TrainTimeTable(++id, departureTime, arrivalTime, trainLine)));
+            id += 1;
+
+            TimeTables.Add(new TrainTimeTable(id, departureTime, arrivalTime, trainLine));
+            //dodato
+            TTDTOs.Add(new TTT_DTO(new TrainTimeTable(id, departureTime, arrivalTime, trainLine)));
         }
         public static List<TrainTimeTable> GetTimeTables()
         {
             return TimeTables;
         }
+
+        //dodato
         public static List<TTT_DTO> GetTTT_DTOS()
         {
             return TTDTOs;
+        }
+
+        //dodato
+        public static TrainLine GetTrainLineByID(int ID)
+        {
+            foreach(TrainLine trainLine in TrainLines)
+            {
+                if (trainLine.ID.Equals(ID))
+                    return trainLine;
+            }
+            return null;
         }
     }
 }

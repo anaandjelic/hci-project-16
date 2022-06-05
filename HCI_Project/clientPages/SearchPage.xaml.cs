@@ -54,7 +54,7 @@ namespace HCI_Project.clientPages
 
                 }
             }
-            if(start>end)
+            if(start>=end)
                 return false;
             return true;
         }

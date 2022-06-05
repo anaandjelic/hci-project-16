@@ -64,5 +64,16 @@ namespace HCI_Project.utils
             return res.Substring(0,res.Length-3);
         }
 
+        //dodato
+        public string stationsToStringWithID()
+        {
+            string res = ID.ToString() + " -> ";
+            foreach (Station station in Stations)
+            {
+                res += station.Name;
+                res += " - ";
+            }
+            return res.Substring(0, res.Length - 3);
+        }
     }
 }
