@@ -99,5 +99,38 @@ namespace HCI_Project.clientPages
             }
             BingMapRESTServices.SendRequest(MyMap, locations);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LB_result.Items.Clear();
+            string enteredValues = SearchBar.Text.ToString().Trim();
+            string[] stationsNames = enteredValues.Split();
+            foreach (string value in Database.findLinesWithStations(stationsNames))
+                LB_result.Items.Add(value);
+        }
+
+        private int getTrainLineID_forLB()
+        {
+            if (LB_result.SelectedItem!=null)
+            {
+                string trainLineString = LB_result.SelectedItem.ToString();
+                string trainLineID_String = trainLineString.Split('>')[0];
+                trainLineID_String = trainLineID_String.Substring(0, trainLineID_String.Length - 2);
+                int trainLineID = Convert.ToInt32(trainLineID_String.Trim());
+                return trainLineID;
+            }
+            return -1;
+        }
+
+        private void LB_result_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MyMap.Children.Clear();
+            int trainLineID = getTrainLineID_forLB();
+            if (trainLineID != -1)
+            {
+                trainLine = Database.GetTrainLineByID(trainLineID);
+                DrawLine();
+            }
+        }
     }
 }

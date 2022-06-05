@@ -135,5 +135,28 @@ namespace HCI_Project.utils
             }
             return null;
         }
+
+        //dodato
+        public static List<String> findLinesWithStations(string []stationNames)
+        {
+            List<String> TempTrainLines = new List<String>();
+            foreach (string tempI in TrainLinesStringWithID)
+            {
+                bool doesOccur = false;
+                foreach(string tempJ in stationNames)
+                {
+                    if (!tempI.Contains(tempJ))
+                    {
+                        doesOccur = false;
+                        break;
+                    }
+                    else
+                        doesOccur = true;
+                }
+                if (doesOccur)
+                    TempTrainLines.Add(tempI);
+            }
+            return TempTrainLines;
+        }
     }
 }
