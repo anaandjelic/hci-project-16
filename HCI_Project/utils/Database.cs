@@ -12,6 +12,9 @@ namespace HCI_Project.utils
         private static readonly List<TrainTimeTable> TimeTables = new List<TrainTimeTable>();
         private static User LoggedInUser;
 
+        //dodato
+        private static readonly List<TTT_DTO> TTDTOs = new List<TTT_DTO>();
+
         public static void LogOut()
         {
             LoggedInUser = null;
@@ -91,10 +94,15 @@ namespace HCI_Project.utils
         {
             int id = TimeTables.Count == 0 ? -1 : TimeTables.OrderByDescending(x => x.ID).First().ID;
             TimeTables.Add(new TrainTimeTable(++id, departureTime, arrivalTime, trainLine));
+            TTDTOs.Add(new TTT_DTO(new TrainTimeTable(++id, departureTime, arrivalTime, trainLine)));
         }
         public static List<TrainTimeTable> GetTimeTables()
         {
             return TimeTables;
+        }
+        public static List<TTT_DTO> GetTTT_DTOS()
+        {
+            return TTDTOs;
         }
     }
 }

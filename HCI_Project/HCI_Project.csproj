@@ -101,6 +101,7 @@
     <Compile Include="utils\Train.cs" />
     <Compile Include="utils\TrainLine.cs" />
     <Compile Include="utils\TrainTimeTable.cs" />
+    <Compile Include="utils\TTT_DTO.cs" />
     <Compile Include="utils\User.cs" />
     <Page Include="clientPages\ClientPage.xaml">
       <SubType>Designer</SubType>
