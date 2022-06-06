@@ -27,5 +27,10 @@ namespace HCI_Project.managerPages
         {
             ManagerFrame.Content = new NewTrainLinePage();
         }
+
+        private void ShowNewTrain(object sender, RoutedEventArgs e)
+        {
+            ManagerFrame.Content = new NewTrainPage();
+        }
     }
 }

@@ -16,10 +16,10 @@ namespace HCI_Project
             MainFrame.Content = new LogInPage(MainFrame);
             Database.AddUser("pera", "pera", "Pera", "Peric", UserRole.CLIENT);
             Database.AddUser("maja", "maja", "Maja", "Majic", UserRole.MANAGER);
-            Database.AddTrain(5, "Vrabac");
-            Database.AddTrain(2, "Roda");
-            Database.AddTrain(10, "Noj");
-            Database.AddTrain(7, "Gavran");
+            Database.AddTrain("Vrabac", 3, 4);
+            Database.AddTrain("Roda", 2, 5);
+            Database.AddTrain("Noj", 7, 3);
+            Database.AddTrain("Gavran", 4, 3);
             List<Station> stations1 = new List<Station>()
             {
                 new Station("Sombor", 0, 45.773979, 19.118759, new TimeSpan(0)),

@@ -25,7 +25,7 @@
                 <MenuItem Header="Timetable" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem Header="New" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
-                <MenuItem Header="Train" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Train" FontFamily="Bahnschrift Light" Click="ShowNewTrain"/>
                 <MenuItem Header="TrainLine" FontFamily="Bahnschrift Light" Click="ShowNewTrainLine"/>
                 <MenuItem Header="Timetable" FontFamily="Bahnschrift Light"/>
             </MenuItem>

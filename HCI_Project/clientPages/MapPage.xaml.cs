@@ -92,12 +92,10 @@ namespace HCI_Project.clientPages
 
         private void DrawLine()
         {
-            List<double[]> locations = new List<double[]>();
-            foreach(Station s in trainLine.Stations)
-            {
-                locations.Add(new double[] { s.Latitude, s.Longitude });
-            }
-            BingMapRESTServices.SendRequest(MyMap, locations);
+            List<BingMapsRESTToolkit.SimpleWaypoint> waypoints = new List<BingMapsRESTToolkit.SimpleWaypoint>();
+            foreach (Station s in trainLine.Stations)
+                waypoints.Add(new BingMapsRESTToolkit.SimpleWaypoint(s.Latitude, s.Longitude));
+            BingMapRESTServices.SendRequest(MyMap, waypoints);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

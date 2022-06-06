@@ -73,10 +73,10 @@ namespace HCI_Project.utils
                 throw new TrainNotFoundException();
             Trains.Remove(train);
         }
-        public static void AddTrain(int capacity, string name)
+        public static void AddTrain(string name, int firstClassCapacity, int secondClassCapacity)
         {
             int id = Trains.Count == 0 ? -1 : Trains.OrderByDescending(x => x.ID).First().ID;
-            Trains.Add(new Train(++id, name, capacity));
+            Trains.Add(new Train(++id, name, firstClassCapacity, secondClassCapacity));
         }
         public static Train GetTrain(int ID)
         {

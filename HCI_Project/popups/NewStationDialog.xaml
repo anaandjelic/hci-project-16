@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:local="clr-namespace:HCI_Project"
-        xmlns:popups="clr-namespace:HCI_Project.popups"
+        xmlns:validations="clr-namespace:HCI_Project.validations"
         Title="New station" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
         Icon="/HCI_Project;component/images/icon.png" FontSize="24" >
 
@@ -31,7 +31,7 @@
             <TextBox.Text>
                 <Binding Path="StationName" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <popups:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        <validations:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -43,7 +43,7 @@
             <TextBox.Text>
                 <Binding Path="Price" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                     <Binding.ValidationRules>
-                        <popups:StationPriceValidationRule ValidatesOnTargetUpdated="True"/>
+                        <validations:StationPriceValidationRule ValidatesOnTargetUpdated="True"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -55,7 +55,7 @@
             <materialDesign:TimePicker.Text>
                 <Binding Path="Time" UpdateSourceTrigger="PropertyChanged"  Mode="TwoWay">
                     <Binding.ValidationRules>
-                        <popups:StationTimeValidationRule ValidatesOnTargetUpdated="True"/>
+                        <validations:StationTimeValidationRule ValidatesOnTargetUpdated="True"/>
                     </Binding.ValidationRules>
                 </Binding>
             </materialDesign:TimePicker.Text>

@@ -86,6 +86,9 @@
     <Compile Include="managerPages\NewTrainLinePage.xaml.cs">
       <DependentUpon>NewTrainLinePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="managerPages\NewTrainPage.xaml.cs">
+      <DependentUpon>NewTrainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="popups\MessageBoxCustom.xaml.cs">
       <DependentUpon>MessageBoxCustom.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
     <Compile Include="utils\TrainTimeTable.cs" />
     <Compile Include="utils\TTT_DTO.cs" />
     <Compile Include="utils\User.cs" />
+    <Compile Include="validations\NotEmptyValidationRule.cs" />
+    <Compile Include="validations\StationPriceValidationRule.cs" />
+    <Compile Include="validations\PositiveNumberValidationRule.cs" />
+    <Compile Include="validations\StationTimeValidationRule.cs" />
     <Page Include="clientPages\ClientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -152,6 +159,10 @@
     <Page Include="managerPages\NewTrainLinePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="managerPages\NewTrainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="popups\MessageBoxCustom.xaml">
       <SubType>Designer</SubType>

@@ -23,7 +23,7 @@ namespace HCI_Project.managerPages
         public NewTrainLinePage()
         {
             InitializeComponent();
-            Trains = new ObservableCollection<string>(Database.GetTrains().Select(t => $"{t.Name} - {t.ID} - {t.Capacity}").OrderBy(name => name).ToArray());
+            Trains = new ObservableCollection<string>(Database.GetTrains().Select(t => $"{t.Name} - {t.FirstClassCapacity + t.SecondClassCapacity} seats").OrderBy(name => name).ToArray());
             TrainsCombobox.ItemsSource = Trains;
             TrainsCombobox.SelectedIndex = 0;
             DataContext = this;
