@@ -1,4 +1,5 @@
 ﻿using BingMapsRESTToolkit;
+using HCI_Project.popups;
 using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
@@ -9,12 +10,8 @@ namespace HCI_Project.utils
 {
     public static class BingMapRESTServices
     {
-        public static void SendRequest(Map myMap, List<double[]> locations)
+        public static void SendRequest(Map myMap, List<SimpleWaypoint> waypoints)
         {
-            List<SimpleWaypoint> waypoints = new List<SimpleWaypoint>();
-            foreach (double[] pair in locations)
-                waypoints.Add(new SimpleWaypoint(pair[0], pair[1]));
-
             RouteRequest routeRequest = new RouteRequest()
             {
                 Waypoints = waypoints,
@@ -69,7 +66,8 @@ namespace HCI_Project.utils
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                if (ex.Message != "Not enough Waypoints specified.")
+                    _ = new MessageBoxCustom(ex.Message, MessageType.Error, MessageButtons.Ok).ShowDialog();
             }
         }
     }

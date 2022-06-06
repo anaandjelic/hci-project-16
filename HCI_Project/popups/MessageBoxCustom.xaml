@@ -23,9 +23,9 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <materialDesign:Card x:Name="cardHeader" Grid.Row="0" Padding="10" Margin="0" materialDesign:ShadowAssist.ShadowDepth="Depth5"   Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Visibility="Visible" Grid.ColumnSpan="2">
+        <materialDesign:Card x:Name="cardHeader" Grid.Row="0" Padding="10" Margin="0" Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Visibility="Visible" Grid.ColumnSpan="2">
             <StackPanel>
-                <TextBlock x:Name="txtTitle" HorizontalAlignment="Center" VerticalAlignment="Stretch" Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="20" >Message Title</TextBlock>
+                <TextBlock x:Name="txtTitle" HorizontalAlignment="Center" VerticalAlignment="Stretch" Style="{DynamicResource MaterialDesignHeadline6TextBlock}" FontSize="20" >Message Title</TextBlock>
             </StackPanel>
         </materialDesign:Card>
         <StackPanel  HorizontalAlignment="Right" Margin="0,5,5,0"  VerticalAlignment="Top" Grid.Column="1">
@@ -64,10 +64,10 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button x:Name="btnOk" Click="BtnOk_Click" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5" Width="100" Content="OK" ToolTip="Ok"/>
-                    <Button x:Name="btnCancel" Click="BtnCancel_Click" Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5" Width="100" Content="Cancel" ToolTip="Cancel"/>
-                    <Button x:Name="btnYes" Click="BtnYes_Click" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5" Width="100" Content="Yes" ToolTip="Yes"/>
-                    <Button x:Name="btnNo" Click="BtnNo_Click" Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5" Width="100" Content="No" ToolTip="No"/>
+                    <Button x:Name="btnOk" Click="BtnOk_Click" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5" Width="100" Content="OK" ToolTip="Ok" Foreground="White"/>
+                    <Button x:Name="btnCancel" Click="BtnCancel_Click" Grid.Column="2" Style="{StaticResource MaterialDesignPaperButton}" Margin="5" Width="100" Content="Cancel" ToolTip="Cancel"/>
+                    <Button x:Name="btnYes" Click="BtnYes_Click" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5" Width="100" Content="Yes" ToolTip="Yes" Foreground="White"/>
+                    <Button x:Name="btnNo" Click="BtnNo_Click" Grid.Column="2" Style="{StaticResource MaterialDesignPaperButton}" Margin="5" Width="100" Content="No" ToolTip="No"/>
                 </Grid>
 
             </Grid>

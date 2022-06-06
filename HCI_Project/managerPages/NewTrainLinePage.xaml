@@ -41,7 +41,7 @@
             <RowDefinition Height="10"/>
             <RowDefinition Height="6*"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
@@ -60,22 +60,27 @@
                MouseMove="Image_MouseMove" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"/>
 
         <DataGrid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" x:Name="StationGrid" FontFamily="Bahnschrift Light"
-                  CanUserAddRows="False" SelectionUnit="FullRow" CanUserSortColumns="False"
+                  CanUserAddRows="True" SelectionUnit="FullRow" CanUserSortColumns="False" FontSize="20"
                   SelectionMode="Single" ItemsSource="{Binding Source=Stations}" AutoGeneratingColumn="StationGrid_AutoGeneratingColumn"/>
 
         <m:Map CredentialsProvider="jcN70CoOBDnsrAlWKqWM~KGgDd7HLbAy2iRafyB9ytw~ApXB3OvpKS1Loo6XUCGodM0rf6U6ph0Jtc-kt3pk3FWMZ8zZVBhOxxMSViza80RG"
                Center="45.2461818273899, 19.85138567223834" ZoomLevel="10" Name="MyMap" Grid.RowSpan="8"
                AllowDrop="True" DragEnter="MapView_DragEnter" Drop="MapView_Drop" Grid.Column="5"/>
         <Grid Grid.Row="6" Grid.Column="1" Margin="0 0 5 0">
-            <ComboBox x:Name="TrainsCombobox" 
+            <ComboBox x:Name="TrainsCombobox" Padding="0"
                       FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Converter={StaticResource fontSizeConverter}}"/>
         </Grid>
-        
 
-        <Viewbox Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Margin="5 0 0 0">
-            <Button Click="CreateTrainLine" IsDefault="True" Content="Finish" 
-                Style="{StaticResource MaterialDesignFlatMidBgButton}" Foreground="White" materialDesign:ButtonAssist.CornerRadius="5"/>
-        </Viewbox>
+
+        <Button  Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Margin="5 0 0 0"
+                Click="CreateTrainLine" IsDefault="True"
+                Style="{StaticResource MaterialDesignFlatMidBgButton}" Foreground="White" materialDesign:ButtonAssist.CornerRadius="5" FontFamily="Bahnschrift Light">
+            <Viewbox>
+                <TextBlock>
+                    Finish
+                </TextBlock>
+            </Viewbox>
+        </Button>
         
     </Grid>
 </Page>

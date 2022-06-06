@@ -1,8 +1,11 @@
 ﻿<Window x:Class="HCI_Project.popups.NewStationDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local="clr-namespace:HCI_Project"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:local="clr-namespace:HCI_Project"
+        xmlns:popups="clr-namespace:HCI_Project.popups"
         Title="New station" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
-        ContentRendered="Window_ContentRendered" Icon="/HCI_Project;component/images/icon.png">
+        Icon="/HCI_Project;component/images/icon.png" FontSize="24" >
 
     <Window.Resources>
         <local:MyFontSizeConverter x:Key="fontSizeConverter"/>
@@ -14,35 +17,55 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="65" />
             <RowDefinition Height="20" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="10" />
+            <RowDefinition Height="65" />
             <RowDefinition Height="20" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="20" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="65" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left" FontSize="15" Text="name"/>
-        <Grid Grid.Column="1" Grid.Row="1" MinWidth="250">
-            <TextBox Name="Name" 
-                 FontSize="24"/>
-        </Grid>
+        <TextBox Name="NameField" Grid.Column="1" MinWidth="250" Margin="40 0"
+                 materialDesign:HintAssist.Hint="Station name"  VerticalAlignment="Center"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <TextBox.Text>
+                <Binding Path="StationName" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <popups:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <TextBlock Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" FontSize="14" Text="price"/>
-        <Grid Grid.Column="1" Grid.Row="4" MinWidth="250">
-            <TextBox Name="Price" PreviewTextInput="NumberValidation"
-                 FontSize="24"/>
-        </Grid>
+        <TextBox Name="PriceField" Grid.Column="1" Grid.Row="2" MinWidth="250" Margin="40 0"
+                 materialDesign:HintAssist.Hint="Price since first stop"  VerticalAlignment="Center"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <TextBox.Text>
+                <Binding Path="Price" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <popups:StationPriceValidationRule ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <TextBlock Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" FontSize="15" Text="time span"/>
-        <materialDesign:TimePicker Name="Time" Grid.Column="1" Grid.Row="7" MinWidth="250" FontSize="24" Is24Hours="True"/>
+        <materialDesign:TimePicker Name="TimeField" Grid.Column="1" Grid.Row="4" MinWidth="250"  Margin="40 0"
+                                   Is24Hours="True" materialDesign:HintAssist.Hint="Time since first stop"
+                                   Style="{StaticResource MaterialDesignFloatingHintTimePicker}">
+            <materialDesign:TimePicker.Text>
+                <Binding Path="Time" UpdateSourceTrigger="PropertyChanged"  Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <popups:StationTimeValidationRule ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </materialDesign:TimePicker.Text>
+        </materialDesign:TimePicker>
 
-        <WrapPanel Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0 15 0 0">
+        <WrapPanel Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="40 35 40 20">
             <Button IsDefault="True" Name="btnDialogOk" Click="btnDialogOk_Click" Foreground="White"
-                    Style="{StaticResource MaterialDesignFlatMidBgButton}" Content="Confirm"/>
+                    Style="{StaticResource MaterialDesignFlatMidBgButton}" Content="Confirm" 
+                    Height="50" FontSize="24" FontFamily="Bahnschrift Light"
+                    materialDesign:ButtonAssist.CornerRadius="5"/>
         </WrapPanel>
     </Grid>
 </Window>

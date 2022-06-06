@@ -15,10 +15,10 @@ namespace HCI_Project.managerPages
     public partial class NewTrainLinePage : Page
     {
         private ObservableCollection<Station> Stations = new ObservableCollection<Station>();
-        private ObservableCollection<string> Trains;
+        private readonly ObservableCollection<string> Trains;
+        private List<Pushpin> Pins = new List<Pushpin>();
         private bool IsFirstStation = true;
         private Point StartPoint;
-        private double LastPrice;
 
         public NewTrainLinePage()
         {
@@ -26,6 +26,7 @@ namespace HCI_Project.managerPages
             Trains = new ObservableCollection<string>(Database.GetTrains().Select(t => $"{t.Name} - {t.ID} - {t.Capacity}").OrderBy(name => name).ToArray());
             TrainsCombobox.ItemsSource = Trains;
             TrainsCombobox.SelectedIndex = 0;
+            DataContext = this;
         }
 
         private void MapView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -58,33 +59,50 @@ namespace HCI_Project.managerPages
 
         private void MapView_Drop(object sender, DragEventArgs e)
         {
+            string[] invalidFields = { "", "", "" };
             e.Handled = true;
+            double lastPrice = Stations.Count == 0 ? 0 : Stations.Last().Price;
+            TimeSpan lastTime = Stations.Count == 0 ? new TimeSpan() : Stations.Last().Offset;
 
             Point mousePosition = e.GetPosition(MyMap);
             Location pinLocation = MyMap.ViewportPointToLocation(mousePosition);
 
-            NewStationDialog dialog = new NewStationDialog(IsFirstStation);
-
-            dialog.ShowDialog();
+            NewStationDialog dialog = new NewStationDialog(IsFirstStation, lastPrice, lastTime);
+            bool? result = dialog.ShowDialog();
+            if (!(bool)result)
+            {
+                return;
+            }
 
             Pushpin pin = new Pushpin
             {
                 Location = pinLocation,
 
-                ToolTip = dialog.GetName(),
+                ToolTip = dialog.StationName,
                 Height = 70,
                 Width = 70,
                 Template = (ControlTemplate)FindResource("CustomPushpinTemplate")
             };
+            pin.MouseDoubleClick += new MouseButtonEventHandler(Pin_Click);
 
+            Stations.Add(new Station(dialog.StationName, dialog.Price, pinLocation.Latitude, pinLocation.Longitude, dialog.Time));
+            Pins.Add(pin);
+            UpdateMap();
 
-            Stations.Add(new Station(dialog.GetName(), dialog.GetPrice(), pinLocation.Latitude, pinLocation.Longitude, dialog.GetTime()));
-            StationGrid.ItemsSource = Stations;
+            if (IsFirstStation)
+            {
+                IsFirstStation = false;
+            }
+        }
 
-            if (!IsFirstStation)
-                DrawLine();
-            IsFirstStation = false;
-            MyMap.Children.Add(pin);
+        private void Pin_Click(object sender, RoutedEventArgs e)
+        {
+            Pushpin pin = (Pushpin)sender;
+            Pins.Remove(pin);
+            var station = (from s in Stations where s.Longitude == pin.Location.Longitude && s.Latitude == pin.Location.Latitude select s).FirstOrDefault();
+            Stations.Remove(station);
+            UpdateMap();
+            IsFirstStation = Stations.Count == 0;
         }
 
         private void CreateTrainLine(object sender, RoutedEventArgs e)
@@ -92,15 +110,24 @@ namespace HCI_Project.managerPages
             string selectedTrain = ((string)TrainsCombobox.SelectedItem).Split('-')[1].Trim();
             Train train = Database.GetTrain(Int32.Parse(selectedTrain));
             Database.AddTrainLine(Stations.ToList(), train);
+            Stations = new ObservableCollection<Station>();
+            Pins = new List<Pushpin>();
+            MyMap.Children.Clear();
+            IsFirstStation = true;
+            StationGrid.ItemsSource = Stations;
         }
 
-        private void DrawLine()
+        private void UpdateMap()
         {
-            List<double[]> locations = new List<double[]>();
+            MyMap.Children.Clear();
+            List<BingMapsRESTToolkit.SimpleWaypoint> waypoints = new List<BingMapsRESTToolkit.SimpleWaypoint>();
             foreach (Station s in Stations)
-                locations.Add(new double[] { s.Latitude, s.Longitude });
-            BingMapRESTServices.SendRequest(MyMap, locations);
+                waypoints.Add(new BingMapsRESTToolkit.SimpleWaypoint(s.Latitude, s.Longitude));
+            BingMapRESTServices.SendRequest(MyMap, waypoints);
+            Pins.ForEach(x => MyMap.Children.Add(x));
+            StationGrid.ItemsSource = Stations;
         }
+
 
         private void StationGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {

@@ -13,7 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
             <!--Page-->
             <Style TargetType="{x:Type Page}">
-                <Setter Property="TextElement.FontFamily" Value="Bahnschrift Light" />
+                <Setter Property="TextElement.FontFamily" Value="Bahnschrift Light"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>
