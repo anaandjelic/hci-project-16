@@ -84,16 +84,21 @@
         
         <Viewbox Grid.Row="10">
             <Button IsDefault="True" Content="Create" Foreground="White" materialDesign:ButtonAssist.CornerRadius="5"
-                        Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="CreateTrain"/>
+                        Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="CreateTrain" FontFamily="Bahnschrift Light"/>
         </Viewbox>
 
-        <Grid x:Name="TogglesGrid" Grid.Column="1" Grid.RowSpan="15" ShowGridLines="False">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-        </Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="1" Grid.RowSpan="15">
+            <Grid x:Name="TogglesGrid" ShowGridLines="False" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </ScrollViewer>
+        
     </Grid>
 </Page>

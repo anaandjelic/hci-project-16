@@ -49,26 +49,32 @@ namespace HCI_Project.managerPages
             int totalSeats = FirstClass + SecondClass;
             int rows = (int)Math.Ceiling(totalSeats / 4.0);
             TogglesGrid.RowDefinitions.Clear();
+            TogglesGrid.Children.Clear();
             int count = 1;
 
             for (int i = 0; i < rows; i++)
             {
-                TogglesGrid.RowDefinitions.Add(new RowDefinition());
-                for (int j = 0; j < 4; j++)
+                TogglesGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(140) });
+                for (int j = 1; j < 5; j++)
                 {
-                    PackIcon icon = new PackIcon
-                    {
-                        Kind = count <= FirstClass ? PackIconKind.Ticket : PackIconKind.TicketOutline
-                    };
-                    StackPanel stackPanel = new StackPanel()
-                    {
-                        Orientation = Orientation.Horizontal,
-                        Children = { icon, new TextBlock() { Text = count.ToString() } }
-                    };
+                    /*
                     ToggleButton toggle = new ToggleButton
                     {
-                        Style = Resources["MaterialDesignActionToggleButton"] as Style,
-                        Content = stackPanel
+                        Style = count <= FirstClass ? (Style)FindResource("MaterialDesignFlatPrimaryToggleButton") : (Style)FindResource("MaterialDesignFlatToggleButton"),
+                        Content = count,
+                        IsChecked = true,
+                        FontSize = 40,
+                        Height = 120,
+                        Width = 120
+                    };
+                    */
+                    Button toggle = new Button
+                    {
+                        Style = count <= FirstClass ? (Style)FindResource("MaterialDesignFloatingActionDarkButton") : (Style)FindResource("MaterialDesignFloatingActionButton"),
+                        Content = count,
+                        FontSize = 40,
+                        Height = 120,
+                        Width = 120
                     };
 
                     Grid.SetColumn(toggle, j);
