@@ -83,6 +83,8 @@
     <Compile Include="clientPages\TicketsPage.xaml.cs">
       <DependentUpon>TicketsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="commands\RoutedCommands.cs" />
+    <Compile Include="commands\TempKlasa.cs" />
     <Compile Include="managerPages\NewTrainLinePage.xaml.cs">
       <DependentUpon>NewTrainLinePage.xaml</DependentUpon>
     </Compile>

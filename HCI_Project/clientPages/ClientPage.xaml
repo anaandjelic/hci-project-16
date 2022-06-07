@@ -7,7 +7,12 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:cmd="clr-namespace:HCI_Project.commands"
       Title="ClientPage">
+    
+    <Page.CommandBindings>
+        <CommandBinding Command="cmd:RoutedCommands.Search" CanExecute="Serach_CanExecute" Executed="Search_Executed"></CommandBinding>
+    </Page.CommandBindings>
 
     <Grid>
         <Grid.RowDefinitions>
