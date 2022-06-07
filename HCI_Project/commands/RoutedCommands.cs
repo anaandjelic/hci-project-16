@@ -30,15 +30,15 @@ namespace HCI_Project.commands
             FormatSearchTrainTable = new RoutedUICommand("Format SearchTrainTable", "FormatSearchTrainTable", typeof(RoutedCommands), inputGestures);
 
             inputGestures = new InputGestureCollection();
-            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.L, Key.O }, ModifierKeys.Control, "Ctrl+F, T"));
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.L, Key.O }, ModifierKeys.Control, "Ctrl+L, O"));
             FormatLogOut = new RoutedUICommand("Format LogOut", "FormatLogOut", typeof(RoutedCommands), inputGestures);
 
             inputGestures = new InputGestureCollection();
-            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.H, Key.T }, ModifierKeys.Control, "Ctrl+F, T"));
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.H, Key.T }, ModifierKeys.Control, "Ctrl+H, T"));
             FormatHistoryTickets = new RoutedUICommand("Format HistoryTickets", "FormatHistoryTickets", typeof(RoutedCommands), inputGestures);
 
             inputGestures = new InputGestureCollection();
-            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.H, Key.R }, ModifierKeys.Control, "Ctrl+F, T"));
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.H, Key.R }, ModifierKeys.Control, "Ctrl+H, R"));
             FormatHistoryReservations = new RoutedUICommand("Format HistoryReservations", "FormatHistoryReservations", typeof(RoutedCommands), inputGestures);
 
 
