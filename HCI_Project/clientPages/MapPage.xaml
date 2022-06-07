@@ -46,7 +46,7 @@
         <ComboBox Name="TrainLineSelect" Grid.Column="0" Grid.Row="0" IsEditable="True" StaysOpenOnEdit="True" IsTextSearchEnabled="False" VerticalAlignment="Top" Background="AliceBlue" SelectionChanged="TrainLine_SelectionChanged" FontSize="20" Height="35" Margin="0,10,0,0"/>
         <Button Content="Search" HorizontalAlignment="Right" Margin="10,6,13,0" Grid.Row="2"  Grid.Column="0" VerticalAlignment="Top" Width="99" Click="Button_Click"/>
         <ListBox x:Name="LB_result" HorizontalAlignment="Left" Height="385" Margin="10,10.333,0,-99.333" Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" Width="335" Background="AliceBlue" Grid.ColumnSpan="2" SelectionChanged="LB_result_SelectionChanged"/>
-        <TextBox x:Name="SearchBar" HorizontalAlignment="Left" Margin="10,19,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="255" FontSize="20" Height="35"/>
+        <TextBox x:Name="SearchBar" HorizontalAlignment="Left" Margin="10,19,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="255" FontSize="20" Height="35" KeyDown="EnterIsPressed"/>
 
     </Grid>
 </Page>

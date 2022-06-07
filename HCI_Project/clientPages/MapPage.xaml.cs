@@ -130,5 +130,11 @@ namespace HCI_Project.clientPages
                 DrawLine();
             }
         }
+
+        private void EnterIsPressed(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+                this.Button_Click(sender,e);
+        }
     }
 }

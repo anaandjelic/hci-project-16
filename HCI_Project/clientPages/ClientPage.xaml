@@ -5,9 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HCI_Project.clientPages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:cmd="clr-namespace:HCI_Project.commands"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ClientPage">
+
+    <Page.CommandBindings>
+        <CommandBinding Command="cmd:RoutedCommands.FormatSearchTrainLine" CanExecute="SearchTrainLine_CanExecute" Executed="SearchTrainLine_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatSearchTrainTable" CanExecute="SearchTrainTable_CanExecute" Executed="SearchTrainTable_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatLogOut" CanExecute="LogOut_CanExecute" Executed="LogOut_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatHistoryTickets" CanExecute="HistoryTickets_CanExecute" Executed="HistoryTickets_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatHistoryReservations" CanExecute="HistoryReservations_CanExecute" Executed="HistoryReservations_Executed"></CommandBinding>
+    </Page.CommandBindings>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -15,16 +24,16 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Menu materialDesign:MenuAssist.TopLevelMenuItemHeight="35" Foreground="White" Background="{DynamicResource PrimaryHueMidBrush}">
-            <MenuItem Header="Main"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
-                <MenuItem Header="Log Out" FontFamily="Bahnschrift Light" Click="LogOutClick"/>
+            <MenuItem x:Name="MainBar" Header="Main"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+                <MenuItem Header="Log Out" Command="cmd:RoutedCommands.FormatLogOut" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem Header="Search"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
-                <MenuItem Header="TrainLine" FontFamily="Bahnschrift Light" Click="ShowMap"/>
-                <MenuItem Header="Timetable" FontFamily="Bahnschrift Light" Click="ShowSearch"/>
+                <MenuItem Header="TrainLine" Command="cmd:RoutedCommands.FormatSearchTrainLine" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Timetable" Command="cmd:RoutedCommands.FormatSearchTrainTable" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem Header="History"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
-                <MenuItem Header="Tickets" FontFamily="Bahnschrift Light" Click="ShowTickets"/>
-                <MenuItem Header="Reservations" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Tickets" Command="cmd:RoutedCommands.FormatHistoryTickets" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Reservations" Command="cmd:RoutedCommands.FormatHistoryReservations" FontFamily="Bahnschrift Light"/>
             </MenuItem>
         </Menu>
         <Frame x:Name="ClientFrame" Grid.Row="2"/>

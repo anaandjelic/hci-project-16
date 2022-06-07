@@ -83,6 +83,10 @@
     <Compile Include="clientPages\TicketsPage.xaml.cs">
       <DependentUpon>TicketsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="commands\MultiKey\MultiKeyBinding.cs" />
+    <Compile Include="commands\MultiKey\MultiKeyGesture.cs" />
+    <Compile Include="commands\MultiKey\MultiKeyGestureConverter.cs" />
+    <Compile Include="commands\RoutedCommands.cs" />
     <Compile Include="managerPages\NewTrainLinePage.xaml.cs">
       <DependentUpon>NewTrainLinePage.xaml</DependentUpon>
     </Compile>
