@@ -5,10 +5,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HCI_Project.managerPages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:cmd="clr-namespace:HCI_Project.commands"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManagerPage">
-
+    <Page.CommandBindings>
+        <CommandBinding Command="cmd:RoutedCommands.FormatCreateTrain" CanExecute="CreateTrain_CanExecute" Executed="CreateTrain_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatCreateTrainLine" CanExecute="CreateTrainLine_CanExecute" Executed="CreateTrainLine_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatCreateTrainTable" CanExecute="CreateTrainTable_CanExecute" Executed="CreateTrainTable_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatEditTrain" CanExecute="EditTrain_CanExecute" Executed="EditTrain_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatEditTrainLine" CanExecute="EditTrainLine_CanExecute" Executed="EditTrainLine_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatEditTrainTable" CanExecute="EditTrainTable_CanExecute" Executed="EditTrainTable_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatLogOut" CanExecute="LogOut_CanExecute" Executed="LogOut_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatMonthlyReports" CanExecute="MonthlyReports_CanExecute" Executed="MonthlyReports_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatPerTableReports" CanExecute="PerTableReports_CanExecute" Executed="PerTableReports_Executed"></CommandBinding>
+    </Page.CommandBindings>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
@@ -17,21 +29,21 @@
 
         <Menu materialDesign:MenuAssist.TopLevelMenuItemHeight="35" Foreground="White" Background="{DynamicResource PrimaryHueMidBrush}">
             <MenuItem Header="Main" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
-                <MenuItem Header="Log Out" FontFamily="Bahnschrift Light" Click="LogOutClick"/>
+                <MenuItem Header="Log Out" Command="cmd:RoutedCommands.FormatLogOut" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem Header="Edit" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
-                <MenuItem Header="Train" FontFamily="Bahnschrift Light"/>
-                <MenuItem Header="TrainLine" FontFamily="Bahnschrift Light"/>
-                <MenuItem Header="Timetable" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Train" Command="cmd:RoutedCommands.FormatEditTrain" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="TrainLine"  Command="cmd:RoutedCommands.FormatEditTrainLine" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Timetable" Command="cmd:RoutedCommands.FormatEditTrainTable" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem Header="New" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
-                <MenuItem Header="Train" FontFamily="Bahnschrift Light" Click="ShowNewTrain"/>
-                <MenuItem Header="TrainLine" FontFamily="Bahnschrift Light" Click="ShowNewTrainLine"/>
-                <MenuItem Header="Timetable" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Train" Command="cmd:RoutedCommands.FormatCreateTrain" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="TrainLine" Command="cmd:RoutedCommands.FormatCreateTrainLine" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Timetable" Command="cmd:RoutedCommands.FormatCreateTrainTable" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem Header="Reports" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
-                <MenuItem Header="Monthly" FontFamily="Bahnschrift Light"/>
-                <MenuItem Header="Per timetable" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Monthly" Command="cmd:RoutedCommands.FormatMonthlyReports" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Per timetable" Command="cmd:RoutedCommands.FormatPerTableReports" FontFamily="Bahnschrift Light"/>
             </MenuItem>
         </Menu>
 
