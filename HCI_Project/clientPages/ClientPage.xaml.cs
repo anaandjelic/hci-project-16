@@ -43,5 +43,15 @@ namespace HCI_Project.clientPages
             Database.LogOut();
             MainFrame.Content = new LogInPage(MainFrame);
         }
+
+        private void CommandBinding_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        {
+
+        }
+
+        private void CommandBinding_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -11,7 +11,8 @@
       Title="ClientPage">
     
     <Page.CommandBindings>
-        <CommandBinding Command="cmd:RoutedCommands.Search" CanExecute="Serach_CanExecute" Executed="Search_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.Search" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed"></CommandBinding>
+
     </Page.CommandBindings>
 
     <Grid>
