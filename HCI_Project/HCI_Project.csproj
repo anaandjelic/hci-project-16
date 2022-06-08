@@ -87,6 +87,9 @@
     <Compile Include="commands\MultiKey\MultiKeyGesture.cs" />
     <Compile Include="commands\MultiKey\MultiKeyGestureConverter.cs" />
     <Compile Include="commands\RoutedCommands.cs" />
+    <Compile Include="managerPages\NewTimeTablePage.xaml.cs">
+      <DependentUpon>NewTimeTablePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="managerPages\NewTrainLinePage.xaml.cs">
       <DependentUpon>NewTrainLinePage.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="managerPages\ManagerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="managerPages\NewTimeTablePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

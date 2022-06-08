@@ -47,7 +47,7 @@ namespace HCI_Project.managerPages
 
         private void CreateTrainTable_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Train table in development");
+            ManagerFrame.Content = new NewTimeTablePage();
             ManagerFrame.Focus();
         }
 
@@ -92,8 +92,8 @@ namespace HCI_Project.managerPages
             MessageBox.Show(" Edit Train table in development");
             ManagerFrame.Focus();
         }
-        ////////////////
-        ///
+        
+
         private void MonthlyReports_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
