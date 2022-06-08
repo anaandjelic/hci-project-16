@@ -70,7 +70,7 @@ namespace HCI_Project.managerPages
                     */
                     Button toggle = new Button
                     {
-                        Style = count <= FirstClass ? (Style)FindResource("MaterialDesignFloatingActionDarkButton") : (Style)FindResource("MaterialDesignFloatingActionButton"),
+                        Style = count <= FirstClass ? (Style)FindResource("MaterialDesignFloatingActionDarkButton") : (Style)FindResource("MaterialDesignFloatingActionSecondaryButton"),
                         Content = count,
                         FontSize = 40,
                         Height = 120,

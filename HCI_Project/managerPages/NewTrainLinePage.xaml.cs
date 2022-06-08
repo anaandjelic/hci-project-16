@@ -100,6 +100,11 @@ namespace HCI_Project.managerPages
             Pushpin pin = (Pushpin)sender;
             Pins.Remove(pin);
             var station = (from s in Stations where s.Longitude == pin.Location.Longitude && s.Latitude == pin.Location.Latitude select s).FirstOrDefault();
+            if (station.Offset.Equals(new TimeSpan(0, 0, 0)))
+            {
+                new MessageBoxCustom("You have to remove every other pin in order to remove the first one.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+                return;
+            }
             Stations.Remove(station);
             UpdateMap();
             IsFirstStation = Stations.Count == 0;
@@ -115,6 +120,18 @@ namespace HCI_Project.managerPages
             MyMap.Children.Clear();
             IsFirstStation = true;
             StationGrid.ItemsSource = Stations;
+        }
+        private void CancelTrainLine(object sender, RoutedEventArgs e)
+        {
+            var result = new MessageBoxCustom("You're about to delete everything on this page. Do you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
+            if ((bool)result)
+            {
+                Stations = new ObservableCollection<Station>();
+                Pins = new List<Pushpin>();
+                MyMap.Children.Clear();
+                IsFirstStation = true;
+                StationGrid.ItemsSource = Stations;
+            }
         }
 
         private void UpdateMap()

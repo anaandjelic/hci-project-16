@@ -39,9 +39,12 @@
             <RowDefinition Height="0.5*"/>
 
             <RowDefinition Height="10"/>
+            <RowDefinition Height="0.4*"/>
+            
+            <RowDefinition Height="20"/>
             <RowDefinition Height="6*"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="32"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
@@ -50,29 +53,40 @@
                 Drag this pin on the map
             </TextBlock>
         </Viewbox>
-        <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="0,0,30,0">
+        <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="0 0 30 0">
             <TextBlock>
                 to add another stop.
             </TextBlock>
         </Viewbox>
-        <Image Source="/HCI_Project;component/images/previewPin.png" Margin="10,0,0,0"
+        
+        <Image Source="/HCI_Project;component/images/previewPin.png" Margin="10 0 0 0"
                PreviewMouseLeftButtonDown="MapView_PreviewMouseLeftButtonDown" HorizontalAlignment="Right"
                MouseMove="Image_MouseMove" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"/>
 
-        <DataGrid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" x:Name="StationGrid" FontFamily="Bahnschrift Light"
-                  CanUserAddRows="True" SelectionUnit="FullRow" CanUserSortColumns="False" FontSize="20"
-                  SelectionMode="Single" ItemsSource="{Binding Source=Stations}" AutoGeneratingColumn="StationGrid_AutoGeneratingColumn"/>
-
-        <m:Map CredentialsProvider="jcN70CoOBDnsrAlWKqWM~KGgDd7HLbAy2iRafyB9ytw~ApXB3OvpKS1Loo6XUCGodM0rf6U6ph0Jtc-kt3pk3FWMZ8zZVBhOxxMSViza80RG"
-               Center="45.2461818273899, 19.85138567223834" ZoomLevel="10" Name="MyMap" Grid.RowSpan="8"
-               AllowDrop="True" DragEnter="MapView_DragEnter" Drop="MapView_Drop" Grid.Column="5"/>
-        <Grid Grid.Row="6" Grid.Column="1" Margin="0 0 5 0">
+        <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Margin="0 0 5 0">
             <ComboBox x:Name="TrainsCombobox" Padding="0"
                       FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Converter={StaticResource fontSizeConverter}}"/>
         </Grid>
 
+        <DataGrid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" x:Name="StationGrid" FontFamily="Bahnschrift Light"
+                  CanUserAddRows="True" SelectionUnit="FullRow" CanUserSortColumns="False" FontSize="20"
+                  SelectionMode="Single" ItemsSource="{Binding Source=Stations}" AutoGeneratingColumn="StationGrid_AutoGeneratingColumn"/>
 
-        <Button  Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Margin="5 0 0 0"
+        <m:Map CredentialsProvider="jcN70CoOBDnsrAlWKqWM~KGgDd7HLbAy2iRafyB9ytw~ApXB3OvpKS1Loo6XUCGodM0rf6U6ph0Jtc-kt3pk3FWMZ8zZVBhOxxMSViza80RG"
+               Center="45.2461818273899, 19.85138567223834" ZoomLevel="10" Name="MyMap" Grid.RowSpan="10"
+               AllowDrop="True" DragEnter="MapView_DragEnter" Drop="MapView_Drop" Grid.Column="5"/>
+
+        <Button Grid.Row="8" Grid.Column="1" Margin="0 0 5 0"
+                Click="CancelTrainLine" FontFamily="Bahnschrift Light"
+                Style="{StaticResource MaterialDesignOutlinedButton}" materialDesign:ButtonAssist.CornerRadius="5">
+            <Viewbox>
+                <TextBlock>
+                    Cancel
+                </TextBlock>
+            </Viewbox>
+        </Button>
+        
+        <Button  Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" Margin="5 0 0 0"
                 Click="CreateTrainLine" IsDefault="True"
                 Style="{StaticResource MaterialDesignFlatMidBgButton}" Foreground="White" materialDesign:ButtonAssist.CornerRadius="5" FontFamily="Bahnschrift Light">
             <Viewbox>
@@ -81,6 +95,6 @@
                 </TextBlock>
             </Viewbox>
         </Button>
-        
+
     </Grid>
 </Page>
