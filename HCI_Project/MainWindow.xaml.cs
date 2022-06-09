@@ -56,6 +56,7 @@ namespace HCI_Project
             Database.AddTrainLine(stations2, Database.GetTrain(0));
             Database.AddTrainLine(stations3, Database.GetTrain(0));
             Database.AddTrainLine(stations4, Database.GetTrain(0));
+            /*
             Database.AddTimeTable(DateTime.Now.AddMinutes(12), DateTime.Now.AddHours(3), Database.GetTrainLine(0));
             Database.AddTimeTable(DateTime.Now, DateTime.Now.AddHours(1), Database.GetTrainLine(1));
             Database.AddTimeTable(DateTime.Now.AddDays(10), DateTime.Now.AddHours(3), Database.GetTrainLine(2));
@@ -65,6 +66,7 @@ namespace HCI_Project
             Database.AddTimeTable(DateTime.Now, DateTime.Now.AddHours(1), Database.GetTrainLine(1));
             Database.AddTimeTable(DateTime.Now, DateTime.Now.AddHours(5), Database.GetTrainLine(2));
             Database.AddTimeTable(DateTime.Now, DateTime.Now.AddHours(5), Database.GetTrainLine(3));
+            */
         }
 
         private void FullScreen_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)

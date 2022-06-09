@@ -6,13 +6,15 @@ namespace HCI_Project.utils
     public class TrainLine
     {
         public int ID { get; private set; }
+        public bool Deleted { get; set; }
         public List<Station> Stations { get; private set; }
         public Train Train { get; private set; }
 
 
-        public TrainLine(int iD, List<Station> stations, Train train)
+        public TrainLine(int id, List<Station> stations, Train train)
         {
-            ID = iD;
+            ID = id;
+            Deleted = false;
             Stations = stations;
             Train = train;
         }
@@ -75,7 +77,6 @@ namespace HCI_Project.utils
             }
             return res.Substring(0, res.Length - 3);
         }
-
         //dodato
         public Station getStationByName(string sname)
         {
@@ -85,6 +86,15 @@ namespace HCI_Project.utils
                     return station;
             }
             return null;
+        public override bool Equals(object obj)
+        {
+            return obj is TrainLine line &&
+                   ID == line.ID;
+        }
+
+        public override int GetHashCode()
+        {
+            return 1213502048 + ID.GetHashCode();
         }
     }
 }

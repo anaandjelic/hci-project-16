@@ -1,15 +1,16 @@
-﻿<Page x:Class="HCI_Project.managerPages.NewTrainLinePage"
+﻿<Page x:Class="HCI_Project.managerPages.EditTrainLinePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:HCI_Project.managerPages" 
+      xmlns:local="clr-namespace:HCI_Project.managerPages"
       xmlns:fc="clr-namespace:HCI_Project" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" Background="White"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MapPage">
+      Title="EditTrainLinePage">
+
 
     <Page.Resources>
         <ControlTemplate x:Key="CustomPushpinTemplate" TargetType="m:Pushpin">
@@ -21,8 +22,16 @@
             </Rectangle>
         </ControlTemplate>
         <fc:MyFontSizeConverter x:Key="fontSizeConverter"/>
+        <Style x:Key="RedButton" 
+        BasedOn="{StaticResource MaterialDesignFlatButton}"
+        TargetType="{x:Type Button}">
+            <Style.Resources>
+                <Color x:Key="PrimaryHueMidBrushColor">Red</Color>
+                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="Red" />
+            </Style.Resources>
+        </Style>
     </Page.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
@@ -34,56 +43,65 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
-            
+
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="10"/>
+
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="0.5*"/>
 
             <RowDefinition Height="10"/>
             <RowDefinition Height="0.4*"/>
-            
+
             <RowDefinition Height="20"/>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="70"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
-        <Viewbox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="0 0 5 0">
+            <ComboBox x:Name="TrainLineComboBox" Padding="0"
+                      FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Converter={StaticResource fontSizeConverter}}"/>
+        </Grid>
+
+        <Viewbox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
             <TextBlock>
                 Drag this pin on the map
             </TextBlock>
         </Viewbox>
-        <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="0 0 30 0">
+        <Viewbox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="0 0 30 0">
             <TextBlock>
                 to add another stop.
             </TextBlock>
         </Viewbox>
-        
+
         <Image Source="/HCI_Project;component/images/previewPin.png" Margin="10 0 0 0"
                PreviewMouseLeftButtonDown="MapView_PreviewMouseLeftButtonDown" HorizontalAlignment="Right"
-               MouseMove="Image_MouseMove" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"/>
+               MouseMove="Image_MouseMove" Grid.Column="3" Grid.Row="3" Grid.RowSpan="2"/>
 
-        <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Margin="0 0 5 0">
+        <Grid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Margin="0 0 5 0">
             <ComboBox x:Name="TrainsCombobox" Padding="0"
                       FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Converter={StaticResource fontSizeConverter}}"/>
         </Grid>
 
-        <DataGrid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" x:Name="StationGrid" FontFamily="Bahnschrift Light"
+        <DataGrid Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" x:Name="StationGrid" FontFamily="Bahnschrift Light"
                   CanUserAddRows="True" SelectionUnit="FullRow" CanUserSortColumns="False" FontSize="20"
                   SelectionMode="Single" ItemsSource="{Binding Source=Stations}" AutoGeneratingColumn="StationGrid_AutoGeneratingColumn"/>
 
         <m:Map CredentialsProvider="jcN70CoOBDnsrAlWKqWM~KGgDd7HLbAy2iRafyB9ytw~ApXB3OvpKS1Loo6XUCGodM0rf6U6ph0Jtc-kt3pk3FWMZ8zZVBhOxxMSViza80RG"
-               Center="45.2461818273899, 19.85138567223834" ZoomLevel="10" Name="MyMap" Grid.RowSpan="10"
+               Center="45.2461818273899, 19.85138567223834" ZoomLevel="10" Name="MyMap" Grid.RowSpan="12"
                AllowDrop="True" DragEnter="MapView_DragEnter" Drop="MapView_Drop" Grid.Column="5"/>
 
-        <Button Grid.Row="8" Grid.Column="1" Margin="0 0 5 0"
-                Click="CancelTrainLine" FontFamily="Bahnschrift Light"
-                Style="{StaticResource MaterialDesignOutlinedButton}" materialDesign:ButtonAssist.CornerRadius="5"
-                FontSize="35" Content="Cancel" Height="50"/>
+        <Button Grid.Row="10" Grid.Column="1" Margin="0 0 5 0"
+                Click="DeleteTrainLine" FontFamily="Bahnschrift Light"
+                Style="{StaticResource RedButton}" materialDesign:ButtonAssist.CornerRadius="5"
+                FontSize="35" Content="Delete" Height="50"/>
 
-        <Button Name="CreateBtn" Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" Margin="5 0 0 0"
-                Click="CreateTrainLine" IsDefault="True"
+        <Button  Name="ChangeBtn" Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="2" Margin="5 0 0 0"
+                Click="ChangeTrainLine" IsDefault="True"
                 Style="{StaticResource MaterialDesignFlatMidBgButton}" Foreground="White" materialDesign:ButtonAssist.CornerRadius="5" FontFamily="Bahnschrift Light"
-                FontSize="35" Content="Confirm" Height="50"/>
+                FontSize="35" Content="Change" Height="50"/>
+
     </Grid>
 </Page>

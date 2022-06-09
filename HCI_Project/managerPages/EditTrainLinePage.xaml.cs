@@ -12,15 +12,14 @@ using System.Windows.Media;
 
 namespace HCI_Project.managerPages
 {
-    public partial class NewTrainLinePage : Page
+    public partial class EditTrainLinePage : Page
     {
         private ObservableCollection<Station> Stations = new ObservableCollection<Station>();
         private readonly ObservableCollection<string> Trains;
         private List<Pushpin> Pins = new List<Pushpin>();
         private bool IsFirstStation = true;
         private Point StartPoint;
-
-        public NewTrainLinePage()
+        public EditTrainLinePage()
         {
             InitializeComponent();
             Trains = new ObservableCollection<string>(Database.GetTrains().Select(t => $"{t.Name} - {t.FirstClassCapacity + t.SecondClassCapacity} seats").OrderBy(name => name).ToArray());
@@ -122,9 +121,9 @@ namespace HCI_Project.managerPages
             StationGrid.ItemsSource = Stations;
         }
 
-        private void CancelTrainLine(object sender, RoutedEventArgs e)
+        private void DeleteTrainLine(object sender, RoutedEventArgs e)
         {
-            var result = new MessageBoxCustom("You're about to remove all progress made on this page. This action is irreversible.\nDo you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
+            var result = new MessageBoxCustom("You're about to delete this train line. This action is irreversible and will be applied to tickets and departures 5 days from now.\nDo you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
             if ((bool)result)
             {
                 Stations = new ObservableCollection<Station>();
@@ -132,7 +131,13 @@ namespace HCI_Project.managerPages
                 MyMap.Children.Clear();
                 IsFirstStation = true;
                 StationGrid.ItemsSource = Stations;
+                //Database.DeleteTrainLine()
             }
+        }
+
+        private void ChangeTrainLine(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void UpdateMap()
