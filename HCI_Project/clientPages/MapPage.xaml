@@ -4,7 +4,9 @@
       xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       xmlns:local="clr-namespace:HCI_Project.clientPages"
+      xmlns:local1="clr-namespace:HCI_Project"
       mc:Ignorable="d" Background="White"
       d:DesignHeight="450" d:DesignWidth="1100"
       Title="MapPage">
@@ -18,13 +20,14 @@
                 </Rectangle.Fill>
             </Rectangle>
         </ControlTemplate>
+        <local1:MyFontSizeConverter x:Key="fontSizeConverter"/>
     </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="0.75*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.55*"/>
+            <!--<RowDefinition Height="*"/>-->
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -33,7 +36,7 @@
         </Grid.ColumnDefinitions>
         <m:Map CredentialsProvider="jcN70CoOBDnsrAlWKqWM~KGgDd7HLbAy2iRafyB9ytw~ApXB3OvpKS1Loo6XUCGodM0rf6U6ph0Jtc-kt3pk3FWMZ8zZVBhOxxMSViza80RG"
                Center="45.2461818273899, 19.85138567223834" ZoomLevel="10" Name="MyMap"
-               AllowDrop="True" DragEnter="MapView_DragEnter" Drop="MapView_Drop" Grid.Column="1" Grid.Row="0" Grid.RowSpan="4">
+               AllowDrop="True" DragEnter="MapView_DragEnter" Drop="MapView_Drop" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
 
             <Image Source="/HCI_Project;component/images/pin.png" Height="50" m:MapLayer.PositionOffset="15,0"
                    m:MapLayer.Position="47.620574,-122.34942" m:MapLayer.PositionOrigin="BottomCenter"/>
@@ -42,11 +45,15 @@
                PreviewMouseLeftButtonDown="MapView_PreviewMouseLeftButtonDown"
                MouseMove="Image_MouseMove"/>-->
 
-        <!--<Label Content="Line:" Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Foreground="DarkGray"/>-->
         <ComboBox Name="TrainLineSelect" Grid.Column="0" Grid.Row="0" IsEditable="True" StaysOpenOnEdit="True" IsTextSearchEnabled="False" VerticalAlignment="Top" Background="AliceBlue" SelectionChanged="TrainLine_SelectionChanged" FontSize="20" Height="35" Margin="0,10,0,0"/>
-        <Button Content="Search" HorizontalAlignment="Right" Margin="10,6,13,0" Grid.Row="2"  Grid.Column="0" VerticalAlignment="Top" Width="99" Click="Button_Click"/>
-        <ListBox x:Name="LB_result" HorizontalAlignment="Left" Height="385" Margin="10,10.333,0,-99.333" Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" Width="335" Background="AliceBlue" Grid.ColumnSpan="2" SelectionChanged="LB_result_SelectionChanged"/>
-        <TextBox x:Name="SearchBar" HorizontalAlignment="Left" Margin="10,19,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="255" FontSize="20" Height="35" KeyDown="EnterIsPressed"/>
+        <!--<Button Content="Search" HorizontalAlignment="Right" Margin="10,6,13,0" Grid.Row="2"  Grid.Column="0" VerticalAlignment="Top" Width="99" Click="Button_Click"/>-->
+        <Grid Grid.Row="2">
+            <ListBox x:Name="LB_result" Background="AliceBlue" VerticalAlignment="Top" SelectionChanged="LB_result_SelectionChanged" FontSize="15"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <TextBox x:Name="SearchBar" VerticalAlignment="Top" KeyDown="EnterIsPressed" Background="AliceBlue"
+        FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Converter={StaticResource fontSizeConverter}}" />
+        </Grid>
 
     </Grid>
 </Page>

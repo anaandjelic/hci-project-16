@@ -8,27 +8,27 @@ namespace HCI_Project.utils
 {
     public class TTT_DTO
     {
-        public int ID { get; private set; }
-        public DateTime DepartureTime { get; private set; }
-        public DateTime ArrivalTime { get; private set; }
-        public string TrainLine { get; private set; }
-        public TimeSpan TravelTime { get; private set; }
+        //public int ID { get; private set; }
+        public DateTime Departure { get; private set; }
+        public DateTime Arrival { get; private set; }
+        public string Line { get; private set; }
+        public TimeSpan Time { get; private set; }
 
-        public TTT_DTO(int iD, DateTime departureTime, DateTime arrivalTime, String trainLine)
+        public TTT_DTO(DateTime departureTime, DateTime arrivalTime, String trainLine)
         {
-            ID = iD;
-            DepartureTime = departureTime;
-            ArrivalTime = arrivalTime;
-            TrainLine = trainLine;
-            TravelTime = arrivalTime - departureTime;
+            //ID = iD;
+            Departure = departureTime;
+            Arrival = arrivalTime;
+            Line = trainLine;
+            Time = arrivalTime - departureTime;
         }
         public TTT_DTO(TrainTimeTable trainTimeTable)
         {
-            ID = trainTimeTable.ID;
-            DepartureTime = trainTimeTable.DepartureTime;
-            ArrivalTime = trainTimeTable.ArrivalTime;
-            TravelTime = trainTimeTable.TravelTime;
-            TrainLine = trainTimeTable.TrainLine.stationsToString();
+            //ID = trainTimeTable.ID;
+            Departure = trainTimeTable.DepartureTime;
+            Arrival = trainTimeTable.ArrivalTime;
+            Time = trainTimeTable.TravelTime;
+            Line = trainTimeTable.TrainLine.stationsToString();
         }
     }
 }

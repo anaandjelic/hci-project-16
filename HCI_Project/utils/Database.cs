@@ -137,15 +137,15 @@ namespace HCI_Project.utils
         }
 
         //dodato
-        public static List<String> findLinesWithStations(string []stationNames)
+        public static List<String> findLinesWithStations(string[] stationNames)
         {
             List<String> TempTrainLines = new List<String>();
             foreach (string tempI in TrainLinesStringWithID)
             {
                 bool doesOccur = false;
-                foreach(string tempJ in stationNames)
+                foreach (string tempJ in stationNames)
                 {
-                    if (!tempI.Contains(tempJ))
+                    if (!tempI.ToLower().Contains(tempJ.ToLower()))
                     {
                         doesOccur = false;
                         break;

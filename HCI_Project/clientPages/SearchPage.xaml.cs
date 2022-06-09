@@ -35,7 +35,7 @@ namespace HCI_Project.clientPages
             int start = -1;
             int end = int.MaxValue;
 
-            string[] stationOrder = dto.TrainLine.Split('-');
+            string[] stationOrder = dto.Line.Split('-');
             for(int i=0;i<stationOrder.Length;i++)
             {
                 if (stationOrder[i].Trim().Equals(from))
@@ -72,8 +72,18 @@ namespace HCI_Project.clientPages
                 if (DoesItContainStations(from,to,ttb) && IsItCorrectDate(ttb))
                 {
                     TTT_DTO dto = new TTT_DTO(ttb);
-                    if(CorrectOrder(dto,from,to))
-                        searchRes.Add(dto);
+
+                    if (CorrectOrder(dto, from, to))
+                    {
+                        if (from != "" && to != "")
+                        {
+                            Station fromStation = ttb.TrainLine.getStationByName(from);
+                            Station toStation = ttb.TrainLine.getStationByName(to);
+                            searchRes.Add(new TTT_DTO(ttb.DepartureTime, ttb.ArrivalTime, from + " - " + to));
+                        }
+                        else
+                            searchRes.Add(dto);
+                    }
                 }
             }
             DataTable.ItemsSource = searchRes;

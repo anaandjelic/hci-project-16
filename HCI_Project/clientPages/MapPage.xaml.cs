@@ -101,10 +101,10 @@ namespace HCI_Project.clientPages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             LB_result.Items.Clear();
-            string enteredValues = SearchBar.Text.ToString().Trim();
+            string enteredValues = SearchBar.Text.ToString().Trim().ToLower();
             string[] stationsNames = enteredValues.Split();
             foreach (string value in Database.findLinesWithStations(stationsNames))
-                LB_result.Items.Add(value);
+                LB_result.Items.Add(value.ToUpper());
         }
 
         private int getTrainLineID_forLB()

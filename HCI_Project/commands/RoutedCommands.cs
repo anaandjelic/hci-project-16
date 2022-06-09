@@ -28,6 +28,12 @@ namespace HCI_Project.commands
         public static readonly ICommand FormatMonthlyReports;
         public static readonly ICommand FormatPerTableReports;
 
+        //full screen
+        public static readonly ICommand FormatFullScreen;
+
+        //tutorial
+        public static readonly ICommand FormatTutorial;
+
         //public static readonly ICommand FormatLogOut;
 
         static RoutedCommands()
@@ -92,6 +98,17 @@ namespace HCI_Project.commands
             inputGestures = new InputGestureCollection();
             inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.R, Key.T }, ModifierKeys.Control, "Ctrl+R, T"));
             FormatPerTableReports = new RoutedUICommand("Format EditTrainTable", "FormatEditTrainTable", typeof(RoutedCommands), inputGestures);
+
+            //fullscreen
+            inputGestures = new InputGestureCollection();
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.F }, ModifierKeys.Control, "Ctrl+F"));
+            FormatFullScreen = new RoutedUICommand("Format EditTrainTable", "FormatEditTrainTable", typeof(RoutedCommands), inputGestures);
+
+            //tutorial
+            inputGestures = new InputGestureCollection();
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.F }, ModifierKeys.Control, "Ctrl+F"));
+            FormatTutorial = new RoutedUICommand("Format EditTrainTable", "FormatEditTrainTable", typeof(RoutedCommands), inputGestures);
+            
         }
     }
 }

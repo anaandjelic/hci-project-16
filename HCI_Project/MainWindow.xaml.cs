@@ -9,6 +9,8 @@ namespace HCI_Project
     public delegate void Redirect();
     public partial class MainWindow : Window
     {
+        private WindowState oldstate = WindowState.Normal;
+        private bool fulled = false;
         public MainWindow()
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -63,6 +65,38 @@ namespace HCI_Project
             Database.AddTimeTable(DateTime.Now, DateTime.Now.AddHours(1), Database.GetTrainLine(1));
             Database.AddTimeTable(DateTime.Now, DateTime.Now.AddHours(5), Database.GetTrainLine(2));
             Database.AddTimeTable(DateTime.Now, DateTime.Now.AddHours(5), Database.GetTrainLine(3));
+        }
+
+        private void FullScreen_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void FullScreen_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            if (!fulled)
+            {
+                this.WindowState = WindowState.Maximized;
+                this.WindowStyle = WindowStyle.None;
+                fulled = true;
+            }
+            else
+            {
+                this.WindowState = oldstate;
+                this.WindowStyle = WindowStyle.SingleBorderWindow;
+                fulled = false;
+            }
+        }
+
+        private void FormatTutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void FormatTutorial_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            // ovde treba napisati pravila ili akcije koje hocemo da se odrade
+            
         }
     }
 }

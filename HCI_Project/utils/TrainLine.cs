@@ -75,5 +75,16 @@ namespace HCI_Project.utils
             }
             return res.Substring(0, res.Length - 3);
         }
+
+        //dodato
+        public Station getStationByName(string sname)
+        {
+            foreach(Station station in Stations)
+            {
+                if (station.Name == sname)
+                    return station;
+            }
+            return null;
+        }
     }
 }

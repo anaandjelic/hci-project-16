@@ -17,6 +17,7 @@ namespace HCI_Project.clientPages
             MainFrame = mainFrame;
             Style = (Style)FindResource(typeof(Page));
             ClientFrame.Focus();
+         
         }
 
         private void SearchTrainLine_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)

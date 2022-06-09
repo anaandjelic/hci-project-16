@@ -4,12 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="Railsy" MinHeight="450" MinWidth="800" Icon="images/icon.png" mc:Ignorable="d"
+        xmlns:cmd="clr-namespace:HCI_Project.commands"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}">
+    <Window.CommandBindings>
+        <CommandBinding Command = "cmd:RoutedCommands.FormatFullScreen" CanExecute = "FullScreen_CanExecute" Executed = "FullScreen_Executed" ></CommandBinding >
+        <CommandBinding Command = "cmd:RoutedCommands.FormatTutorial" CanExecute = "FormatTutorial_CanExecute" Executed = "FormatTutorial_Executed" ></CommandBinding >
+    </Window.CommandBindings>
     <Window.Resources>
         <Style TargetType="Button" x:Key="RoundButton">
             <Style.Resources>
