@@ -90,7 +90,7 @@ namespace HCI_Project.managerPages
 
         private void EditTrainTable_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show(" Edit Train table in development");
+            ManagerFrame.Content = new EditTimeTablePage();
             ManagerFrame.Focus();
         }
         

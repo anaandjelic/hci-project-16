@@ -6,7 +6,7 @@ namespace HCI_Project.utils
     {
         public int ID { get; private set; }
         public bool Deleted { get; set; }
-        public DateTime DepartureTime { get; private set; }
+        public DateTime DepartureTime { get; set; }
         public DateTime ArrivalTime { get; private set; }
         public TrainLine TrainLine { get; private set; }
         public TimeSpan TravelTime { get; private set; }

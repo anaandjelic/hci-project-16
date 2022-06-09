@@ -9,7 +9,7 @@ namespace HCI_Project.utils
         public bool Deleted { get; set; }
         public double Price { get; private set; }
         public int Seat { get; private set; }
-        public DateTime TimeStamp { get; private set; }
+        public DateTime TimeStamp { get; set; }
         public TrainTimeTable TrainTime { get; private set; }
 
         public Ticket(int iD, User client, double price, int seat, TrainTimeTable trainTime)

@@ -8,6 +8,7 @@ namespace HCI_Project.utils
 {
     public class TimeTableConfiguration
     {
+        public int ID { get; private set; }
         public TrainLine TrainLine { get; private set; }
         public TimeSpan DepartureTime { get; private set; }
         public bool Monday { get; private set; }
@@ -19,8 +20,9 @@ namespace HCI_Project.utils
         public bool Sunday { get; private set; }
         public bool Deleted { get; set; }
 
-        public TimeTableConfiguration(TrainLine trainLine, TimeSpan departureTime, bool monday, bool tuesday, bool wednesday, bool thursday, bool friday, bool saturday, bool sunday)
+        public TimeTableConfiguration(int iD, TrainLine trainLine, TimeSpan departureTime, bool monday, bool tuesday, bool wednesday, bool thursday, bool friday, bool saturday, bool sunday)
         {
+            ID = iD;
             Deleted = false;
             TrainLine = trainLine;
             DepartureTime = departureTime;

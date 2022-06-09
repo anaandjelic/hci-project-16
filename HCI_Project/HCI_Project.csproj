@@ -90,6 +90,9 @@
     <Compile Include="managerPages\EditTimeTablePage.xaml.cs">
       <DependentUpon>EditTimeTablePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="managerPages\EditTrainLinePage.xaml.cs">
+      <DependentUpon>EditTrainLinePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="managerPages\EditTrainPage.xaml.cs">
       <DependentUpon>EditTrainPage.xaml</DependentUpon>
     </Compile>
@@ -167,6 +170,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="managerPages\EditTimeTablePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="managerPages\EditTrainLinePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -60,6 +60,13 @@ namespace HCI_Project.utils
             Users.Add(new User(username, password, firstName, lastName, role));
         }
 
+        public static TrainTimeTable GetTimeTable(TimeTableConfiguration config, DateTime date)
+        {
+            return TimeTables.FirstOrDefault(x => x.Configuration.ID == config.ID &&
+                                                  x.DepartureTime.Date == date.Date &&
+                                                  !x.Deleted);
+        }
+
         // Train CRUD
         public static void DeleteTrain(Train train)
         {
@@ -74,6 +81,18 @@ namespace HCI_Project.utils
             }
             Trains.Remove(train);
         }
+
+        internal static void DeleteTimetable(TrainTimeTable timetable)
+        {
+            timetable.Deleted = true;
+            Tickets.Where(x => x.TrainTime == timetable && x.TimeStamp > DateTime.Now.AddDays(5)).ToList().ForEach(x => x.Deleted = true);
+        }
+
+        internal static void ChangeTimeTable(TrainTimeTable timetable, DateTime time)
+        {
+            Tickets.Where(x => x.TrainTime == timetable && x.TimeStamp > DateTime.Now.AddDays(5)).ToList().ForEach(x => x.TimeStamp += time.TimeOfDay);
+        }
+
         public static void AddTrain(string name, int firstClassCapacity, int secondClassCapacity)
         {
             int id = Trains.Count == 0 ? -1 : Trains.OrderByDescending(x => x.ID).First().ID;
@@ -91,7 +110,7 @@ namespace HCI_Project.utils
 
         public static Train GetTrain(int ID)
         {
-            Train train = Trains.Where(x => x.ID == ID).FirstOrDefault();
+            Train train = Trains.Where(x => x.ID == ID && !x.Deleted).FirstOrDefault();
             if (train == null)
                 throw new TrainNotFoundException();
             return train;
@@ -109,7 +128,7 @@ namespace HCI_Project.utils
         }
         public static TrainLine GetTrainLine(int ID)
         {
-            TrainLine trainLine = (TrainLine)(from t in TrainLines where t.ID == ID select t).FirstOrDefault();
+            TrainLine trainLine = TrainLines.Where(x => x.ID == ID && !x.Deleted).FirstOrDefault();
             if (trainLine == null)
                 throw new TrainNotFoundException();
             return trainLine;
@@ -146,15 +165,19 @@ namespace HCI_Project.utils
 
         public static TimeTableConfiguration GetConfiguration(TrainLine trainLine)
         {
-            return Configurations.Where(x => !x.Deleted && x.TrainLine.Equals(trainLine)).FirstOrDefault();
+            return Configurations.Where(x => !x.Deleted && x.TrainLine.ID == trainLine.ID).FirstOrDefault();
         }
 
         public static TimeTableConfiguration AddConfiguration(TrainLine trainLine, TimeSpan departureTime, bool monday, bool tuesday, bool wednesday, bool thursday, bool friday, bool saturday, bool sunday)
         {
-            var config = (from c in Configurations where c.TrainLine.Equals(trainLine) select c).FirstOrDefault();
-            if (config != null)
+            int id = TrainLines.Count == 0 ? -1 : TrainLines.OrderByDescending(x => x.ID).First().ID;
+            var config = (from c in Configurations where c.TrainLine.ID == trainLine.ID select c).FirstOrDefault();
+            if (config != null) 
+            { 
                 Configurations.Remove(config);
-            config = new TimeTableConfiguration(trainLine, departureTime, monday, tuesday, wednesday, thursday, friday, saturday, sunday);
+                id = config.ID - 1;
+            }
+            config = new TimeTableConfiguration(++id, trainLine, departureTime, monday, tuesday, wednesday, thursday, friday, saturday, sunday);
             Configurations.Add(config);
             return config;
         }
@@ -166,7 +189,7 @@ namespace HCI_Project.utils
 
         public static List<TrainLine> GetUnConfiguredTrainLines()
         {
-            return new List<TrainLine>(TrainLines.Except(GetConfiguredTrainLines()));
+            return TrainLines.Except(GetConfiguredTrainLines()).Where(x => !x.Deleted).ToList();
         }
 
         //dodato
@@ -180,7 +203,7 @@ namespace HCI_Project.utils
         {
             foreach(TrainLine trainLine in TrainLines)
             {
-                if (trainLine.ID.Equals(ID))
+                if (trainLine.ID.Equals(ID) && !trainLine.Deleted)
                     return trainLine;
             }
             return null;
