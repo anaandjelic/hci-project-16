@@ -1,27 +1,11 @@
 ﻿using HCI_Project.utils;
-using MaterialDesignThemes.Wpf;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HCI_Project.managerPages
 {
-    /// <summary>
-    /// Interaction logic for NewTrainPage.xaml
-    /// </summary>
     public partial class NewTrainPage : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -97,6 +81,11 @@ namespace HCI_Project.managerPages
                 return;
             }
             Database.AddTrain(TrainName, FirstClass, SecondClass);
+        }
+
+        private void CancelTrain(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

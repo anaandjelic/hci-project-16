@@ -5,7 +5,7 @@
         xmlns:local="clr-namespace:HCI_Project"
         xmlns:validations="clr-namespace:HCI_Project.validations"
         Title="New station" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
-        Icon="/HCI_Project;component/images/icon.png" FontSize="24" >
+        Icon="/HCI_Project;component/images/icon.png" FontSize="24" ShowInTaskbar="False" Topmost="True">
 
     <Window.Resources>
         <local:MyFontSizeConverter x:Key="fontSizeConverter"/>

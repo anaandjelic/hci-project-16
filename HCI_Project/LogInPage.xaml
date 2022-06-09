@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HCI_Project"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800" >
 
     <Page.Resources>
@@ -67,7 +68,7 @@
             </Grid>
             <Viewbox Grid.Row="7" Grid.Column="1">
                 <Button Click="LogInClick" IsDefault="True" Margin="70 0" Content="Log in" Foreground="White"
-                        Style="{StaticResource MaterialDesignFlatMidBgButton}"/>
+                        Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ButtonAssist.CornerRadius="5"/>
             </Viewbox>
             
         </Grid>

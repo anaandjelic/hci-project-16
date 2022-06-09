@@ -1,22 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace HCI_Project.popups
 {
-    /// <summary>
-    /// Interaction logic for MessageBoxCustom.xaml
-    /// </summary>
     public partial class MessageBoxCustom : Window
     {
         public MessageBoxCustom(string Message, MessageType Type, MessageButtons Buttons)
@@ -27,23 +12,19 @@ namespace HCI_Project.popups
             {
 
                 case MessageType.Info:
-                    txtTitle.Text = "Info";
+                    Title = "Info";
                     break;
                 case MessageType.Confirmation:
-                    txtTitle.Text = "Confirmation";
+                    Title = "Confirmation";
                     break;
                 case MessageType.Success:
-                    {
-                        txtTitle.Text = "Success";
-                    }
+                    Title = "Success";
                     break;
                 case MessageType.Warning:
-                    txtTitle.Text = "Warning";
+                    Title = "Warning";
                     break;
                 case MessageType.Error:
-                    {
-                        txtTitle.Text = "Error";
-                    }
+                    Title = "Error";
                     break;
                 default:
                     break;

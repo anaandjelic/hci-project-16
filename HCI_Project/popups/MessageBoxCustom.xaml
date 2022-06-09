@@ -5,72 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="MessageBoxWindow" Height="220" Width="500" 
-        WindowStartupLocation="CenterScreen" WindowStyle="None" Background="White" 
+        WindowStartupLocation="CenterScreen" Background="White" 
         ResizeMode="CanResize" Topmost="True" ShowInTaskbar="False"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
-        TextElement.FontSize="10"
+        TextElement.FontSize="10" FontFamily="Bahnschrift Light"
         TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"        
-        FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="197*"/>
-            <ColumnDefinition Width="295*"/>
-        </Grid.ColumnDefinitions>
+        TextOptions.TextRenderingMode="Auto" Icon="/HCI_Project;component/images/icon.png">
+    <Grid Margin="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <materialDesign:Card x:Name="cardHeader" Grid.Row="0" Padding="10" Margin="0" Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Visibility="Visible" Grid.ColumnSpan="2">
-            <StackPanel>
-                <TextBlock x:Name="txtTitle" HorizontalAlignment="Center" VerticalAlignment="Stretch" Style="{DynamicResource MaterialDesignHeadline6TextBlock}" FontSize="20" >Message Title</TextBlock>
-            </StackPanel>
-        </materialDesign:Card>
-        <StackPanel  HorizontalAlignment="Right" Margin="0,5,5,0"  VerticalAlignment="Top" Grid.Column="1">
-            <Button x:Name="btnClose" Click="BtnClose_Click" Width="35" Height="35"  Background="White" Foreground="{DynamicResource PrimaryHueDarkBrush}" Style="{StaticResource MaterialDesignFloatingActionDarkButton}">
-                <materialDesign:PackIcon Kind="Close" />
-            </Button>
-        </StackPanel>
-        <Grid Grid.Row="1" Grid.ColumnSpan="2">
-            <Grid Margin="20">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+        <TextBlock x:Name="txtMessage" Grid.Row="0" Margin="5" FontSize="18" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+          
+        <Grid Grid.Row="1" Margin="0,20,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-                    <materialDesign:TransitioningContent>
-                        <materialDesign:TransitioningContent.OpeningEffects >
-                            <materialDesign:TransitionEffect Kind="FadeIn" />
-                            <materialDesign:TransitionEffect Kind="SlideInFromBottom" />
-                        </materialDesign:TransitioningContent.OpeningEffects>
-                        <TextBox x:Name="txtMessage" HorizontalAlignment="Center" IsReadOnly="True" Grid.Row="0" Margin="5" materialDesign:HintAssist.Hint="" FontSize="18" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    </materialDesign:TransitioningContent>
-
-                </Grid>
-                <Grid Grid.Row="1" Margin="0,20,0,5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Button x:Name="btnOk" Click="BtnOk_Click" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5" Width="100" Content="OK" ToolTip="Ok" Foreground="White"/>
-                    <Button x:Name="btnCancel" Click="BtnCancel_Click" Grid.Column="2" Style="{StaticResource MaterialDesignPaperButton}" Margin="5" Width="100" Content="Cancel" ToolTip="Cancel"/>
-                    <Button x:Name="btnYes" Click="BtnYes_Click" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5" Width="100" Content="Yes" ToolTip="Yes" Foreground="White"/>
-                    <Button x:Name="btnNo" Click="BtnNo_Click" Grid.Column="2" Style="{StaticResource MaterialDesignPaperButton}" Margin="5" Width="100" Content="No" ToolTip="No"/>
-                </Grid>
-
-            </Grid>
+            <Button x:Name="btnOk" Click="BtnOk_Click" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5" Width="100" Content="OK" ToolTip="Ok" Foreground="White" materialDesign:ButtonAssist.CornerRadius="5"/>
+            <Button x:Name="btnCancel" Click="BtnCancel_Click" Grid.Column="2" Style="{StaticResource MaterialDesignPaperButton}" Margin="5" Width="100" Content="Cancel" ToolTip="Cancel" materialDesign:ButtonAssist.CornerRadius="5"/>
+            <Button x:Name="btnYes" Click="BtnYes_Click" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5" Width="100" Content="Yes" ToolTip="Yes" Foreground="White" materialDesign:ButtonAssist.CornerRadius="5"/>
+            <Button x:Name="btnNo" Click="BtnNo_Click" Grid.Column="2" Style="{StaticResource MaterialDesignPaperButton}" Margin="5" Width="100" Content="No" ToolTip="No" materialDesign:ButtonAssist.CornerRadius="5"/>
         </Grid>
+
     </Grid>
 </Window>

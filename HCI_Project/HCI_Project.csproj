@@ -87,6 +87,12 @@
     <Compile Include="commands\MultiKey\MultiKeyGesture.cs" />
     <Compile Include="commands\MultiKey\MultiKeyGestureConverter.cs" />
     <Compile Include="commands\RoutedCommands.cs" />
+    <Compile Include="managerPages\EditTimeTablePage.xaml.cs">
+      <DependentUpon>EditTimeTablePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="managerPages\EditTrainPage.xaml.cs">
+      <DependentUpon>EditTrainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="managerPages\NewTimeTablePage.xaml.cs">
       <DependentUpon>NewTimeTablePage.xaml</DependentUpon>
     </Compile>
@@ -108,6 +114,7 @@
     <Compile Include="utils\Reservation.cs" />
     <Compile Include="utils\Station.cs" />
     <Compile Include="utils\Ticket.cs" />
+    <Compile Include="utils\TimeTableConfiguration.cs" />
     <Compile Include="utils\Train.cs" />
     <Compile Include="utils\TrainLine.cs" />
     <Compile Include="utils\TrainTimeTable.cs" />
@@ -159,6 +166,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="managerPages\EditTimeTablePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="managerPages\EditTrainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="managerPages\ManagerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
