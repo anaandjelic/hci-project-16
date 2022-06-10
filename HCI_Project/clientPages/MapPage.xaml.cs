@@ -7,6 +7,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Collections.Generic;
+using ToastNotifications;
+using ToastNotifications.Messages;
+using System.Threading;
 
 namespace HCI_Project.clientPages
 {
@@ -16,8 +19,10 @@ namespace HCI_Project.clientPages
         private TrainLine trainLine;
         private Frame MainFrame;
         private bool isTutorialLine;
+        private Notifier pageNotifier;
+        private int brojac = 0;
 
-        public MapPage(bool isTutorialLine,Frame MainFrame)
+        public MapPage(bool isTutorialLine,Frame MainFrame,Notifier notifier)
         {
             InitializeComponent();
             //BingMapRESTServices.SendRequest(MyMap);
@@ -27,9 +32,11 @@ namespace HCI_Project.clientPages
             //za tutorial
             this.isTutorialLine = isTutorialLine;
             this.MainFrame = MainFrame;
+            this.pageNotifier = notifier;
             if (isTutorialLine)
             {
-                MessageBox.Show("Pritiskom na ComboBox dobijate ponudjene sve moguce Train linije \n Klikom na neku od njih Vam se iscrtava ta linija na mapi sa desne strane");
+                //MessageBox.Show("Pritiskom na ComboBox dobijate ponudjene sve moguce Train linije \n Klikom na neku od njih Vam se iscrtava ta linija na mapi sa desne strane");
+                this.pageNotifier.ShowInformation("Pritiskom na ComboBox dobijate ponudjene sve moguce Train linije \n Klikom na neku od njih Vam se iscrtava ta linija na mapi sa desne strane");
                 this.SearchBar.IsEnabled = false;
                 this.LB_result.IsEnabled = false;
                 // zatim skacemo na combobox value changed jer kad izabere jednu od njih mozemo da nastavimo dalje sa tutorijalom
@@ -108,7 +115,8 @@ namespace HCI_Project.clientPages
             {
                 // ovde enejblujemo search bar a disejblujemo combobox 
                 this.TrainLineSelect.IsEnabled = false;
-                MessageBox.Show("Search bar Vam sluzi da detaljnije pretrazujete Train linije.\nU Search bar unosite naziv stanice/a odvojene razmakom.");
+                //MessageBox.Show("Search bar Vam sluzi da detaljnije pretrazujete Train linije.\nU Search bar unosite naziv stanice/a odvojene razmakom.");
+                this.pageNotifier.ShowInformation("Search bar Vam sluzi da detaljnije pretrazujete Train linije.\nU Search bar unosite naziv stanice/a odvojene razmakom.\n npr. belgrade");
                 this.SearchBar.IsEnabled = true;
                 //sad idemo skok na search bar i nakon unosa par slova izbacuemo poruku za enter i enejblujemo message box
             }
@@ -155,11 +163,14 @@ namespace HCI_Project.clientPages
                 DrawLine();
                 if (isTutorialLine)
                 {
-                    MessageBox.Show("Ovim se zavrsava tutorijal Search Train Lines, za ponovan prolazak pritisnite Ctrl U,T");
+                    //MessageBox.Show("Ovim se zavrsava tutorijal Search Train Lines, za ponovan prolazak pritisnite Ctrl U,T");
+                    this.pageNotifier.ShowSuccess("Ovim se zavrsava tutorijal Search Train Lines");
                     this.isTutorialLine = false;
                     //return; // KAKO MOGU DA SE VRATIM NA POCETNI PROZOR!??!?!? JEDINO DA FORSIRAM LOGOUT??
+                    //Thread.Sleep(2000);
+                    MessageBox.Show("Klikom na ok dugme se vracate na login stranicu");
+                    // zasad mora biti koriscen msgbox da bi se prikazala zeljena ruta
                     this.NavigationService.GoBack();
-                    
                 }
             }
         }
@@ -170,8 +181,13 @@ namespace HCI_Project.clientPages
             {
                 if (isTutorialLine)
                 {
+                    if (this.SearchBar.Text != "belgrade")
+                        this.SearchBar.Text = "belgrade";
+
+                    this.SearchBar.IsEnabled = false;
                     this.LB_result.IsEnabled = true;
-                    MessageBox.Show("Klikom na neku od opcija Vam se prikazuje selektovana linija na mapi pored");
+                    //MessageBox.Show("Klikom na neku od opcija Vam se prikazuje selektovana linija na mapi pored");
+                    this.pageNotifier.ShowInformation("Klikom na neku od opcija Vam se prikazuje selektovana linija na mapi pored");
                 }
                 this.Button_Click(sender, e);
             }
@@ -181,9 +197,13 @@ namespace HCI_Project.clientPages
         {
             if (isTutorialLine)
             {
-                if(this.SearchBar.Text!="belgrade")
-                    this.SearchBar.Text = "belgrade";
-                MessageBox.Show("Pritiskom na dugme ENTER u listboxu ispod search bara ce Vam se prikazati sve linije koje sadrze unetu stanicu");
+                this.brojac++;
+                //MessageBox.Show("Pritiskom na dugme ENTER u listboxu ispod search bara ce Vam se prikazati sve linije koje sadrze unetu stanicu");
+                if (this.brojac % 8 == 0)
+                {
+                    this.pageNotifier.ShowInformation("Pritiskom na dugme ENTER u listboxu ispod search bara ce Vam se prikazati sve linije koje sadrze unetu stanicu");
+                    this.brojac = 0;
+                }
             }
         }
     }

@@ -1,6 +1,11 @@
 ﻿using HCI_Project.utils;
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Position;
+using ToastNotifications.Messages;
 
 namespace HCI_Project.clientPages
 {
@@ -11,6 +16,7 @@ namespace HCI_Project.clientPages
     {
         private readonly Frame MainFrame;
         private bool isTutorialLine=false;
+        private bool stardedSearchLine = false;
 
         public ClientPage(Frame mainFrame)
         {
@@ -23,16 +29,20 @@ namespace HCI_Project.clientPages
 
         private void SearchTrainLine_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = true;
+            if(!stardedSearchLine)
+                e.CanExecute = true;
+            else
+                e.CanExecute = false;
         }
 
         private void SearchTrainLine_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             // ovde bih prosledio da je u pitanju tutorial 
             //ClientFrame.Content = new MapPage();
-            ClientFrame.Content = new MapPage(isTutorialLine,MainFrame);
+            ClientFrame.Content = new MapPage(isTutorialLine,MainFrame,notifier);
             ClientFrame.Focus();
-
+            if(isTutorialLine)
+                this.stardedSearchLine = true;
         }
 
         private void SearchTrainTable_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
@@ -93,13 +103,17 @@ namespace HCI_Project.clientPages
 
         private void Tutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = true;
+            if(!isTutorialLine)
+                e.CanExecute = true;
+            else
+                e.CanExecute = false;
         }
 
         private void Tutorial_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             isTutorialLine = true;
-            MessageBox.Show("This begins the Train Line Search Tutorial\nTo continue press Ctrl F,L or go to Search -> TrainLine");
+            //MessageBox.Show("This begins the Train Line Search Tutorial\nTo continue press Ctrl F,L or go to Search -> TrainLine");
+            this.notifier.ShowWarning("This begins the Train Line Search Tutorial\nTo continue press Ctrl F,L or go to Search -> TrainLine");
             this.HistoryBTN.IsEnabled = false;
             this.MainBar.IsEnabled = false;
             this.TimeTableBtn.IsEnabled = false;
@@ -107,5 +121,24 @@ namespace HCI_Project.clientPages
             // ako su ovi koraci obavljeni onda skacemo na searchtrainline prozor
             // tu i dalje ostaje ovo stanje sa menu itemima, a korisnika teramo da unese npr beograd u search bar i da pritisne enter za pretragu
         }
+
+        //  NOTIFIKACIJE (zamena za msgbox) 
+        // vrv mogu da ga prosledjujem po pageovima za njegovo prikazivanje
+        Notifier notifier = new Notifier(cfg =>
+        {
+            cfg.PositionProvider = new WindowPositionProvider(
+                parentWindow: Application.Current.MainWindow,
+                corner: Corner.TopRight,
+                offsetX: 15,
+                offsetY: 15);
+
+            cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                notificationLifetime: TimeSpan.FromSeconds(6),
+                maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+            cfg.Dispatcher = Application.Current.Dispatcher;
+        });
+        //
+
     }
 }

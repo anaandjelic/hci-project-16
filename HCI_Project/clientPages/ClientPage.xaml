@@ -27,6 +27,7 @@
         <Menu materialDesign:MenuAssist.TopLevelMenuItemHeight="35" Foreground="White" Background="{DynamicResource PrimaryHueMidBrush}">
             <MenuItem x:Name="MainBar" Header="Main"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Log Out" Command="cmd:RoutedCommands.FormatLogOut" FontFamily="Bahnschrift Light"/>
+                <MenuItem  Header="Search train line Tutorial" Command="cmd:RoutedCommands.FormatTutorial" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem x:Name="MenuItemSerach" Header="Search"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="TrainLine" Command="cmd:RoutedCommands.FormatSearchTrainLine" FontFamily="Bahnschrift Light"/>
