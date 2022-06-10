@@ -1,4 +1,5 @@
-﻿using HCI_Project.utils;
+﻿using HCI_Project.help;
+using HCI_Project.utils;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -114,6 +115,29 @@ namespace HCI_Project.managerPages
         {
             MessageBox.Show(" PerTableReports in development");
             ManagerFrame.Focus();
+        }
+
+        private void ManagerHelp_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void ManagerHelp_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            string helpTag;
+            switch (ManagerFrame.Content.GetType().Name)
+            {
+                case "NewTrainPage":
+                    helpTag = "create_train";
+                    break;
+                case "EditTrainPage":
+                    helpTag = "edit_train";
+                    break;
+                default:
+                    helpTag = "";
+                    break;
+            }
+            new HelpViewer("manager.html", helpTag).ShowDialog();
         }
     }
 }

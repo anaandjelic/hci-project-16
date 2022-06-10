@@ -19,15 +19,21 @@
         <CommandBinding Command="cmd:RoutedCommands.FormatLogOut" CanExecute="LogOut_CanExecute" Executed="LogOut_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatMonthlyReports" CanExecute="MonthlyReports_CanExecute" Executed="MonthlyReports_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatPerTableReports" CanExecute="PerTableReports_CanExecute" Executed="PerTableReports_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatManagerHelp" CanExecute="ManagerHelp_CanExecute" Executed="ManagerHelp_Executed"></CommandBinding>
     </Page.CommandBindings>
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Menu materialDesign:MenuAssist.TopLevelMenuItemHeight="35" Foreground="White" Background="{DynamicResource PrimaryHueMidBrush}">
+        <Menu materialDesign:MenuAssist.TopLevelMenuItemHeight="48" FontSize="20" Foreground="White" Background="{DynamicResource PrimaryHueMidBrush}">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
             <MenuItem Header="Main" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Log Out" Command="cmd:RoutedCommands.FormatLogOut" FontFamily="Bahnschrift Light"/>
             </MenuItem>
@@ -45,6 +51,8 @@
                 <MenuItem Header="Monthly" Command="cmd:RoutedCommands.FormatMonthlyReports" FontFamily="Bahnschrift Light"/>
                 <MenuItem Header="Per timetable" Command="cmd:RoutedCommands.FormatPerTableReports" FontFamily="Bahnschrift Light"/>
             </MenuItem>
+            <MenuItem Header="Help" FontFamily="BahnSchrift Light" Background="{DynamicResource PrimaryHueMidBrush}" HorizontalAlignment="Right"
+                      Command="cmd:RoutedCommands.FormatManagerHelp"/>
         </Menu>
 
         <Frame x:Name="ManagerFrame" Grid.Row="2"/>
