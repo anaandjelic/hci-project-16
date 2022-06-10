@@ -28,6 +28,7 @@ namespace HCI_Project.commands
         public static readonly ICommand FormatMonthlyReports;
         public static readonly ICommand FormatPerTableReports;
 
+        //help
         public static readonly ICommand FormatManagerHelp;
 
         //full screen

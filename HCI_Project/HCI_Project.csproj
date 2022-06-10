@@ -87,7 +87,6 @@
     <Compile Include="commands\MultiKey\MultiKeyGesture.cs" />
     <Compile Include="commands\MultiKey\MultiKeyGestureConverter.cs" />
     <Compile Include="commands\RoutedCommands.cs" />
-    <Compile Include="help\HelpProvider.cs" />
     <Compile Include="help\HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>

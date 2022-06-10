@@ -124,20 +124,7 @@ namespace HCI_Project.managerPages
 
         private void ManagerHelp_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            string helpTag;
-            switch (ManagerFrame.Content.GetType().Name)
-            {
-                case "NewTrainPage":
-                    helpTag = "create_train";
-                    break;
-                case "EditTrainPage":
-                    helpTag = "edit_train";
-                    break;
-                default:
-                    helpTag = "";
-                    break;
-            }
-            new HelpViewer("manager.html", helpTag).ShowDialog();
+            new HelpViewer("manager.html").ShowDialog();
         }
     }
 }

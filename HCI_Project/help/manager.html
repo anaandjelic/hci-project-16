@@ -1,20 +1,75 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>How to create a train</title>
+    <title>Help</title>
     <style>
-        p, li {
+        p,
+        li {
             font-size: 16pt;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
         }
     </style>
 </head>
+
 <body style="padding: 0 20% 0 20%" ;>
+    <h1>Shortcuts</h1>
 
-    <a href="#edit_train">click here</a>
+    <table>
+        <tr>
+            <th>Action</th>
+            <th>Shortcut</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><a href="#create_train">Create a train</a></td>
+            <td>Ctrl + c + t</td>
+            <td>Create a new train by entering it's name and number of first and second class seats.</td>
+        </tr>
+        <tr>
+            <td><a href="#change_train">Change a train</a></td>
+            <td>Ctrl + e + t</td>
+            <td>Delete a train or change its information or delete it.</td>
+        </tr>
+        <tr>
+            <td><a href="#create_train_line">Create a train line</a></td>
+            <td>Ctrl + c + l</td>
+            <td>Create a new train line by creating new stations.</td>
+        </tr>
+        <tr>
+            <td><a href="#change_train_line">Change a train line</a></td>
+            <td>Ctrl + e + t</td>
+            <td>Delete a train line or change it stations or delete it.</td>
+        </tr>
+        <tr>
+            <td><a href="#create_timetable">Create a timetable</a></td>
+            <td>Ctrl + c + l</td>
+            <td>Create a new timetable by choosing a train line and selecting days and time of departure.</td>
+        </tr>
+        <tr>
+            <td><a href="#change_timetable">Change a timetable</a></td>
+            <td>Ctrl + e + t</td>
+            <td>Delete a timetable or change it by changing the days or time of departure.</td>
+        </tr>
+    </table>
 
-    <a id="create_train">
-        <h1>How to create a train</h1>
-    </a>
+    <h1 id="create_train">How to create a train</h1>
     <div>
         <p>
             You can create a new train by picking a new name and capacity separately for first and second class.
@@ -34,17 +89,16 @@
         </p>
         <ol>
             <li>
-                Enter the <i>train's name</i>. This field can't be empty and can't contain any numerical or special
+                <b>Enter the <i>train's name</i></b>. This field can't be empty and can't contain any numerical or special
                 characters.
             </li>
-            <li>Enter the <i>first class capacity</i>. This field can only contain digits.</li>
-            <li>Enter the <i>second class capacity</i>. This field can only contain digits.</li>
-            <li>Enter the <i>second class capacity</i>. This field can only contain digits.</li>
+            <li><b>Enter the <i>first class capacity</i></b>. This field can only contain digits.</li>
+            <li><b>Enter the <i>second class capacity</i></b>. This field can only contain digits.</li>
             <li>
                 By clicking on the <i>Cancel</i> button, you will see a popup notifying you about your intention to discard
-                all of the changes you've made so far. Your form will be cleared only when you press the <Yes>
-                    button in the
-                    popup.
+                all of the changes you've made so far. Your form will be cleared only when you press the <i>Yes</i> button in
+                the
+                popup.
             </li>
             <li>
                 By clicking on the <i>Create</i> button or pressing the <i>Enter</i> key, you will see a popup confirming your
@@ -54,12 +108,11 @@
         </ol>
     </div>
 
-    <a id="edit_train">
-        <h1>How to change a train</h1>
-    </a>
+    <h1 id="change_train">How to change a train</h1>
     <div>
         <p>
-            You can change a train by selecting the train you want to change from the combobox at the top of the page, entering
+            You can change a train by selecting the train you want to change from the combobox at the top of the page,
+            entering
             the new name and first and second class capacity.
         </p>
         <p>
@@ -76,13 +129,13 @@
             Here are the steps to fill the form successfully:
         </p>
         <ol>
-            <li>Select a train from the combobox in the top-left corner</li>
+            <li><b>Select a train</b> from the combobox in the top-left corner</li>
             <li>
-                Change the <i>train's name</i>. This field can't be empty and can't contain any numerical or special
+                <b>Change the <i>train's name</i></b>. This field can't be empty and can't contain any numerical or special
                 characters.
             </li>
-            <li>Change the <i>first class capacity</i>. This field can only contain digits.</li>
-            <li>Change the <i>second class capacity</i>. This field can only contain digits.</li>
+            <li><b>Change the <i>first class capacity</i></b>. This field can only contain digits.</li>
+            <li><b>Change the <i>second class capacity</i></b>. This field can only contain digits.</li>
             <li>
                 By clicking on the <i>Delete</i> button, you will see a popup notifying you about your intention to delete
                 delete the train. Train will be deleted only when you press the <i>Yes</i> button in the
@@ -90,12 +143,138 @@
             </li>
             <li>
                 By clicking on the <i>Change</i> button or pressing the <i>Enter</i> key, you will see a popup confirming your
-                intention to change the train using data you just entered. You will change the selected train only when you press the
+                intention to change the train using data you just entered. You will change the selected train only when you
+                press the
                 <i>Yes</i> button in the popup.
             </li>
         </ol>
     </div>
 
+    <h1 id="create_train_line">How to create a train line</h1>
+    <div>
+        <p>
+            You can create a new train line by selecting the train you want to traverse this path and by adding, changing and
+            removing stations.
+        </p>
+        <p>
+            Adding new stations is done by dragging the red pin from the left side of the window to the map. Route will be
+            drawn between the stations when you add more than one of them to the map.
+        </p>
+        <p>
+            You can check the name of the station on the map by hovering your mouse over them.
+        </p>
+        <p>
+            Here are the steps to successfully create a new train line.
+        </p>
+        <ol>
+            <li><b>Pick a train</b> you want to traverse this route from the combobox.</li>
+            <li><b>Drag and drop</b> the red pin onto the map to create a new train station.</li>
+            <li>
+                You will see a popup that lets you <b>enter <i>name, price</i> and <i>time</i></b>. <i>Name</i> represents the
+                name of the station. <i>Price</i> represents the price of tickets from the first station. <i>Time</i> represents
+                travel time since the first station.
+            </li>
+            <li>
+                You can <b>remove any of the stations</b> except the first one by double-clicking on the pin representing that
+                station on the map. To be sure about your choice of deletion, hover over the pin to see that station's name.
+            </li>
+            <li>
+                By clicking on the <i>Cancel</i> button, you will see a popup notifying you about your intention to discard
+                all of the changes you've made so far. Stations and your choice of train will be cleared only when you press the
+                <i>Yes</i> button in the popup.
+            </li>
+            <li>
+                By clicking on the <i>Create</i> button or pressing the <i>Enter</i> key, you will see a popup confirming your
+                intention to create a new train line using data you just entered. You will create a train line only when you
+                press the <i>Yes</i> button in the popup.
+            </li>
+        </ol>
+    </div>
+
+    <h1 id="change_train_line">How to change a train line</h1>
+
+    <h1 id="create_timetable">How to create a timetable</h1>
+    <div>
+        <p>
+            You can create a new timetable by selecting the train line from the table on the left side of the screen,
+            selecting days for which you want this timetable to be generated and by selecting time of the departure.
+        </p>
+        <p>
+            Here are the steps to successfully create a timetable.
+        </p>
+        <ol>
+            <li>
+                <b>Choose the train line</b> you want to create a timetable for. You can do this by clicking on the row that
+                describes that train line.
+            </li>
+            <li>
+                <b>Choose the days</b> on which you want this train to depart. You can do this by clicking on the desired
+                comboboxes. Marked days will have a blue box next to them, while unmarked days will have a white box next to
+                them.
+            </li>
+            <li>
+                <b>Choose the time</b> of the departure. You can do this by clicking on the hour you want this train to
+                depart, and then minutes. You can additionally choose if you want the train to depart in the morning or in the
+                afternoon by clicking on the <i>AM</i> or the <i>PM</i> button.
+            </li>
+            <li>
+                By clicking on the <i>Create</i> button, you will be asked to confirm your intention to create a new
+                timetable. Timetable will be created only when you press the <i>Yes</i> button in the popup.
+            </li>
+            <li>
+                By clicking on the <i>Cancel</i> button, you will see a popup confirming your intention to discard all of the
+                changes you've made. Changes will be discarded only when you press the <i>Yes</i> button in the popup.
+            </li>
+        </ol>
+    </div>
+
+    <h1 id="change_timetable">How to change a timetable</h1>
+    <div>
+        <p>
+            You can change a timetable by selecting the timetable configuration from the table on the left side of the screen,
+            selecting days for which you want this timetable to be generated and by selecting time of the departure.
+        </p>
+        <p>
+            New departures will be generated when you add new days to the configuration.
+        </p>
+        <p>
+            Departures and tickets wil be modified if time of departure is changed.
+        </p>
+        <p>
+            Departures and tickets will be deleted on the days you have unchecked.
+        </p>
+        <p>
+            All changes will be applied only to departures that depart five days after change.
+        </p>
+        <p>
+            Here are the steps to successfully change a timetable.
+        </p>
+        <ol>
+            <li>
+                <b>Choose the configuration</b> you want to change. You can do this by clicking on the row that
+                describes that configuration.
+            </li>
+            <li>
+                <b>Choose the days</b> on which you want this train to depart. You can do this by clicking on the desired
+                comboboxes. Marked days will have a blue box next to them, while unmarked days will have a white box next to
+                them.
+            </li>
+            <li>
+                <b>Choose the time</b> of the departure. You can do this by clicking on the hour you want this train to
+                depart, and then minutes. You can additionally choose if you want the train to depart in the morning or in the
+                afternoon by clicking on the <i>AM</i> or the <i>PM</i> button.
+            </li>
+            <li>
+                By clicking on the <i>Create</i> button, you will be asked to confirm your intention to create a new
+                timetable. Timetable will be created only when you press the <i>Yes</i> button in the popup.
+            </li>
+            <li>
+                By clicking on the <i>Delete</i> button, you will see a popup confirming your intention to delete that
+                configuration. Configuration will be deleted only when you press the <i>Yes</i> button in the popup.
+            </li>
+        </ol>
+    </div>
 
 </body>
+
 </html>

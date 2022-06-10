@@ -5,12 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCI_Project.help" Loaded="Window_Loaded"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="HelpViewer" Height="450" Width="800">
+        Title="Help" Height="450" Width="800" Icon="/HCI_Project;component/images/icon.png">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="9*"/>
-        </Grid.RowDefinitions>
-        <WebBrowser Grid.Row="1" Cursor="Arrow" x:Name="browser"/>
+        <WebBrowser Cursor="Arrow" x:Name="browser"/>
     </Grid>
 </Window>

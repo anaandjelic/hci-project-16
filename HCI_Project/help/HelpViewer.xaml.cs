@@ -6,11 +6,9 @@ namespace HCI_Project.help
     public partial class HelpViewer : Window
     {
         private string HelpName;
-        private string HelpAnchor;
-        public HelpViewer(string helpName, string helpAnchor)
+        public HelpViewer(string helpName)
         {
             HelpName = helpName;
-            HelpAnchor = helpAnchor;
             InitializeComponent();
         }
 
