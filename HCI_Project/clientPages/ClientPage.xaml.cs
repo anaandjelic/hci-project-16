@@ -6,6 +6,8 @@ using ToastNotifications;
 using ToastNotifications.Lifetime;
 using ToastNotifications.Position;
 using ToastNotifications.Messages;
+using ToastNotifications.Messages.Core;
+using ToastNotifications.Core;
 
 namespace HCI_Project.clientPages
 {
@@ -113,7 +115,16 @@ namespace HCI_Project.clientPages
         {
             isTutorialLine = true;
             //MessageBox.Show("This begins the Train Line Search Tutorial\nTo continue press Ctrl F,L or go to Search -> TrainLine");
-            this.notifier.ShowWarning("This begins the Train Line Search Tutorial\nTo continue press Ctrl F,L or go to Search -> TrainLine");
+
+            var optionsMax = new MessageOptions
+            {
+                FontSize = 25,
+                FreezeOnMouseEnter = true,
+                UnfreezeOnMouseLeave = true
+            };
+
+            string message = "This begins the Train Line Search Tutorial\nTo continue press Ctrl F,L or go to Search -> TrainLine";
+            this.notifier.ShowWarning(message,optionsMax);
             this.HistoryBTN.IsEnabled = false;
             this.MainBar.IsEnabled = false;
             this.TimeTableBtn.IsEnabled = false;
@@ -137,7 +148,11 @@ namespace HCI_Project.clientPages
                 maximumNotificationCount: MaximumNotificationCount.FromCount(5));
 
             cfg.Dispatcher = Application.Current.Dispatcher;
+
+            cfg.DisplayOptions.Width = Application.Current.MainWindow.Width /3;
         });
+
+
         //
 
     }
