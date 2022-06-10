@@ -52,7 +52,7 @@
         </Grid>
         <Grid Grid.Row="1">
             <TextBox x:Name="SearchBar" VerticalAlignment="Top" KeyDown="EnterIsPressed" Background="AliceBlue"
-        FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Converter={StaticResource fontSizeConverter}}" />
+        FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Converter={StaticResource fontSizeConverter}}" TextChanged="SearchBar_TextChanged" />
         </Grid>
 
     </Grid>

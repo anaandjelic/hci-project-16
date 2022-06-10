@@ -14,6 +14,7 @@ namespace HCI_Project
             InitializeComponent();
             MainFrame = mainFrame;
             Style = (Style)FindResource(typeof(Page));
+            MainFrame.Focus();
         }
 
         private void LogInClick(object sender, System.Windows.RoutedEventArgs e)

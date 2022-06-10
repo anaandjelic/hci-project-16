@@ -10,7 +10,7 @@
     <Page.Resources>
         <local:MyFontSizeConverter x:Key="fontSizeConverter"/>
     </Page.Resources>
-    
+
     <Grid>
 
         <Grid.Background>

@@ -106,7 +106,7 @@ namespace HCI_Project.commands
 
             //tutorial
             inputGestures = new InputGestureCollection();
-            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.F }, ModifierKeys.Control, "Ctrl+F"));
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.T, Key.U }, ModifierKeys.Control, "Ctrl+T, U"));
             FormatTutorial = new RoutedUICommand("Format EditTrainTable", "FormatEditTrainTable", typeof(RoutedCommands), inputGestures);
             
         }

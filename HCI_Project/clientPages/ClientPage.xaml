@@ -16,6 +16,7 @@
         <CommandBinding Command="cmd:RoutedCommands.FormatLogOut" CanExecute="LogOut_CanExecute" Executed="LogOut_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatHistoryTickets" CanExecute="HistoryTickets_CanExecute" Executed="HistoryTickets_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatHistoryReservations" CanExecute="HistoryReservations_CanExecute" Executed="HistoryReservations_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatTutorial" CanExecute="Tutorial_CanExecute" Executed="Tutorial_Executed"></CommandBinding>
     </Page.CommandBindings>
 
     <Grid>
@@ -27,11 +28,11 @@
             <MenuItem x:Name="MainBar" Header="Main"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Log Out" Command="cmd:RoutedCommands.FormatLogOut" FontFamily="Bahnschrift Light"/>
             </MenuItem>
-            <MenuItem Header="Search"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+            <MenuItem x:Name="MenuItemSerach" Header="Search"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="TrainLine" Command="cmd:RoutedCommands.FormatSearchTrainLine" FontFamily="Bahnschrift Light"/>
-                <MenuItem Header="Timetable" Command="cmd:RoutedCommands.FormatSearchTrainTable" FontFamily="Bahnschrift Light"/>
+                <MenuItem x:Name="TimeTableBtn" Header="Timetable" Command="cmd:RoutedCommands.FormatSearchTrainTable" FontFamily="Bahnschrift Light"/>
             </MenuItem>
-            <MenuItem Header="History"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+            <MenuItem x:Name="HistoryBTN" Header="History"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Tickets" Command="cmd:RoutedCommands.FormatHistoryTickets" FontFamily="Bahnschrift Light"/>
                 <MenuItem Header="Reservations" Command="cmd:RoutedCommands.FormatHistoryReservations" FontFamily="Bahnschrift Light"/>
             </MenuItem>

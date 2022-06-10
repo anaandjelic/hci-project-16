@@ -89,16 +89,5 @@ namespace HCI_Project
                 fulled = false;
             }
         }
-
-        private void FormatTutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
-        private void FormatTutorial_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
-        {
-            // ovde treba napisati pravila ili akcije koje hocemo da se odrade
-            
-        }
     }
 }

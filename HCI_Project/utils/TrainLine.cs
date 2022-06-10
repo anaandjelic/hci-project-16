@@ -80,12 +80,13 @@ namespace HCI_Project.utils
         //dodato
         public Station getStationByName(string sname)
         {
-            foreach(Station station in Stations)
+            foreach (Station station in Stations)
             {
                 if (station.Name == sname)
                     return station;
             }
             return null;
+        }
         public override bool Equals(object obj)
         {
             return obj is TrainLine line &&

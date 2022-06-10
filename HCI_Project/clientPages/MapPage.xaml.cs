@@ -14,13 +14,27 @@ namespace HCI_Project.clientPages
     {
         Point StartPoint;
         private TrainLine trainLine;
+        private Frame MainFrame;
+        private bool isTutorialLine;
 
-        public MapPage()
+        public MapPage(bool isTutorialLine,Frame MainFrame)
         {
             InitializeComponent();
             //BingMapRESTServices.SendRequest(MyMap);
-
             TrainLineSelect.ItemsSource = Database.GetTrainLinesStringWithID();
+
+
+            //za tutorial
+            this.isTutorialLine = isTutorialLine;
+            this.MainFrame = MainFrame;
+            if (isTutorialLine)
+            {
+                MessageBox.Show("Pritiskom na ComboBox dobijate ponudjene sve moguce Train linije \n Klikom na neku od njih Vam se iscrtava ta linija na mapi sa desne strane");
+                this.SearchBar.IsEnabled = false;
+                this.LB_result.IsEnabled = false;
+                // zatim skacemo na combobox value changed jer kad izabere jednu od njih mozemo da nastavimo dalje sa tutorijalom
+            }
+
         }
 
         private void MapView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -88,6 +102,17 @@ namespace HCI_Project.clientPages
             int trainLineID = getTrainLineID();
             trainLine = Database.GetTrainLineByID(trainLineID);
             DrawLine();
+
+            //nastavak tutorijala 
+            if (isTutorialLine)
+            {
+                // ovde enejblujemo search bar a disejblujemo combobox 
+                this.TrainLineSelect.IsEnabled = false;
+                MessageBox.Show("Search bar Vam sluzi da detaljnije pretrazujete Train linije.\nU Search bar unosite naziv stanice/a odvojene razmakom.");
+                this.SearchBar.IsEnabled = true;
+                //sad idemo skok na search bar i nakon unosa par slova izbacuemo poruku za enter i enejblujemo message box
+            }
+
         }
 
         private void DrawLine()
@@ -128,13 +153,38 @@ namespace HCI_Project.clientPages
             {
                 trainLine = Database.GetTrainLineByID(trainLineID);
                 DrawLine();
+                if (isTutorialLine)
+                {
+                    MessageBox.Show("Ovim se zavrsava tutorijal Search Train Lines, za ponovan prolazak pritisnite Ctrl U,T");
+                    this.isTutorialLine = false;
+                    //return; // KAKO MOGU DA SE VRATIM NA POCETNI PROZOR!??!?!? JEDINO DA FORSIRAM LOGOUT??
+                    this.NavigationService.GoBack();
+                    
+                }
             }
         }
 
         private void EnterIsPressed(object sender, KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Enter)
-                this.Button_Click(sender,e);
+            {
+                if (isTutorialLine)
+                {
+                    this.LB_result.IsEnabled = true;
+                    MessageBox.Show("Klikom na neku od opcija Vam se prikazuje selektovana linija na mapi pored");
+                }
+                this.Button_Click(sender, e);
+            }
+        }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (isTutorialLine)
+            {
+                if(this.SearchBar.Text!="belgrade")
+                    this.SearchBar.Text = "belgrade";
+                MessageBox.Show("Pritiskom na dugme ENTER u listboxu ispod search bara ce Vam se prikazati sve linije koje sadrze unetu stanicu");
+            }
         }
     }
 }

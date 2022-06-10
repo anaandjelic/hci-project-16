@@ -13,7 +13,6 @@
         Background="{DynamicResource MaterialDesignPaper}">
     <Window.CommandBindings>
         <CommandBinding Command = "cmd:RoutedCommands.FormatFullScreen" CanExecute = "FullScreen_CanExecute" Executed = "FullScreen_Executed" ></CommandBinding >
-        <CommandBinding Command = "cmd:RoutedCommands.FormatTutorial" CanExecute = "FormatTutorial_CanExecute" Executed = "FormatTutorial_Executed" ></CommandBinding >
     </Window.CommandBindings>
     <Window.Resources>
         <Style TargetType="Button" x:Key="RoundButton">
