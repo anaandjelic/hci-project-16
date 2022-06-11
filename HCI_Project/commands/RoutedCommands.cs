@@ -35,7 +35,8 @@ namespace HCI_Project.commands
         public static readonly ICommand FormatFullScreen;
 
         //tutorial
-        public static readonly ICommand FormatTutorial;
+        public static readonly ICommand FormatTutorial; // serach train lines tutorial
+        public static readonly ICommand FormatCreateTrainTutorial;
 
         //public static readonly ICommand FormatLogOut;
 
@@ -96,11 +97,11 @@ namespace HCI_Project.commands
             //reports
             inputGestures = new InputGestureCollection();
             inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.R, Key.M }, ModifierKeys.Control, "Ctrl+R, M"));
-            FormatMonthlyReports = new RoutedUICommand("Format EditTrainLine", "FormatEditTrainLine", typeof(RoutedCommands), inputGestures);
+            FormatMonthlyReports = new RoutedUICommand("Format MonthlyReports", "FormatMonthlyReports", typeof(RoutedCommands), inputGestures);
 
             inputGestures = new InputGestureCollection();
             inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.R, Key.T }, ModifierKeys.Control, "Ctrl+R, T"));
-            FormatPerTableReports = new RoutedUICommand("Format EditTrainTable", "FormatEditTrainTable", typeof(RoutedCommands), inputGestures);
+            FormatPerTableReports = new RoutedUICommand("Format PerTableReports", "FormatPerTableReports", typeof(RoutedCommands), inputGestures);
 
             // help
             inputGestures = new InputGestureCollection();
@@ -110,13 +111,18 @@ namespace HCI_Project.commands
             //fullscreen
             inputGestures = new InputGestureCollection();
             inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.F }, ModifierKeys.Control, "Ctrl+F"));
-            FormatFullScreen = new RoutedUICommand("Format EditTrainTable", "FormatEditTrainTable", typeof(RoutedCommands), inputGestures);
+            FormatFullScreen = new RoutedUICommand("Format FullScreen", "FormatFullScreen", typeof(RoutedCommands), inputGestures);
 
             //tutorial
             inputGestures = new InputGestureCollection();
             inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.T, Key.U }, ModifierKeys.Control, "Ctrl+T, U"));
-            FormatTutorial = new RoutedUICommand("Format EditTrainTable", "FormatEditTrainTable", typeof(RoutedCommands), inputGestures);
-            
+            FormatTutorial = new RoutedUICommand("Format Tutorial", "FormatTutorial", typeof(RoutedCommands), inputGestures);
+
+            inputGestures = new InputGestureCollection();
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.T, Key.C }, ModifierKeys.Control, "Ctrl+T, C"));
+            FormatCreateTrainTutorial = new RoutedUICommand("Format CreateTrainTutorial", "FormatCreateTrainTutorial", typeof(RoutedCommands), inputGestures);
+
+
         }
     }
 }

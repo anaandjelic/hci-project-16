@@ -20,6 +20,7 @@
         <CommandBinding Command="cmd:RoutedCommands.FormatMonthlyReports" CanExecute="MonthlyReports_CanExecute" Executed="MonthlyReports_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatPerTableReports" CanExecute="PerTableReports_CanExecute" Executed="PerTableReports_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatManagerHelp" CanExecute="ManagerHelp_CanExecute" Executed="ManagerHelp_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatCreateTrainTutorial" CanExecute="CreateTrainTutorial_CanExecute" Executed="CreateTrainTutorial_Executed"></CommandBinding>
     </Page.CommandBindings>
     
     <Grid>
@@ -34,24 +35,25 @@
                     <DockPanel HorizontalAlignment="Stretch"/>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Main" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+            <MenuItem x:Name="mainItem" Header="Main" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Log Out" Command="cmd:RoutedCommands.FormatLogOut" FontFamily="Bahnschrift Light"/>
+                <MenuItem  Header="Create train Tutorial" Command="cmd:RoutedCommands.FormatCreateTrainTutorial" FontFamily="Bahnschrift Light"/>
             </MenuItem>
-            <MenuItem Header="Edit" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+            <MenuItem x:Name="editItem" Header="Edit" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Train" Command="cmd:RoutedCommands.FormatEditTrain" FontFamily="Bahnschrift Light"/>
                 <MenuItem Header="TrainLine"  Command="cmd:RoutedCommands.FormatEditTrainLine" FontFamily="Bahnschrift Light"/>
                 <MenuItem Header="Timetable" Command="cmd:RoutedCommands.FormatEditTrainTable" FontFamily="Bahnschrift Light"/>
             </MenuItem>
-            <MenuItem Header="New" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+            <MenuItem x:Name="newItem" Header="New" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Train" Command="cmd:RoutedCommands.FormatCreateTrain" FontFamily="Bahnschrift Light"/>
                 <MenuItem Header="TrainLine" Command="cmd:RoutedCommands.FormatCreateTrainLine" FontFamily="Bahnschrift Light"/>
                 <MenuItem Header="Timetable" Command="cmd:RoutedCommands.FormatCreateTrainTable" FontFamily="Bahnschrift Light"/>
             </MenuItem>
-            <MenuItem Header="Reports" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+            <MenuItem x:Name="reportsItem" Header="Reports" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Monthly" Command="cmd:RoutedCommands.FormatMonthlyReports" FontFamily="Bahnschrift Light"/>
                 <MenuItem Header="Per timetable" Command="cmd:RoutedCommands.FormatPerTableReports" FontFamily="Bahnschrift Light"/>
             </MenuItem>
-            <MenuItem Header="Help" FontFamily="BahnSchrift Light" Background="{DynamicResource PrimaryHueMidBrush}" HorizontalAlignment="Right"
+            <MenuItem x:Name="helpItem" Header="Help" FontFamily="BahnSchrift Light" Background="{DynamicResource PrimaryHueMidBrush}" HorizontalAlignment="Right"
                       Command="cmd:RoutedCommands.FormatManagerHelp"/>
         </Menu>
 
