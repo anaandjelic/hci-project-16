@@ -21,6 +21,7 @@
         <CommandBinding Command="cmd:RoutedCommands.FormatPerTableReports" CanExecute="PerTableReports_CanExecute" Executed="PerTableReports_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatManagerHelp" CanExecute="ManagerHelp_CanExecute" Executed="ManagerHelp_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatCreateTrainTutorial" CanExecute="CreateTrainTutorial_CanExecute" Executed="CreateTrainTutorial_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatCreateTrainLineTutorial" CanExecute="CreateTrainLineTutorial_CanExecute" Executed="CreateTrainLineTutorial_Executed"></CommandBinding>
     </Page.CommandBindings>
     
     <Grid>
@@ -38,6 +39,7 @@
             <MenuItem x:Name="mainItem" Header="Main" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Log Out" Command="cmd:RoutedCommands.FormatLogOut" FontFamily="Bahnschrift Light"/>
                 <MenuItem  Header="Create train Tutorial" Command="cmd:RoutedCommands.FormatCreateTrainTutorial" FontFamily="Bahnschrift Light"/>
+                <MenuItem  Header="Create train line Tutorial" Command="cmd:RoutedCommands.FormatCreateTrainLineTutorial" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem x:Name="editItem" Header="Edit" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Train" Command="cmd:RoutedCommands.FormatEditTrain" FontFamily="Bahnschrift Light"/>

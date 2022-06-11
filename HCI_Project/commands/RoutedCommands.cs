@@ -37,6 +37,7 @@ namespace HCI_Project.commands
         //tutorial
         public static readonly ICommand FormatTutorial; // serach train lines tutorial
         public static readonly ICommand FormatCreateTrainTutorial;
+        public static readonly ICommand FormatCreateTrainLineTutorial;
 
         //public static readonly ICommand FormatLogOut;
 
@@ -122,6 +123,9 @@ namespace HCI_Project.commands
             inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.T, Key.C }, ModifierKeys.Control, "Ctrl+T, C"));
             FormatCreateTrainTutorial = new RoutedUICommand("Format CreateTrainTutorial", "FormatCreateTrainTutorial", typeof(RoutedCommands), inputGestures);
 
+            inputGestures = new InputGestureCollection();
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.T, Key.L }, ModifierKeys.Control, "Ctrl+T, L"));
+            FormatCreateTrainLineTutorial = new RoutedUICommand("Format CreateTrainLineTutorial", "FormatCreateTrainLineTutorial", typeof(RoutedCommands), inputGestures);
 
         }
     }

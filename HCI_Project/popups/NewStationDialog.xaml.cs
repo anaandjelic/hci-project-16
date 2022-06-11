@@ -15,6 +15,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ToastNotifications;
+using ToastNotifications.Core;
+using ToastNotifications.Messages;
 
 namespace HCI_Project.popups
 {
@@ -25,6 +28,10 @@ namespace HCI_Project.popups
         private double _Price;
         private TimeSpan _Time;
         public string StationName { get; set; }
+
+        private Notifier managerNotifier;
+        private bool isTutorialCreateTrainLine;
+
         public double Price
         {
             get => PriceField.IsEnabled && PriceField.Text.Length != 0 ? _Price : 0;
@@ -36,15 +43,27 @@ namespace HCI_Project.popups
             set => _Time = value;
         }
 
-        public NewStationDialog(bool isFirstStation, double lastPrice, TimeSpan lastTime)
+        public NewStationDialog(bool isFirstStation, double lastPrice, TimeSpan lastTime, bool isTutorialCreateTrainLine, Notifier notifier)
         {
             InitializeComponent();
             DataContext = this;
             LastPrice = lastPrice;
             LastTime = lastTime;
             NameField.Focus();
+
+            this.isTutorialCreateTrainLine = isTutorialCreateTrainLine;
+            this.managerNotifier = notifier;
+
             if (isFirstStation)
             {
+                if(isTutorialCreateTrainLine)
+                {
+                    string message = "Uneti naziv stanice";
+                    notifications(message, "Information");
+
+                    message = "Pritisnuti Confirm dugme za nastavak";
+                    notifications(message, "Information");
+                }
                 TimeField.IsEnabled = false;
                 Binding binding = BindingOperations.GetBinding(TimeField, TimePicker.TextProperty);
                 binding.ValidationRules.Clear();
@@ -53,6 +72,18 @@ namespace HCI_Project.popups
                 binding.ValidationRules.Clear();
 
             }
+            else
+            {
+                if(isTutorialCreateTrainLine)
+                {
+                    string message = "Uneti naziv stanice, cenu puta i vreme trajanja voznje";
+                    notifications(message, "Information");
+
+                    message = "Pritisnuti Confirm dugme za nastavak";
+                    notifications(message, "Information");
+                }
+            }
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -71,6 +102,20 @@ namespace HCI_Project.popups
                 return;
             }
             DialogResult = true;
+        }
+
+        private void notifications(string message, string tip)
+        {
+            var optionsMax = new MessageOptions
+            {
+                FontSize = 25,
+                FreezeOnMouseEnter = true,
+                UnfreezeOnMouseLeave = true
+            };
+            if (tip == "Success")
+                this.managerNotifier.ShowSuccess(message, optionsMax);
+            else if (tip == "Information")
+                this.managerNotifier.ShowInformation(message, optionsMax);
         }
 
     }

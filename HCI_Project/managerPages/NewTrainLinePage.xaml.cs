@@ -9,6 +9,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using ToastNotifications;
+using ToastNotifications.Core;
+using ToastNotifications.Messages;
 
 namespace HCI_Project.managerPages
 {
@@ -20,13 +23,34 @@ namespace HCI_Project.managerPages
         private bool IsFirstStation = true;
         private Point StartPoint;
 
-        public NewTrainLinePage()
+        private bool isTutorialCreateTrainLine;
+        private Frame MainFrame;
+        private Notifier managerNotifier;
+        private int brojac = 0;
+
+
+        public NewTrainLinePage(bool isTutorialCreateTrainLine, Frame MainFrame, Notifier notifier)
         {
             InitializeComponent();
             Trains = new ObservableCollection<string>(Database.GetTrains().Select(t => $"{t.Name} - {t.FirstClassCapacity + t.SecondClassCapacity} seats").OrderBy(name => name).ToArray());
             TrainsCombobox.ItemsSource = Trains;
             TrainsCombobox.SelectedIndex = 0;
             DataContext = this;
+
+            this.isTutorialCreateTrainLine = isTutorialCreateTrainLine;
+            this.MainFrame = MainFrame;
+            this.managerNotifier = notifier;
+
+            if (isTutorialCreateTrainLine)
+            {
+                this.MyMap.IsEnabled = false;
+                this.CreateBtn.IsEnabled = false;
+                this.cancelBTN.IsEnabled = false;
+                string message = "Klikom na combobox dobijate mogucnost odabira voza za vasu rutu";
+                this.TrainsCombobox.Focus();
+                notifications(message, "Information");
+            }
+
         }
 
         private void MapView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -67,7 +91,8 @@ namespace HCI_Project.managerPages
             Point mousePosition = e.GetPosition(MyMap);
             Location pinLocation = MyMap.ViewportPointToLocation(mousePosition);
 
-            NewStationDialog dialog = new NewStationDialog(IsFirstStation, lastPrice, lastTime);
+            NewStationDialog dialog = new NewStationDialog(IsFirstStation, lastPrice, lastTime,isTutorialCreateTrainLine,this.managerNotifier);
+
             bool? result = dialog.ShowDialog();
             if (!(bool)result)
             {
@@ -88,6 +113,19 @@ namespace HCI_Project.managerPages
             Stations.Add(new Station(dialog.StationName, dialog.Price, pinLocation.Latitude, pinLocation.Longitude, dialog.Time));
             Pins.Add(pin);
             UpdateMap();
+
+            if (this.isTutorialCreateTrainLine && this.Stations.Count() == 1)
+            {
+                string message = "Pin mozete da kliknete i prevucete na mapu";
+                notifications(message, "Information");
+            }
+            else if (this.isTutorialCreateTrainLine && this.Stations.Count()==2)
+            {
+                MyMap.IsEnabled = false;
+                string message = "Klikom na Confirm dugme kreirate novi train line";
+                notifications(message, "Information");
+                this.CreateBtn.IsEnabled = true;
+            }
 
             if (IsFirstStation)
             {
@@ -120,6 +158,13 @@ namespace HCI_Project.managerPages
             MyMap.Children.Clear();
             IsFirstStation = true;
             StationGrid.ItemsSource = Stations;
+            if(this.isTutorialCreateTrainLine)
+            {
+                string message = "Ovim se zavrsava tutorija za kreiranje train linova";
+                notifications(message, "Success");
+                MessageBox.Show("Klikom na ok se vracate na login page");
+                this.NavigationService.GoBack();
+            }
         }
 
         private void CancelTrainLine(object sender, RoutedEventArgs e)
@@ -168,6 +213,33 @@ namespace HCI_Project.managerPages
             if (e.Column.Header.ToString() == "Price")
             {
                 e.Column.Header = "Price";
+            }
+        }
+
+        private void notifications(string message, string tip)
+        {
+            var optionsMax = new MessageOptions
+            {
+                FontSize = 25,
+                FreezeOnMouseEnter = true,
+                UnfreezeOnMouseLeave = true
+            };
+            if (tip == "Success")
+                this.managerNotifier.ShowSuccess(message, optionsMax);
+            else if (tip == "Information")
+                this.managerNotifier.ShowInformation(message, optionsMax);
+        }
+
+        private void TrainsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(this.isTutorialCreateTrainLine)
+            {
+                this.TrainsCombobox.IsEnabled = false;
+                this.MyMap.IsEnabled = true;
+                string message = "Pin mozete da kliknete i prevucete na mapu";
+                notifications(message, "Information");
+                message = "Zatim pustanjem pina dobijate stanicu";
+                notifications(message, "Information");
             }
         }
     }

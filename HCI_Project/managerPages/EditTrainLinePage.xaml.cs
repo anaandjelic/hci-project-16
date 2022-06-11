@@ -66,7 +66,9 @@ namespace HCI_Project.managerPages
             Point mousePosition = e.GetPosition(MyMap);
             Location pinLocation = MyMap.ViewportPointToLocation(mousePosition);
 
-            NewStationDialog dialog = new NewStationDialog(IsFirstStation, lastPrice, lastTime);
+            NewStationDialog dialog = new NewStationDialog(IsFirstStation, lastPrice, lastTime,false,null);
+            //vestacki postavljene vrednosti na false i null zasad!!!!
+
             bool? result = dialog.ShowDialog();
             if (!(bool)result)
             {

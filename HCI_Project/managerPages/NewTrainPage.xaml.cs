@@ -19,7 +19,6 @@ namespace HCI_Project.managerPages
         private Frame MainFrame;
         private Notifier managerNotifier;
         private int brojac = 0;
-        int brojacPrve = 0;
 
         public NewTrainPage(bool isTutorialCreateTrain,Frame MainFrame,Notifier notifier)
         {

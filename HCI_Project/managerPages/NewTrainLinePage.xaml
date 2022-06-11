@@ -65,7 +65,7 @@
 
         <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Margin="0 0 5 0">
             <ComboBox x:Name="TrainsCombobox" Padding="0"
-                      FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Converter={StaticResource fontSizeConverter}}"/>
+                      FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Converter={StaticResource fontSizeConverter}}" SelectionChanged="TrainsCombobox_SelectionChanged"/>
         </Grid>
 
         <DataGrid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" x:Name="StationGrid" FontFamily="Bahnschrift Light"
@@ -76,7 +76,7 @@
                Center="45.2461818273899, 19.85138567223834" ZoomLevel="10" Name="MyMap" Grid.RowSpan="10"
                AllowDrop="True" DragEnter="MapView_DragEnter" Drop="MapView_Drop" Grid.Column="5"/>
 
-        <Button Grid.Row="8" Grid.Column="1" Margin="0 0 5 0"
+        <Button x:Name="cancelBTN" Grid.Row="8" Grid.Column="1" Margin="0 0 5 0"
                 Click="CancelTrainLine" FontFamily="Bahnschrift Light"
                 Style="{StaticResource MaterialDesignOutlinedButton}" materialDesign:ButtonAssist.CornerRadius="5"
                 FontSize="35" Content="Cancel" Height="50"/>
