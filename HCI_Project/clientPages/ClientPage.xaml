@@ -11,6 +11,7 @@
       Title="ClientPage">
 
     <Page.CommandBindings>
+        <CommandBinding Command="cmd:RoutedCommands.FormatClientHelp" CanExecute="ClientHelp_CanExecute" Executed="ClientHelp_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatSearchTrainLine" CanExecute="SearchTrainLine_CanExecute" Executed="SearchTrainLine_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatSearchTrainTable" CanExecute="SearchTrainTable_CanExecute" Executed="SearchTrainTable_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatLogOut" CanExecute="LogOut_CanExecute" Executed="LogOut_Executed"></CommandBinding>
@@ -25,6 +26,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Menu materialDesign:MenuAssist.TopLevelMenuItemHeight="35" Foreground="White" Background="{DynamicResource PrimaryHueMidBrush}">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
             <MenuItem x:Name="MainBar" Header="Main"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Log Out" Command="cmd:RoutedCommands.FormatLogOut" FontFamily="Bahnschrift Light"/>
                 <MenuItem  Header="Search train line Tutorial" Command="cmd:RoutedCommands.FormatTutorial" FontFamily="Bahnschrift Light"/>
@@ -37,6 +43,7 @@
                 <MenuItem Header="Tickets" Command="cmd:RoutedCommands.FormatHistoryTickets" FontFamily="Bahnschrift Light"/>
                 <MenuItem Header="Reservations" Command="cmd:RoutedCommands.FormatHistoryReservations" FontFamily="Bahnschrift Light"/>
             </MenuItem>
+            <MenuItem x:Name="helpItem" Header="Help" FontFamily="BahnSchrift Light" Background="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Center" HorizontalAlignment="Right" Command="cmd:RoutedCommands.FormatClientHelp"/>
         </Menu>
         <Frame x:Name="ClientFrame" Grid.Row="2"/>
     </Grid>

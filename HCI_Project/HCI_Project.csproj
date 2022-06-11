@@ -266,6 +266,9 @@
     <Resource Include="images\previewPin.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="help\client.html" />
+    <Resource Include="help\clientHelpImages\SearchTrainLine1.PNG" />
+    <Resource Include="help\clientHelpImages\SearchTrainTable.PNG" />
     <Content Include="help\manager.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

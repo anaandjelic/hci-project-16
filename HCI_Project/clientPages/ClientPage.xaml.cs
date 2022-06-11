@@ -8,6 +8,7 @@ using ToastNotifications.Position;
 using ToastNotifications.Messages;
 using ToastNotifications.Messages.Core;
 using ToastNotifications.Core;
+using HCI_Project.help;
 
 namespace HCI_Project.clientPages
 {
@@ -152,8 +153,17 @@ namespace HCI_Project.clientPages
             cfg.DisplayOptions.Width = Application.Current.MainWindow.Width /3;
         });
 
+        private void ClientHelp_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        {
+            if (isTutorialLine)
+                e.CanExecute = false;
+            else
+                e.CanExecute = true;
+        }
 
-        //
-
+        private void ClientHelp_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            new HelpViewer("client.html").ShowDialog();
+        }
     }
 }

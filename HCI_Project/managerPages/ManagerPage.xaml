@@ -23,14 +23,18 @@
         <CommandBinding Command="cmd:RoutedCommands.FormatCreateTrainTutorial" CanExecute="CreateTrainTutorial_CanExecute" Executed="CreateTrainTutorial_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatCreateTrainLineTutorial" CanExecute="CreateTrainLineTutorial_CanExecute" Executed="CreateTrainLineTutorial_Executed"></CommandBinding>
     </Page.CommandBindings>
-    
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="279*"/>
+            <ColumnDefinition Width="121*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Menu materialDesign:MenuAssist.TopLevelMenuItemHeight="48" FontSize="20" Foreground="White" Background="{DynamicResource PrimaryHueMidBrush}">
+        <Menu materialDesign:MenuAssist.TopLevelMenuItemHeight="48" FontSize="20" Foreground="White" Background="{DynamicResource PrimaryHueMidBrush}" Grid.ColumnSpan="2">
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <DockPanel HorizontalAlignment="Stretch"/>
@@ -59,6 +63,6 @@
                       Command="cmd:RoutedCommands.FormatManagerHelp"/>
         </Menu>
 
-        <Frame x:Name="ManagerFrame" Grid.Row="2"/>
+        <Frame x:Name="ManagerFrame" Grid.Row="1" Grid.ColumnSpan="2"/>
     </Grid>
 </Page>

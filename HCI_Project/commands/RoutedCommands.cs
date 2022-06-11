@@ -30,6 +30,7 @@ namespace HCI_Project.commands
 
         //help
         public static readonly ICommand FormatManagerHelp;
+        public static readonly ICommand FormatClientHelp;
 
         //full screen
         public static readonly ICommand FormatFullScreen;
@@ -108,6 +109,10 @@ namespace HCI_Project.commands
             inputGestures = new InputGestureCollection();
             inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.F1 } , ModifierKeys.Control, "Ctrl+F1"));
             FormatManagerHelp = new RoutedUICommand("Format Help", "Help", typeof(RoutedCommands), inputGestures);
+
+            inputGestures = new InputGestureCollection();
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.F1 }, ModifierKeys.Control, "Ctrl+F1"));
+            FormatClientHelp = new RoutedUICommand("Format ClientHelp", "ClientHelp", typeof(RoutedCommands), inputGestures);
 
             //fullscreen
             inputGestures = new InputGestureCollection();
