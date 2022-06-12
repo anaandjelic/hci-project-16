@@ -27,7 +27,7 @@ namespace HCI_Project.utils
             //ID = trainTimeTable.ID;
             Departure = trainTimeTable.DepartureDate + trainTimeTable.Configuration.DepartureTime;
             Arrival = Departure + trainTimeTable.TrainLine.Stations.Last().Offset;
-            Time = Arrival - Departure;
+            //Time = Arrival - Departure;
             Line = trainTimeTable.TrainLine.stationsToString();
         }
     }

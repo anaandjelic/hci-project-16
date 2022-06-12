@@ -49,10 +49,10 @@ namespace HCI_Project.managerPages
 
         private void CreateTrainLine_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if(isTutorialCreateTrain && !startedCreatingTrainLine)
-                e.CanExecute = false;
-            else
+            if(!isTutorialCreateTrain && !startedCreatingTrainLine)
                 e.CanExecute = true;
+            else
+                e.CanExecute = false;
         }
 
         private void CreateTrainLine_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
@@ -186,12 +186,12 @@ namespace HCI_Project.managerPages
             isTutorialCreateTrain = true;
             var optionsMax = new MessageOptions
             {
-                FontSize = 25,
+                FontSize = 30,
                 FreezeOnMouseEnter = true,
                 UnfreezeOnMouseLeave = true
             };
 
-            string message = "This begins the Train creating Tutorial\nTo continue press Ctrl C,T or go to New -> Train";
+            string message = "This begins the Train creating Tutorial\nTo continue press Ctrl C,T or go to New -> Train\nTo exit the Tutorial press Ctrl T,X";
             this.notifier.ShowWarning(message, optionsMax);
             this.editItem.IsEnabled = false;
             this.helpItem.IsEnabled = false;
@@ -230,17 +230,40 @@ namespace HCI_Project.managerPages
             isTutorialCreateTrainLine = true;
             var optionsMax = new MessageOptions
             {
-                FontSize = 25,
+                FontSize = 30,
                 FreezeOnMouseEnter = true,
                 UnfreezeOnMouseLeave = true
             };
 
-            string message = "This begins the Train Line creating Tutorial\nTo continue press Ctrl C,L or go to New -> TrainLine";
+            string message = "This begins the Train Line creating Tutorial\nTo continue press Ctrl C,L or go to New -> TrainLine\nTo exit the Tutorial press Ctrl T,X";
             this.notifier.ShowWarning(message, optionsMax);
             this.editItem.IsEnabled = false;
             this.helpItem.IsEnabled = false;
             this.mainItem.IsEnabled = false;
             this.reportsItem.IsEnabled = false;
+        }
+
+        private void CancelTutorial_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            var optionsMax = new MessageOptions
+            {
+                FontSize = 30,
+                FreezeOnMouseEnter = true,
+                UnfreezeOnMouseLeave = true
+            };
+
+            string message = "This will end the Tutorial";
+            this.notifier.ShowWarning(message, optionsMax);
+            MessageBox.Show("Klikom na ok se vracate na login screen");
+            this.NavigationService.GoBack();
+        }
+
+        private void CancelTutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        {
+            if (isTutorialCreateTrain || isTutorialCreateTrainLine)
+                e.CanExecute = true;
+            else
+                e.CanExecute = false;
         }
     }
 }

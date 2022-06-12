@@ -218,7 +218,7 @@ namespace HCI_Project.clientPages
         {
             var optionsMax = new MessageOptions
             {
-                FontSize = 25,
+                FontSize = 30,
                 FreezeOnMouseEnter = true,
                 UnfreezeOnMouseLeave = true
             };
