@@ -57,12 +57,12 @@ namespace HCI_Project.managerPages
                 // new timetable is added
                 if (timetable == null && DateEqualsCheckedDay(date))
                 {
-                    Database.AddTimeTable(date, new DateTime(), SelectedTrainLine, config);
+                    Database.AddTimeTable(date, SelectedTrainLine, config);
                 }
                 // timetable changes
                 else if (timetable != null && DateEqualsCheckedDay(date))
                 {
-                    timetable.DepartureTime = date;
+                    timetable.DepartureDate = date;
                     Database.ChangeTimeTable(timetable, time - originalTime);
                 }
                 // timetable is deleted

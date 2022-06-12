@@ -83,9 +83,6 @@
     <Compile Include="clientPages\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="clientPages\SearchContent.xaml.cs">
-      <DependentUpon>SearchContent.xaml</DependentUpon>
-    </Compile>
     <Compile Include="clientPages\TicketsPage.xaml.cs">
       <DependentUpon>TicketsPage.xaml</DependentUpon>
     </Compile>
@@ -122,6 +119,8 @@
     </Compile>
     <Compile Include="utils\Database.cs" />
     <Compile Include="utils\BingMapRESTServices.cs" />
+    <Compile Include="utils\display\TimeTableDisplay.cs" />
+    <Compile Include="utils\display\TrainLineDisplay.cs" />
     <Compile Include="utils\Exceptions.cs" />
     <Compile Include="utils\Reservation.cs" />
     <Compile Include="utils\Station.cs" />
@@ -145,10 +144,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="clientPages\SearchPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="clientPages\SearchContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,6 +268,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

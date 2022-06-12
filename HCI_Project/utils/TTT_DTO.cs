@@ -25,9 +25,9 @@ namespace HCI_Project.utils
         public TTT_DTO(TrainTimeTable trainTimeTable)
         {
             //ID = trainTimeTable.ID;
-            Departure = trainTimeTable.DepartureTime;
-            Arrival = trainTimeTable.ArrivalTime;
-            Time = trainTimeTable.TravelTime;
+            Departure = trainTimeTable.DepartureDate + trainTimeTable.Configuration.DepartureTime;
+            Arrival = Departure + trainTimeTable.TrainLine.Stations.Last().Offset;
+            Time = Arrival - Departure;
             Line = trainTimeTable.TrainLine.stationsToString();
         }
     }

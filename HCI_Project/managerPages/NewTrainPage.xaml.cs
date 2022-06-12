@@ -9,9 +9,8 @@ using ToastNotifications.Messages;
 
 namespace HCI_Project.managerPages
 {
-    public partial class NewTrainPage : Page, INotifyPropertyChanged
+    public partial class NewTrainPage : Page
     {
-        public event PropertyChangedEventHandler PropertyChanged;
         public string TrainName { get; set; }
         public int FirstClass { get; set; }
         public int SecondClass { get; set; }

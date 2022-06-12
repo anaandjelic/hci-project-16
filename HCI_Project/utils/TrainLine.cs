@@ -32,6 +32,11 @@ namespace HCI_Project.utils
             Stations.RemoveAt(index);
         }
 
+        public int GetStationIndex(string name)
+        {
+            Station station = Stations.Where(x => x.Name.ToLower() == name.ToLower()).FirstOrDefault();
+            return station == null ? -1 : Stations.IndexOf(station);
+        }
 
         //dodato
         public List<string> GetStationsNames()
@@ -82,7 +87,7 @@ namespace HCI_Project.utils
         {
             foreach (Station station in Stations)
             {
-                if (station.Name == sname)
+                if (station.Name.ToLower() == sname.ToLower())
                     return station;
             }
             return null;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HCI_Project.utils.display;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,7 +26,7 @@ namespace HCI_Project.utils
         }
         public static UserRole LogIn(string username, string password)
         {
-            User user = (User)(from u in Users where u.Username == username && u.Password == password select u).FirstOrDefault();
+            User user = (from u in Users where u.Username == username && u.Password == password select u).FirstOrDefault();
             LoggedInUser = user ?? throw new UserNotFoundException();
             return user.Role;
         }
@@ -63,14 +64,14 @@ namespace HCI_Project.utils
         public static TrainTimeTable GetTimeTable(TimeTableConfiguration config, DateTime date)
         {
             return TimeTables.FirstOrDefault(x => x.Configuration.ID == config.ID &&
-                                                  x.DepartureTime.Date == date.Date &&
+                                                  x.DepartureDate.Date == date.Date &&
                                                   !x.Deleted);
         }
 
         // Train CRUD
         public static void DeleteTrain(Train train)
         {
-            var timeTables = TimeTables.Where(x => x.TrainLine.Train.ID == train.ID && x.DepartureTime > DateTime.Now.AddDays(5));
+            var timeTables = TimeTables.Where(x => x.TrainLine.Train.ID == train.ID && x.DepartureDate > DateTime.Now.AddDays(5));
             foreach (var timetable in timeTables)
             {
                 var tickets = Tickets.Where(x => x.TrainTime.ID == timetable.ID).ToList();
@@ -102,7 +103,7 @@ namespace HCI_Project.utils
         internal static void EditTrain(Train train)
         {
             Tickets.Where(x => x.TrainTime.TrainLine.Train.ID == train.ID &&
-                               x.TrainTime.DepartureTime > DateTime.Now.AddDays(5) &&
+                               x.TrainTime.DepartureDate > DateTime.Now.AddDays(5) &&
                                x.Seat > train.FirstClassCapacity + train.SecondClassCapacity)
                    .ToList()
                    .ForEach(x => x.Deleted = true);
@@ -135,21 +136,21 @@ namespace HCI_Project.utils
         }
 
         // TrainTimeTable CRUD
-        public static void AddTimeTable(DateTime departureTime, DateTime arrivalTime, TrainLine trainLine, TimeTableConfiguration configuration)
+        public static void AddTimeTable(DateTime departureTime, TrainLine trainLine, TimeTableConfiguration configuration)
         {
             int id = TimeTables.Count == 0 ? -1 : TimeTables.OrderByDescending(x => x.ID).First().ID;
             id += 1;
 
-            TimeTables.Add(new TrainTimeTable(id, departureTime, arrivalTime, trainLine, configuration));
+            TimeTables.Add(new TrainTimeTable(id, departureTime, trainLine, configuration));
             //dodato
-            TTDTOs.Add(new TTT_DTO(new TrainTimeTable(id, departureTime, arrivalTime, trainLine, null)));
+            TTDTOs.Add(new TTT_DTO(new TrainTimeTable(id, departureTime, trainLine, configuration)));
         }
 
         internal static void DeleteConfiguration(TimeTableConfiguration config)
         {
             config.Deleted = true;
-            var timetables = TimeTables.Where(x => x.Configuration == config && 
-                                                   x.DepartureTime > DateTime.Now.AddDays(5));
+            var timetables = TimeTables.Where(x => x.Configuration == config &&
+                                                   x.DepartureDate > DateTime.Now.AddDays(5));
             foreach (var timetable in timetables)
             {
                 Tickets.Where(x => x.TrainTime.ID == timetable.ID).ToList()
@@ -230,6 +231,30 @@ namespace HCI_Project.utils
                     TempTrainLines.Add(tempI);
             }
             return TempTrainLines;
+        }
+
+        // diaplays
+
+        private static int GetAvailableSeats(TrainTimeTable timeTable)
+        {
+            return timeTable.TrainLine.Train.GetAllSeats() - Tickets.Where(x => x.TrainTime.ID == timeTable.ID).Count();
+        }
+
+        public static List<TimeTableDisplay> GetTimeTableDisplays()
+        {
+            var res = new List<TimeTableDisplay>();
+            TimeTables.ForEach(x => res.Add(new TimeTableDisplay(x, "Novi Sad", "Belgrade", GetAvailableSeats(x))));
+            return res;
+        }
+
+        public static List<TimeTableDisplay> GetTimeTableDisplays(string from, string to, DateTime date)
+        {
+            var res = new List<TimeTableDisplay>();
+            var timeTables = TimeTables.Where(x => x.DepartureDate.Date.Equals(date.Date) &&
+                                              x.TravelsBetween(from, to))
+                .ToList();
+            timeTables.ForEach(x => res.Add(new TimeTableDisplay(x, from, to, GetAvailableSeats(x))));
+            return res;
         }
     }
 }
