@@ -25,10 +25,6 @@
     </Page.CommandBindings>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="279*"/>
-            <ColumnDefinition Width="121*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
@@ -63,6 +59,6 @@
                       Command="cmd:RoutedCommands.FormatManagerHelp"/>
         </Menu>
 
-        <Frame x:Name="ManagerFrame" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Frame x:Name="ManagerFrame" Grid.Row="1"/>
     </Grid>
 </Page>

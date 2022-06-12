@@ -49,7 +49,7 @@ namespace HCI_Project.managerPages
                 date = date.AddMinutes(hour.Minute);
 
                 if (DateEqualsCheckedDay(date))
-                    Database.AddTimeTable(date, new DateTime(), SelectedTrainLine, config);
+                    Database.AddTimeTable(date, SelectedTrainLine, config);
             }
 
             new MessageBoxCustom("You have sucessfully created a new timetable.", MessageType.Success, MessageButtons.Ok).ShowDialog();

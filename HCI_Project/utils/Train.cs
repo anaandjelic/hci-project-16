@@ -20,5 +20,9 @@
         {
             return $"{Name}.{ID} - {FirstClassCapacity + SecondClassCapacity} seats";
         }
+        public int GetAllSeats()
+        {
+            return SecondClassCapacity + FirstClassCapacity;
+        }
     }
 }
