@@ -9,7 +9,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ClientPage">
-
     <Page.CommandBindings>
         <CommandBinding Command="cmd:RoutedCommands.FormatClientHelp" CanExecute="ClientHelp_CanExecute" Executed="ClientHelp_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatSearchTrainLine" CanExecute="SearchTrainLine_CanExecute" Executed="SearchTrainLine_Executed"></CommandBinding>
@@ -18,6 +17,7 @@
         <CommandBinding Command="cmd:RoutedCommands.FormatHistoryTickets" CanExecute="HistoryTickets_CanExecute" Executed="HistoryTickets_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatHistoryReservations" CanExecute="HistoryReservations_CanExecute" Executed="HistoryReservations_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatTutorial" CanExecute="Tutorial_CanExecute" Executed="Tutorial_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatCancelTutorial" CanExecute="CancelTutorial_CanExecute" Executed="CancelTutorial_Executed"></CommandBinding>
     </Page.CommandBindings>
 
     <Grid>
@@ -33,7 +33,9 @@
             </Menu.ItemsPanel>
             <MenuItem x:Name="MainBar" Header="Main"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Log Out" Command="cmd:RoutedCommands.FormatLogOut" FontFamily="Bahnschrift Light"/>
-                <MenuItem  Header="Search train line Tutorial" Command="cmd:RoutedCommands.FormatTutorial" FontFamily="Bahnschrift Light"/>
+                <MenuItem  Header="Tutorial" Command="cmd:RoutedCommands.FormatTutorial" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+                    <MenuItem  Header="Search train line Tutorial" Command="cmd:RoutedCommands.FormatTutorial" FontFamily="Bahnschrift Light"/>
+                </MenuItem>
             </MenuItem>
             <MenuItem x:Name="MenuItemSerach" Header="Search"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="TrainLine" Command="cmd:RoutedCommands.FormatSearchTrainLine" FontFamily="Bahnschrift Light"/>

@@ -9,6 +9,7 @@ using ToastNotifications.Messages;
 using ToastNotifications.Messages.Core;
 using ToastNotifications.Core;
 using HCI_Project.help;
+using HCI_Project.popups;
 
 namespace HCI_Project.clientPages
 {
@@ -119,12 +120,12 @@ namespace HCI_Project.clientPages
 
             var optionsMax = new MessageOptions
             {
-                FontSize = 25,
+                FontSize = 30,
                 FreezeOnMouseEnter = true,
-                UnfreezeOnMouseLeave = true
+                UnfreezeOnMouseLeave = true            
             };
 
-            string message = "This begins the Train Line Search Tutorial\nTo continue press Ctrl F,L or go to Search -> TrainLine";
+            string message = "This begins the Train Line Search Tutorial\nTo continue press Ctrl F,L or go to Search -> TrainLine\n To exit the Tutorial press Ctrl T,X";
             this.notifier.ShowWarning(message,optionsMax);
             this.HistoryBTN.IsEnabled = false;
             this.MainBar.IsEnabled = false;
@@ -153,6 +154,8 @@ namespace HCI_Project.clientPages
             cfg.DisplayOptions.Width = Application.Current.MainWindow.Width /3;
         });
 
+
+
         private void ClientHelp_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
             if (isTutorialLine)
@@ -164,6 +167,30 @@ namespace HCI_Project.clientPages
         private void ClientHelp_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             new HelpViewer("client.html").ShowDialog();
+        }
+
+        private void CancelTutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        {
+            if (isTutorialLine)
+                e.CanExecute = true;
+            else
+                e.CanExecute = false;
+        }
+
+        private void CancelTutorial_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            var optionsMax = new MessageOptions
+            {
+                FontSize = 30,
+                FreezeOnMouseEnter = true,
+                UnfreezeOnMouseLeave = true
+            };
+
+            string message = "This will end the Tutorial";
+            this.notifier.ShowWarning(message, optionsMax);
+            //MessageBox.Show("Klikom na ok se vracate na login screen");
+            new MessageBoxCustom("By clicking the ok button you will be return to the login screen", MessageType.Confirmation, MessageButtons.Ok).ShowDialog();
+            this.NavigationService.GoBack();
         }
     }
 }

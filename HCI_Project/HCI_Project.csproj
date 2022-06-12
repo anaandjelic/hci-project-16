@@ -261,8 +261,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="help\client.html" />
-    <Resource Include="help\clientHelpImages\SearchTrainLine1.png" />
-    <Resource Include="help\clientHelpImages\SearchTrainTable.png" />
+    <Resource Include="help\clientHelpImages\searchtrainline1.png" />
+    <Resource Include="help\clientHelpImages\searchtraintable.png" />
     <Content Include="help\manager.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

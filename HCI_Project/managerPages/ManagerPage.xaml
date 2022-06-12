@@ -22,6 +22,8 @@
         <CommandBinding Command="cmd:RoutedCommands.FormatManagerHelp" CanExecute="ManagerHelp_CanExecute" Executed="ManagerHelp_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatCreateTrainTutorial" CanExecute="CreateTrainTutorial_CanExecute" Executed="CreateTrainTutorial_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatCreateTrainLineTutorial" CanExecute="CreateTrainLineTutorial_CanExecute" Executed="CreateTrainLineTutorial_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatCancelTutorial" CanExecute="CancelTutorial_CanExecute" Executed="CancelTutorial_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatCreateTrainTableTutorial" CanExecute="CreateTrainTableTutorial_CanExecute" Executed="CreateTrainTableTutorial_Executed"></CommandBinding>
     </Page.CommandBindings>
 
     <Grid>
@@ -38,8 +40,11 @@
             </Menu.ItemsPanel>
             <MenuItem x:Name="mainItem" Header="Main" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Log Out" Command="cmd:RoutedCommands.FormatLogOut" FontFamily="Bahnschrift Light"/>
-                <MenuItem  Header="Create train Tutorial" Command="cmd:RoutedCommands.FormatCreateTrainTutorial" FontFamily="Bahnschrift Light"/>
-                <MenuItem  Header="Create train line Tutorial" Command="cmd:RoutedCommands.FormatCreateTrainLineTutorial" FontFamily="Bahnschrift Light"/>
+                <MenuItem  Header="Tutorial" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+                    <MenuItem  Header="Create train Tutorial" Command="cmd:RoutedCommands.FormatCreateTrainTutorial" FontFamily="Bahnschrift Light"/>
+                    <MenuItem  Header="Create train line Tutorial" Command="cmd:RoutedCommands.FormatCreateTrainLineTutorial" FontFamily="Bahnschrift Light"/>
+                    <MenuItem  Header="Create train table Tutorial" Command="cmd:RoutedCommands.FormatCreateTrainTableTutorial" FontFamily="Bahnschrift Light"/>
+                </MenuItem>
             </MenuItem>
             <MenuItem x:Name="editItem" Header="Edit" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Train" Command="cmd:RoutedCommands.FormatEditTrain" FontFamily="Bahnschrift Light"/>

@@ -29,8 +29,6 @@ namespace HCI_Project.clientPages
 
             DataTable.ItemsSource = searchRes;
             DataTable.Items.Refresh();
-
-            DataTitle.Text = $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(from.ToLower())} → {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(to.ToLower())}";
         }
 
         private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

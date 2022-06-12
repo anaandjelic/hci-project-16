@@ -1,4 +1,5 @@
-﻿using HCI_Project.utils;
+﻿using HCI_Project.popups;
+using HCI_Project.utils;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -136,7 +137,8 @@ namespace HCI_Project.managerPages
             {
                 string message = "Ovim zavrsavamo Tutorijal za kreiranmje vozova";
                 notifications(message, "Success");
-                MessageBox.Show("Klikom na ok se vracate na login starnicu");
+                new MessageBoxCustom("By clicking the ok button you will be return to the login screen", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                //MessageBox.Show("Klikom na ok se vracate na login starnicu");
                 this.NavigationService.GoBack();
             }
         }
@@ -150,7 +152,7 @@ namespace HCI_Project.managerPages
         {
             var optionsMax = new MessageOptions
             {
-                FontSize = 25,
+                FontSize = 30,
                 FreezeOnMouseEnter = true,
                 UnfreezeOnMouseLeave = true
             };

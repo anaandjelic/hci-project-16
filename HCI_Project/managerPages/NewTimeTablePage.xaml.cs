@@ -6,6 +6,9 @@ using System.Windows.Controls;
 using System.Windows;
 using HCI_Project.utils.display;
 using System.Collections.Generic;
+using ToastNotifications;
+using ToastNotifications.Messages;
+using ToastNotifications.Core;
 
 namespace HCI_Project.managerPages
 {
@@ -13,13 +16,36 @@ namespace HCI_Project.managerPages
     {
         public ObservableCollection<TrainLineDisplay> TrainLines;
         private TrainLine SelectedTrainLine;
+        private bool isTutorialCreateTrainTable;
+        private Frame MainFrame;
+        private Notifier managerNotifier;
+        private int brojac = 0;
 
-        public NewTimeTablePage()
+        public NewTimeTablePage(bool isTutorialCreateTrainTable, Frame MainFrame, Notifier notifier)
         {
             InitializeComponent();
             var x = Database.GetUnConfiguredTrainLines();
             UpdateDataGrid();
             DataContext = this;
+
+            this.isTutorialCreateTrainTable = isTutorialCreateTrainTable;
+            this.MainFrame = MainFrame;
+            this.managerNotifier = notifier;
+
+            if(isTutorialCreateTrainTable)
+            {
+                this.TimeField.IsEnabled = false;
+                this.CreateBtn.IsEnabled = false;
+                this.FridayCheck.IsEnabled = false;
+                this.MondayCheck.IsEnabled = false;
+                this.SaturdayCheck.IsEnabled = false;
+                this.SundayCheck.IsEnabled = false;
+                this.ThursdayCheck.IsEnabled = false;
+                this.TuesdayCheck.IsEnabled = false;
+                this.WednesdayCheck.IsEnabled = false;
+                string message = "Select your train";
+                notifications(message, "Information");
+            }
         }
 
         private void CreateTimeTable(object sender, RoutedEventArgs e)
@@ -54,7 +80,15 @@ namespace HCI_Project.managerPages
                     Database.AddTimeTable(date, config);
             }
 
-            new MessageBoxCustom("You have sucessfully created a new timetable.", MessageType.Success, MessageButtons.Ok).ShowDialog();
+            if(isTutorialCreateTrainTable)
+            {
+                string message = "This marks the end of Tutorial";
+                notifications(message, "Success");
+                new MessageBoxCustom("You have sucessfully created a new timetable.\n By clicking the ok button you will be return to the login screen", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                this.NavigationService.GoBack();
+            }
+            else
+                new MessageBoxCustom("You have sucessfully created a new timetable.", MessageType.Success, MessageButtons.Ok).ShowDialog();
             UpdateDataGrid();
         }
 
@@ -115,6 +149,94 @@ namespace HCI_Project.managerPages
                 case "OriginalTrainLine":
                     e.Column.Visibility = Visibility.Hidden;
                     break;
+            }
+        }
+
+        private void notifications(string message, string tip)
+        {
+            var optionsMax = new MessageOptions
+            {
+                FontSize = 30,
+                FreezeOnMouseEnter = true,
+                UnfreezeOnMouseLeave = true
+            };
+            if (tip == "Success")
+                this.managerNotifier.ShowSuccess(message, optionsMax);
+            else if (tip == "Information")
+                this.managerNotifier.ShowInformation(message, optionsMax);
+        }
+
+        private void TrainLineGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            if (brojac == 0)
+            {
+                string message = "Select two working days";
+                notifications(message, "Information");
+            }
+            this.TrainLineGrid.IsEnabled = false;
+            this.FridayCheck.IsEnabled = true;
+            this.MondayCheck.IsEnabled = true;
+            //this.SaturdayCheck.IsEnabled = true;
+            //this.SundayCheck.IsEnabled = true;
+            this.ThursdayCheck.IsEnabled = true;
+            this.TuesdayCheck.IsEnabled = true;
+            this.WednesdayCheck.IsEnabled = true;
+        }
+
+        private void MondayCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            forCheckBoxes();
+            this.MondayCheck.IsEnabled = false;
+        }
+
+        private void TuesdayCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            forCheckBoxes();
+            this.TuesdayCheck.IsEnabled = false;
+        }
+
+        private void WednesdayCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            forCheckBoxes();
+            this.WednesdayCheck.IsEnabled = false;
+        }
+
+        private void ThursdayCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            forCheckBoxes();
+            this.ThursdayCheck.IsEnabled = false;
+        }
+
+        private void FridayCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            forCheckBoxes();
+            this.FridayCheck.IsEnabled = false;
+        }
+
+        private void forCheckBoxes()
+        {
+            if (isTutorialCreateTrainTable)
+            {
+                this.brojac++;
+                if (brojac == 2)
+                {
+                    string message = "Choose desired time";
+                    notifications(message, "Information");
+
+                    this.FridayCheck.IsEnabled = false;
+                    this.MondayCheck.IsEnabled = false;
+                    //this.SaturdayCheck.IsEnabled = false;
+                    //this.SundayCheck.IsEnabled = false;
+                    this.ThursdayCheck.IsEnabled = false;
+                    this.TuesdayCheck.IsEnabled = false;
+                    this.WednesdayCheck.IsEnabled = false;
+
+                    this.TimeField.IsEnabled = true;
+
+                    message = "Click Create button to create train table";
+                    notifications(message, "Information");
+                    this.CreateBtn.IsEnabled = true;
+                }
             }
         }
     }
