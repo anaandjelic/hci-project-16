@@ -23,6 +23,9 @@ namespace HCI_Project.managerPages
         private bool isTutorialCreateTrainLine = false;
         private bool startedCreatingTrainLine = false;
 
+        private bool isTutorialCreateTrainTable = false;
+        private bool startedCreatingTrainTable = false;
+
         public ManagerPage(Frame mainFrame)
         {
             InitializeComponent();
@@ -33,7 +36,7 @@ namespace HCI_Project.managerPages
 
         private void CreateTrain_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (!startedCreatingTrain && !isTutorialCreateTrainLine)
+            if (!startedCreatingTrain && !isTutorialCreateTrainLine && !isTutorialCreateTrainTable)
                 e.CanExecute = true;
             else
                 e.CanExecute = false;
@@ -49,7 +52,7 @@ namespace HCI_Project.managerPages
 
         private void CreateTrainLine_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if(!isTutorialCreateTrain && !startedCreatingTrainLine)
+            if(!isTutorialCreateTrain && !startedCreatingTrainLine && !isTutorialCreateTrainTable)
                 e.CanExecute = true;
             else
                 e.CanExecute = false;
@@ -65,21 +68,23 @@ namespace HCI_Project.managerPages
 
         private void CreateTrainTable_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (isTutorialCreateTrain || isTutorialCreateTrainLine)
-                e.CanExecute = false;
-            else
+            if (!isTutorialCreateTrain && !startedCreatingTrainTable && !isTutorialCreateTrainLine)
                 e.CanExecute = true;
+            else
+                e.CanExecute = false;
         }
 
         private void CreateTrainTable_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            ManagerFrame.Content = new NewTimeTablePage();
+            ManagerFrame.Content = new NewTimeTablePage(isTutorialCreateTrainTable, MainFrame, notifier);
             ManagerFrame.Focus();
+            if (isTutorialCreateTrainTable)
+                this.startedCreatingTrainTable = true;
         }
 
         private void LogOut_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (isTutorialCreateTrain || isTutorialCreateTrainLine)
+            if (isTutorialCreateTrain || isTutorialCreateTrainLine || isTutorialCreateTrainTable)
                 e.CanExecute = false;
             else
                 e.CanExecute = true;
@@ -93,7 +98,7 @@ namespace HCI_Project.managerPages
 
         private void EditTrain_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (isTutorialCreateTrain || isTutorialCreateTrainLine)
+            if (isTutorialCreateTrain || isTutorialCreateTrainLine || isTutorialCreateTrainTable)
                 e.CanExecute = false;
             else
                 e.CanExecute = true;
@@ -107,7 +112,7 @@ namespace HCI_Project.managerPages
 
         private void EditTrainLine_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (isTutorialCreateTrain || isTutorialCreateTrainLine)
+            if (isTutorialCreateTrain || isTutorialCreateTrainLine || isTutorialCreateTrainTable)
                 e.CanExecute = false;
             else
                 e.CanExecute = true;
@@ -120,7 +125,7 @@ namespace HCI_Project.managerPages
 
         private void EditTrainTable_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (isTutorialCreateTrain || isTutorialCreateTrainLine)
+            if (isTutorialCreateTrain || isTutorialCreateTrainLine || isTutorialCreateTrainTable)
                 e.CanExecute = false;
             else
                 e.CanExecute = true;
@@ -135,7 +140,7 @@ namespace HCI_Project.managerPages
 
         private void MonthlyReports_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (isTutorialCreateTrain || isTutorialCreateTrainLine)
+            if (isTutorialCreateTrain || isTutorialCreateTrainLine || isTutorialCreateTrainTable)
                 e.CanExecute = false;
             else
                 e.CanExecute = true;
@@ -148,7 +153,7 @@ namespace HCI_Project.managerPages
         }
         private void PerTableReports_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (isTutorialCreateTrain || isTutorialCreateTrainLine)
+            if (isTutorialCreateTrain || isTutorialCreateTrainLine || isTutorialCreateTrainTable)
                 e.CanExecute = false;
             else
                 e.CanExecute = true;
@@ -162,7 +167,7 @@ namespace HCI_Project.managerPages
 
         private void ManagerHelp_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (isTutorialCreateTrain || isTutorialCreateTrainLine)
+            if (isTutorialCreateTrain || isTutorialCreateTrainLine || isTutorialCreateTrainTable)
                 e.CanExecute = false;
             else
                 e.CanExecute = true;
@@ -175,7 +180,7 @@ namespace HCI_Project.managerPages
 
         private void CreateTrainTutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (!isTutorialCreateTrain && !isTutorialCreateTrainLine)
+            if (!isTutorialCreateTrain && !isTutorialCreateTrainLine && !isTutorialCreateTrainTable)
                 e.CanExecute = true;
             else
                 e.CanExecute = false;
@@ -219,7 +224,7 @@ namespace HCI_Project.managerPages
 
         private void CreateTrainLineTutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (!isTutorialCreateTrain && !isTutorialCreateTrainLine)
+            if (!isTutorialCreateTrain && !isTutorialCreateTrainLine && !isTutorialCreateTrainTable)
                 e.CanExecute = true;
             else
                 e.CanExecute = false;
@@ -260,10 +265,36 @@ namespace HCI_Project.managerPages
 
         private void CancelTutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (isTutorialCreateTrain || isTutorialCreateTrainLine)
+            if (isTutorialCreateTrain || isTutorialCreateTrainLine || isTutorialCreateTrainTable)
                 e.CanExecute = true;
             else
                 e.CanExecute = false;
+        }
+
+        private void CreateTrainTableTutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        {
+            if (!isTutorialCreateTrain && !isTutorialCreateTrainLine && !isTutorialCreateTrainTable)
+                e.CanExecute = true;
+            else
+                e.CanExecute = false;
+        }
+
+        private void CreateTrainTableTutorial_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            isTutorialCreateTrainTable = true;
+            var optionsMax = new MessageOptions
+            {
+                FontSize = 30,
+                FreezeOnMouseEnter = true,
+                UnfreezeOnMouseLeave = true
+            };
+
+            string message = "This begins the Train Table creating Tutorial\nTo continue press Ctrl C,E or go to New -> Train\nTo exit the Tutorial press Ctrl T,X";
+            this.notifier.ShowWarning(message, optionsMax);
+            this.editItem.IsEnabled = false;
+            this.helpItem.IsEnabled = false;
+            this.mainItem.IsEnabled = false;
+            this.reportsItem.IsEnabled = false;
         }
     }
 }
