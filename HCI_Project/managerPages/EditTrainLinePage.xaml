@@ -23,11 +23,11 @@
         </ControlTemplate>
         <fc:MyFontSizeConverter x:Key="fontSizeConverter"/>
         <Style x:Key="RedButton" 
-        BasedOn="{StaticResource MaterialDesignFlatButton}"
+        BasedOn="{StaticResource MaterialDesignFlatMidBgButton}"
         TargetType="{x:Type Button}">
             <Style.Resources>
                 <Color x:Key="PrimaryHueMidBrushColor">Red</Color>
-                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="Red" />
+                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="DarkRed" />
             </Style.Resources>
         </Style>
     </Page.Resources>

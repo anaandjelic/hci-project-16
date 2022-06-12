@@ -36,7 +36,7 @@
         </Grid.ColumnDefinitions>
         <m:Map CredentialsProvider="jcN70CoOBDnsrAlWKqWM~KGgDd7HLbAy2iRafyB9ytw~ApXB3OvpKS1Loo6XUCGodM0rf6U6ph0Jtc-kt3pk3FWMZ8zZVBhOxxMSViza80RG"
                Center="45.2461818273899, 19.85138567223834" ZoomLevel="10" Name="MyMap"
-               AllowDrop="True" DragEnter="MapView_DragEnter" Drop="MapView_Drop" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
+               AllowDrop="True" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
 
             <Image Source="/HCI_Project;component/images/pin.png" Height="50" m:MapLayer.PositionOffset="15,0"
                    m:MapLayer.Position="47.620574,-122.34942" m:MapLayer.PositionOrigin="BottomCenter"/>

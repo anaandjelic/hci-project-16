@@ -57,17 +57,20 @@ namespace HCI_Project
             Database.AddTrainLine(stations3, Database.GetTrain(0));
             Database.AddTrainLine(stations4, Database.GetTrain(0));
 
-            var config = new TimeTableConfiguration(0, Database.GetTrainLine(0), new TimeSpan(13, 0, 0), true, true, true, true, true, true, true);
-            
-            Database.AddTimeTable(DateTime.Now, Database.GetTrainLine(0), config);
-            Database.AddTimeTable(DateTime.Now, Database.GetTrainLine(1), config);
-            Database.AddTimeTable(DateTime.Now, Database.GetTrainLine(2), config);
-            Database.AddTimeTable(DateTime.Now, Database.GetTrainLine(3), config);
+            Database.AddConfiguration(Database.GetTrainLine(0), new TimeSpan(13, 0, 0), true, true, true, true, true, true, true);
+            Database.AddConfiguration(Database.GetTrainLine(1), new TimeSpan(13, 0, 0), true, true, true, true, true, true, true);
+            Database.AddConfiguration(Database.GetTrainLine(2), new TimeSpan(13, 0, 0), true, true, true, true, true, true, true);
+            Database.AddConfiguration(Database.GetTrainLine(3), new TimeSpan(13, 0, 0), true, true, true, true, true, true, true);
 
-            Database.AddTimeTable(DateTime.Now.AddDays(1), Database.GetTrainLine(0), config);
-            Database.AddTimeTable(DateTime.Now.AddDays(1), Database.GetTrainLine(1), config);
-            Database.AddTimeTable(DateTime.Now.AddDays(1), Database.GetTrainLine(2), config);
-            Database.AddTimeTable(DateTime.Now.AddDays(1), Database.GetTrainLine(3), config);
+            Database.AddTimeTable(DateTime.Now, Database.GetConfiguration(0));
+            Database.AddTimeTable(DateTime.Now, Database.GetConfiguration(0));
+            Database.AddTimeTable(DateTime.Now, Database.GetConfiguration(0));
+            Database.AddTimeTable(DateTime.Now, Database.GetConfiguration(0));
+
+            Database.AddTimeTable(DateTime.Now.AddDays(1), Database.GetConfiguration(0));
+            Database.AddTimeTable(DateTime.Now.AddDays(1), Database.GetConfiguration(0));
+            Database.AddTimeTable(DateTime.Now.AddDays(1), Database.GetConfiguration(0));
+            Database.AddTimeTable(DateTime.Now.AddDays(1), Database.GetConfiguration(0));
             
         }
 

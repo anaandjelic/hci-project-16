@@ -1,6 +1,8 @@
 ﻿using HCI_Project.popups;
 using HCI_Project.utils;
+using HCI_Project.utils.display;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +11,7 @@ namespace HCI_Project.managerPages
 {
     public partial class EditTimeTablePage : Page
     {
-        public ObservableCollection<TrainLine> TrainLines;
+        public ObservableCollection<TrainLineDisplay> TrainLines;
         private TrainLine SelectedTrainLine;
 
         public EditTimeTablePage()
@@ -25,7 +27,7 @@ namespace HCI_Project.managerPages
             if (!(bool)result) { return; }
 
 
-            SelectedTrainLine = TrainLineGrid.SelectedItem as TrainLine;
+            SelectedTrainLine = (TrainLineDisplay)TrainLineGrid.SelectedItem == null ? null : ((TrainLineDisplay)TrainLineGrid.SelectedItem).OriginalTrainLine;
             if (SelectedTrainLine == null)
             {
                 new MessageBoxCustom("You have to choose a train line.", MessageType.Error, MessageButtons.Ok).ShowDialog();
@@ -57,7 +59,7 @@ namespace HCI_Project.managerPages
                 // new timetable is added
                 if (timetable == null && DateEqualsCheckedDay(date))
                 {
-                    Database.AddTimeTable(date, SelectedTrainLine, config);
+                    Database.AddTimeTable(date, config);
                 }
                 // timetable changes
                 else if (timetable != null && DateEqualsCheckedDay(date))
@@ -100,9 +102,8 @@ namespace HCI_Project.managerPages
 
         private void FillForm()
         {
-            SelectedTrainLine = TrainLineGrid.SelectedItem as TrainLine;
-            var config = Database.GetConfiguration(SelectedTrainLine);
-            if (config == null)
+            SelectedTrainLine = (TrainLineDisplay)TrainLineGrid.SelectedItem == null ? null : ((TrainLineDisplay)TrainLineGrid.SelectedItem).OriginalTrainLine;
+            if (SelectedTrainLine == null)
             {
                 TimeField.Time = new DateTime();
                 MondayCheck.IsChecked = false;
@@ -115,6 +116,7 @@ namespace HCI_Project.managerPages
             }
             else
             {
+                var config = Database.GetConfiguration(SelectedTrainLine);
                 TimeField.Time = new DateTime() + config.DepartureTime;
                 MondayCheck.IsChecked = config.Monday;
                 TuesdayCheck.IsChecked = config.Tuesday;
@@ -128,10 +130,10 @@ namespace HCI_Project.managerPages
 
         private void DeleteTimeTable(object sender, RoutedEventArgs e)
         {
-            var result = new MessageBoxCustom("This action is irreversible and will impact tickets and departures 5 days from now.\nDo you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
+            var result = new MessageBoxCustom("This action is irreversible and will impact tickets and departures 5 days from now.Do you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
             if (!(bool)result) { return; }
 
-            SelectedTrainLine = TrainLineGrid.SelectedItem as TrainLine;
+            SelectedTrainLine = ((TrainLineDisplay)TrainLineGrid.SelectedItem).OriginalTrainLine;
             var config = Database.GetConfiguration(SelectedTrainLine);
             Database.DeleteConfiguration(config);
             UpdateDataGrid();
@@ -145,8 +147,33 @@ namespace HCI_Project.managerPages
 
         private void UpdateDataGrid()
         {
-            TrainLines = new ObservableCollection<TrainLine>(Database.GetConfiguredTrainLines());
+            var trainLineDisplays = new List<TrainLineDisplay>();
+            Database.GetConfiguredTrainLines().ForEach(x => trainLineDisplays.Add(new TrainLineDisplay(x)));
+            TrainLines = new ObservableCollection<TrainLineDisplay>(trainLineDisplays);
             TrainLineGrid.ItemsSource = TrainLines;
+        }
+
+        private void SearchTimeTable(object sender, RoutedEventArgs e)
+        {
+            string enteredValues = SearchTextBox.Text.ToString().Trim().ToLower();
+            string[] stationsNames = enteredValues.Split();
+            TrainLines = new ObservableCollection<TrainLineDisplay>(Database.SearchConfigured(stationsNames));
+            TrainLineGrid.ItemsSource = TrainLines;
+        }
+
+        private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(System.TimeSpan))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "hh\\:mm";
+            switch (e.Column.Header)
+            {
+                case "TravelTime":
+                    e.Column.Header = "Travel time";
+                    break;
+                case "OriginalTrainLine":
+                    e.Column.Visibility = Visibility.Hidden;
+                    break;
+            }
         }
     }
 }

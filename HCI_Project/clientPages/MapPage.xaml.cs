@@ -16,7 +16,6 @@ namespace HCI_Project.clientPages
 {
     public partial class MapPage : Page
     {
-        Point StartPoint;
         private TrainLine trainLine;
         private Frame MainFrame;
         private bool isTutorialLine;
@@ -44,56 +43,6 @@ namespace HCI_Project.clientPages
                 // zatim skacemo na combobox value changed jer kad izabere jednu od njih mozemo da nastavimo dalje sa tutorijalom
             }
 
-        }
-
-        private void MapView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            StartPoint = e.GetPosition(null);
-        }
-
-        private void Image_MouseMove(object sender, MouseEventArgs e)
-        {
-            Point mousePos = e.GetPosition(null);
-            Vector diff = StartPoint - mousePos;
-
-            if (e.LeftButton == MouseButtonState.Pressed &&
-                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
-                Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
-            {
-                Image image = e.Source as Image;
-                DataObject data = new DataObject(typeof(ImageSource), image.Source);
-                DragDrop.DoDragDrop(image, data, DragDropEffects.Move);
-            }
-        }
-
-        private void MapView_DragEnter(object sender, DragEventArgs e)
-        {
-            if (!e.Data.GetDataPresent("myFormat") || sender == e.Source)
-            {
-                e.Effects = DragDropEffects.None;
-            }
-        }
-
-        private void MapView_Drop(object sender, DragEventArgs e)
-        {
-            e.Handled = true;
-
-            Point mousePosition = e.GetPosition(MyMap);
-            Location pinLocation = MyMap.ViewportPointToLocation(mousePosition);
-
-            Pushpin pin = new Pushpin
-            {
-                Location = pinLocation,
-
-                ToolTip = "This is a pushpin with custom image",
-                Height = 70,
-                Width = 70,
-                Template = (ControlTemplate)FindResource("CustomPushpinTemplate")
-            };
-
-            //Coordinates.Text = pinLocation.Longitude.ToString();
-            //Coordinates1.Text = pinLocation.Latitude.ToString();
-            MyMap.Children.Add(pin);
         }
 
         private int getTrainLineID()
@@ -137,11 +86,10 @@ namespace HCI_Project.clientPages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            LB_result.Items.Clear();
             string enteredValues = SearchBar.Text.ToString().Trim().ToLower();
             string[] stationsNames = enteredValues.Split();
-            foreach (string value in Database.findLinesWithStations(stationsNames))
-                LB_result.Items.Add(value.ToUpper());
+            var res = Database.findLinesWithStations(stationsNames);
+            LB_result.ItemsSource = res;
         }
 
         private int getTrainLineID_forLB()

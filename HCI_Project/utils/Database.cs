@@ -15,8 +15,6 @@ namespace HCI_Project.utils
         private static readonly List<TimeTableConfiguration> Configurations = new List<TimeTableConfiguration>();
         private static User LoggedInUser;
 
-        //dodato
-        private static readonly List<TTT_DTO> TTDTOs = new List<TTT_DTO>();
         private static readonly List<String> TrainLinesString = new List<string>();
         private static readonly List<String> TrainLinesStringWithID = new List<string>();
 
@@ -136,14 +134,12 @@ namespace HCI_Project.utils
         }
 
         // TrainTimeTable CRUD
-        public static void AddTimeTable(DateTime departureTime, TrainLine trainLine, TimeTableConfiguration configuration)
+        public static void AddTimeTable(DateTime departureDate, TimeTableConfiguration configuration)
         {
             int id = TimeTables.Count == 0 ? -1 : TimeTables.OrderByDescending(x => x.ID).First().ID;
             id += 1;
 
-            TimeTables.Add(new TrainTimeTable(id, departureTime, trainLine, configuration));
-            //dodato
-            TTDTOs.Add(new TTT_DTO(new TrainTimeTable(id, departureTime, trainLine, configuration)));
+            TimeTables.Add(new TrainTimeTable(id, departureDate, configuration));
         }
 
         internal static void DeleteConfiguration(TimeTableConfiguration config)
@@ -164,17 +160,23 @@ namespace HCI_Project.utils
             return TimeTables.Where(x => !x.Deleted).ToList();
         }
 
+        // configurations
         public static TimeTableConfiguration GetConfiguration(TrainLine trainLine)
         {
             return Configurations.Where(x => !x.Deleted && x.TrainLine.ID == trainLine.ID).FirstOrDefault();
         }
 
+        public static TimeTableConfiguration GetConfiguration(int iD)
+        {
+            return Configurations.Where(x => !x.Deleted && x.ID == iD).FirstOrDefault();
+        }
+
         public static TimeTableConfiguration AddConfiguration(TrainLine trainLine, TimeSpan departureTime, bool monday, bool tuesday, bool wednesday, bool thursday, bool friday, bool saturday, bool sunday)
         {
-            int id = TrainLines.Count == 0 ? -1 : TrainLines.OrderByDescending(x => x.ID).First().ID;
+            int id = Configurations.Count == 0 ? -1 : Configurations.OrderByDescending(x => x.ID).First().ID;
             var config = (from c in Configurations where c.TrainLine.ID == trainLine.ID select c).FirstOrDefault();
-            if (config != null) 
-            { 
+            if (config != null)
+            {
                 Configurations.Remove(config);
                 id = config.ID - 1;
             }
@@ -193,10 +195,50 @@ namespace HCI_Project.utils
             return TrainLines.Except(GetConfiguredTrainLines()).Where(x => !x.Deleted).ToList();
         }
 
-        //dodato
-        public static List<TTT_DTO> GetTTT_DTOS()
+        public static List<TrainLineDisplay> SearchConfigured(string[] stationNames)
         {
-            return TTDTOs;
+            List<TrainLineDisplay> TempTrainLines = new List<TrainLineDisplay>();
+            foreach (var trainLine in GetConfiguredTrainLines())
+            {
+                bool doesOccur = false;
+                foreach (string inputStation in stationNames)
+                {
+                    foreach (string trainLineStation in trainLine.GetStationsNames())
+                    {
+                        if (trainLineStation.ToLower().Contains(inputStation.ToLower()))
+                        {
+                            doesOccur = true;
+                            break;
+                        }
+                    }
+                }
+                if (doesOccur)
+                    TempTrainLines.Add(new TrainLineDisplay(trainLine));
+            }
+            return TempTrainLines;
+        }
+
+        public static List<TrainLineDisplay> SearchUnConfigured(string[] stationNames)
+        {
+            List<TrainLineDisplay> TempTrainLines = new List<TrainLineDisplay>();
+            foreach (var trainLine in GetUnConfiguredTrainLines())
+            {
+                bool doesOccur = false;
+                foreach (string inputStation in stationNames)
+                {
+                    foreach (string trainLineStation in trainLine.GetStationsNames())
+                    {
+                        if (trainLineStation.ToLower().Contains(inputStation.ToLower()))
+                        {
+                            doesOccur = true;
+                            break;
+                        }
+                    }
+                }
+                if (doesOccur)
+                    TempTrainLines.Add(new TrainLineDisplay(trainLine));
+            }
+            return TempTrainLines;
         }
 
         //dodato
@@ -211,24 +253,25 @@ namespace HCI_Project.utils
         }
 
         //dodato
-        public static List<String> findLinesWithStations(string[] stationNames)
+        public static List<TrainLineDisplay> findLinesWithStations(string[] stationNames)
         {
-            List<String> TempTrainLines = new List<String>();
-            foreach (string tempI in TrainLinesStringWithID)
+            List<TrainLineDisplay> TempTrainLines = new List<TrainLineDisplay>();
+            foreach (var trainLine in TrainLines)
             {
                 bool doesOccur = false;
-                foreach (string tempJ in stationNames)
+                foreach (string inputStation in stationNames)
                 {
-                    if (!tempI.ToLower().Contains(tempJ.ToLower()))
+                    foreach (string trainLineStation in trainLine.GetStationsNames())
                     {
-                        doesOccur = false;
-                        break;
+                        if (trainLineStation.ToLower().Contains(inputStation.ToLower()))
+                        {
+                            doesOccur = true;
+                            break;
+                        }
                     }
-                    else
-                        doesOccur = true;
                 }
                 if (doesOccur)
-                    TempTrainLines.Add(tempI);
+                    TempTrainLines.Add(new TrainLineDisplay(trainLine));
             }
             return TempTrainLines;
         }

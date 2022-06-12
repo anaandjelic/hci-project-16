@@ -4,12 +4,14 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows;
+using HCI_Project.utils.display;
+using System.Collections.Generic;
 
 namespace HCI_Project.managerPages
 {
     public partial class NewTimeTablePage : Page
     {
-        public ObservableCollection<TrainLine> TrainLines;
+        public ObservableCollection<TrainLineDisplay> TrainLines;
         private TrainLine SelectedTrainLine;
 
         public NewTimeTablePage()
@@ -22,7 +24,7 @@ namespace HCI_Project.managerPages
 
         private void CreateTimeTable(object sender, RoutedEventArgs e)
         {
-            SelectedTrainLine = TrainLineGrid.SelectedItem as TrainLine;
+            SelectedTrainLine = (TrainLineDisplay)TrainLineGrid.SelectedItem == null ? null : ((TrainLineDisplay)TrainLineGrid.SelectedItem).OriginalTrainLine;
             if (SelectedTrainLine == null)
             {
                 new MessageBoxCustom("You have to choose a train line.", MessageType.Error, MessageButtons.Ok).ShowDialog();
@@ -49,7 +51,7 @@ namespace HCI_Project.managerPages
                 date = date.AddMinutes(hour.Minute);
 
                 if (DateEqualsCheckedDay(date))
-                    Database.AddTimeTable(date, SelectedTrainLine, config);
+                    Database.AddTimeTable(date, config);
             }
 
             new MessageBoxCustom("You have sucessfully created a new timetable.", MessageType.Success, MessageButtons.Ok).ShowDialog();
@@ -76,7 +78,9 @@ namespace HCI_Project.managerPages
 
         private void UpdateDataGrid()
         {
-            TrainLines = new ObservableCollection<TrainLine>(Database.GetUnConfiguredTrainLines());
+            var trainLineDisplays = new List<TrainLineDisplay>();
+            Database.GetUnConfiguredTrainLines().ForEach(x => trainLineDisplays.Add(new TrainLineDisplay(x)));
+            TrainLines = new ObservableCollection<TrainLineDisplay>(trainLineDisplays);
             TrainLineGrid.ItemsSource = TrainLines;
         }
 
@@ -89,6 +93,29 @@ namespace HCI_Project.managerPages
                    (date.DayOfWeek == DayOfWeek.Friday && (bool)FridayCheck.IsChecked) ||
                    (date.DayOfWeek == DayOfWeek.Saturday && (bool)SaturdayCheck.IsChecked) ||
                    (date.DayOfWeek == DayOfWeek.Sunday && (bool)SundayCheck.IsChecked);
+        }
+
+        private void SearchTimeTable(object sender, RoutedEventArgs e)
+        {
+            string enteredValues = SearchTextBox.Text.ToString().Trim().ToLower();
+            string[] stationsNames = enteredValues.Split();
+            TrainLines = new ObservableCollection<TrainLineDisplay>(Database.SearchUnConfigured(stationsNames));
+            TrainLineGrid.ItemsSource = TrainLines;
+        }
+
+        private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(System.TimeSpan))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "hh\\:mm";
+            switch (e.Column.Header)
+            {
+                case "TravelTime":
+                    e.Column.Header = "Travel time";
+                    break;
+                case "OriginalTrainLine":
+                    e.Column.Visibility = Visibility.Hidden;
+                    break;
+            }
         }
     }
 }

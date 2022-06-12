@@ -18,19 +18,6 @@ namespace HCI_Project.utils
             Stations = stations;
             Train = train;
         }
-        public void AddStation(Station station, int position)
-        {
-            Stations.Insert(position, station);
-        }
-        public void RemoveStop(Station station)
-        {
-            Station res = (Station)(from s in Stations where s.Name == station.Name select s).FirstOrDefault();
-            Stations.Remove(res);
-        }
-        public void RemoveStop(int index)
-        {
-            Stations.RemoveAt(index);
-        }
 
         public int GetStationIndex(string name)
         {

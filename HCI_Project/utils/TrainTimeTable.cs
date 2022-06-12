@@ -10,12 +10,11 @@ namespace HCI_Project.utils
         public TrainLine TrainLine { get; private set; }
         public TimeTableConfiguration Configuration { get; private set; }
 
-        public TrainTimeTable(int iD, DateTime departureDate, TrainLine trainLine, TimeTableConfiguration configuration)
+        public TrainTimeTable(int iD, DateTime departureDate, TimeTableConfiguration configuration)
         {
             ID = iD;
             Deleted = false;
             DepartureDate = departureDate;
-            TrainLine = trainLine;
             Configuration = configuration;
         }
         

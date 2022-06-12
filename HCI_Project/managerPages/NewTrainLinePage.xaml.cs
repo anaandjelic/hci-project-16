@@ -18,7 +18,7 @@ namespace HCI_Project.managerPages
     public partial class NewTrainLinePage : Page
     {
         private ObservableCollection<Station> Stations = new ObservableCollection<Station>();
-        private readonly ObservableCollection<string> Trains;
+        private readonly ObservableCollection<Train> Trains;
         private List<Pushpin> Pins = new List<Pushpin>();
         private bool IsFirstStation = true;
         private Point StartPoint;
@@ -26,13 +26,12 @@ namespace HCI_Project.managerPages
         private bool isTutorialCreateTrainLine;
         private Frame MainFrame;
         private Notifier managerNotifier;
-        private int brojac = 0;
 
 
         public NewTrainLinePage(bool isTutorialCreateTrainLine, Frame MainFrame, Notifier notifier)
         {
             InitializeComponent();
-            Trains = new ObservableCollection<string>(Database.GetTrains().Select(t => $"{t.Name} - {t.FirstClassCapacity + t.SecondClassCapacity} seats").OrderBy(name => name).ToArray());
+            Trains = new ObservableCollection<Train>(Database.GetTrains());
             TrainsCombobox.ItemsSource = Trains;
             TrainsCombobox.SelectedIndex = 0;
             DataContext = this;
@@ -135,7 +134,7 @@ namespace HCI_Project.managerPages
 
         private void Pin_Click(object sender, RoutedEventArgs e)
         {
-            Pushpin pin = (Pushpin)sender;
+            Pushpin pin = sender as Pushpin;
             Pins.Remove(pin);
             var station = (from s in Stations where s.Longitude == pin.Location.Longitude && s.Latitude == pin.Location.Latitude select s).FirstOrDefault();
             if (station.Offset.Equals(new TimeSpan(0, 0, 0)))
@@ -150,8 +149,7 @@ namespace HCI_Project.managerPages
 
         private void CreateTrainLine(object sender, RoutedEventArgs e)
         {
-            string selectedTrain = ((string)TrainsCombobox.SelectedItem).Split('-')[1].Trim();
-            Train train = Database.GetTrain(Int32.Parse(selectedTrain));
+            Train train = TrainsCombobox.SelectedItem as Train;
             Database.AddTrainLine(Stations.ToList(), train);
             Stations = new ObservableCollection<Station>();
             Pins = new List<Pushpin>();

@@ -129,7 +129,6 @@
     <Compile Include="utils\Train.cs" />
     <Compile Include="utils\TrainLine.cs" />
     <Compile Include="utils\TrainTimeTable.cs" />
-    <Compile Include="utils\TTT_DTO.cs" />
     <Compile Include="utils\User.cs" />
     <Compile Include="validations\NotEmptyValidationRule.cs" />
     <Compile Include="validations\StationPriceValidationRule.cs" />
