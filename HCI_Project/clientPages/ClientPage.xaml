@@ -9,7 +9,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ClientPage">
-
     <Page.CommandBindings>
         <CommandBinding Command="cmd:RoutedCommands.FormatClientHelp" CanExecute="ClientHelp_CanExecute" Executed="ClientHelp_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatSearchTrainLine" CanExecute="SearchTrainLine_CanExecute" Executed="SearchTrainLine_Executed"></CommandBinding>

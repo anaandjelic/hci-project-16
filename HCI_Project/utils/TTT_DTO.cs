@@ -12,7 +12,7 @@ namespace HCI_Project.utils
         public DateTime Departure { get; private set; }
         public DateTime Arrival { get; private set; }
         public string Line { get; private set; }
-        public TimeSpan Time { get; private set; }
+        //public TimeSpan Time { get; private set; }
 
         public TTT_DTO(DateTime departureTime, DateTime arrivalTime, String trainLine)
         {
@@ -20,14 +20,14 @@ namespace HCI_Project.utils
             Departure = departureTime;
             Arrival = arrivalTime;
             Line = trainLine;
-            Time = arrivalTime - departureTime;
+            //Time = arrivalTime - departureTime;
         }
         public TTT_DTO(TrainTimeTable trainTimeTable)
         {
             //ID = trainTimeTable.ID;
             Departure = trainTimeTable.DepartureTime;
             Arrival = trainTimeTable.ArrivalTime;
-            Time = trainTimeTable.TravelTime;
+            //Time = trainTimeTable.TravelTime;
             Line = trainTimeTable.TrainLine.stationsToString();
         }
     }
