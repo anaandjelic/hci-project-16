@@ -6,18 +6,18 @@ using System.Linq;
 using HCI_Project.utils.display;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace HCI_Project.clientPages
 {
     public partial class SearchPage : Page
     {
-        readonly ObservableCollection<TrainTimeTable> ttbs = new ObservableCollection<TrainTimeTable>(Database.GetTimeTables());
         public SearchPage()
         {
             InitializeComponent();
             Style = (Style)FindResource(typeof(Page));
 
-            DataTable.ItemsSource = new ObservableCollection<TTT_DTO>(Database.GetTTT_DTOS());
+            DataTable.ItemsSource = new ObservableCollection<TimeTableDisplay>();
         }
 
         private void SearchClick(object sender, RoutedEventArgs e)
@@ -29,6 +29,23 @@ namespace HCI_Project.clientPages
 
             DataTable.ItemsSource = searchRes;
             DataTable.Items.Refresh();
+
+            DataTitle.Text = $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(from.ToLower())} → {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(to.ToLower())}";
+        }
+
+        private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(System.DateTime))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "hh:mm";
+            switch (e.Column.Header)
+            {
+                case "TravelTime":
+                    e.Column.Header = "Travel time";
+                    break;
+                case "AvailableSeats":
+                    e.Column.Header = "Available seats";
+                    break;
+            }
         }
     }
 }
