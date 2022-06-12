@@ -9,6 +9,7 @@ using ToastNotifications.Messages;
 using ToastNotifications.Messages.Core;
 using ToastNotifications.Core;
 using HCI_Project.help;
+using HCI_Project.popups;
 
 namespace HCI_Project.clientPages
 {
@@ -187,7 +188,8 @@ namespace HCI_Project.clientPages
 
             string message = "This will end the Tutorial";
             this.notifier.ShowWarning(message, optionsMax);
-            MessageBox.Show("Klikom na ok se vracate na login screen");
+            //MessageBox.Show("Klikom na ok se vracate na login screen");
+            new MessageBoxCustom("By clicking the ok button you will be return to the login screen", MessageType.Confirmation, MessageButtons.Ok).ShowDialog();
             this.NavigationService.GoBack();
         }
     }

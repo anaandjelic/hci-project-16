@@ -1,4 +1,5 @@
 ﻿using HCI_Project.help;
+using HCI_Project.popups;
 using HCI_Project.utils;
 using System;
 using System.Windows;
@@ -259,7 +260,8 @@ namespace HCI_Project.managerPages
 
             string message = "This will end the Tutorial";
             this.notifier.ShowWarning(message, optionsMax);
-            MessageBox.Show("Klikom na ok se vracate na login screen");
+            //MessageBox.Show("Klikom na ok se vracate na login screen");
+            new MessageBoxCustom("By clicking the ok button you will be return to the login screen", MessageType.Confirmation, MessageButtons.Ok).ShowDialog();
             this.NavigationService.GoBack();
         }
 

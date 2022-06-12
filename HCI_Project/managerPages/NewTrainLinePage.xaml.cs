@@ -162,7 +162,8 @@ namespace HCI_Project.managerPages
             {
                 string message = "Ovim se zavrsava tutorija za kreiranje train linova";
                 notifications(message, "Success");
-                MessageBox.Show("Klikom na ok se vracate na login page");
+                //MessageBox.Show("Klikom na ok se vracate na login page");
+                new MessageBoxCustom("By clicking the ok button you will be return to the login screen", MessageType.Success, MessageButtons.Ok).ShowDialog();
                 this.NavigationService.GoBack();
             }
         }

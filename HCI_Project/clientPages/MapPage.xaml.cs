@@ -11,6 +11,7 @@ using ToastNotifications;
 using ToastNotifications.Messages;
 using System.Threading;
 using ToastNotifications.Core;
+using HCI_Project.popups;
 
 namespace HCI_Project.clientPages
 {
@@ -173,7 +174,8 @@ namespace HCI_Project.clientPages
                     this.isTutorialLine = false;
                     //return; // KAKO MOGU DA SE VRATIM NA POCETNI PROZOR!??!?!? JEDINO DA FORSIRAM LOGOUT??
                     //Thread.Sleep(2000);
-                    MessageBox.Show("Klikom na ok dugme se vracate na login stranicu");
+                    //MessageBox.Show("Klikom na ok dugme se vracate na login stranicu");
+                    new MessageBoxCustom("By clicking the ok button you will be return to the login screen", MessageType.Success, MessageButtons.Ok).ShowDialog();
                     // zasad mora biti koriscen msgbox da bi se prikazala zeljena ruta
                     this.NavigationService.GoBack();
                 }
