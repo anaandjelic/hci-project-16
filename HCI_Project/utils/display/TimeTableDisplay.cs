@@ -14,6 +14,8 @@ namespace HCI_Project.utils.display
         public TimeSpan TravelTime { get; private set; }
         public double Price { get; private set; }
         public int AvailableSeats { get; private set; }
+        public TrainTimeTable OriginalTimeTable { get; private set; }
+        
         public TimeTableDisplay(TrainTimeTable timeTable, string from, string to, int availableSeats)
         {
             Train = $"{timeTable.Configuration.TrainLine.Train.Name}.{timeTable.Configuration.TrainLine.Train.ID}";
@@ -22,6 +24,7 @@ namespace HCI_Project.utils.display
             TravelTime = Arrival - Departure;
             Price = timeTable.Configuration.TrainLine.getStationByName(to).Price - timeTable.Configuration.TrainLine.getStationByName(from).Price;
             AvailableSeats = availableSeats > -1 ? availableSeats : 0;
+            OriginalTimeTable = timeTable;
         }
     }
 }

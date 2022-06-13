@@ -13,7 +13,7 @@ namespace HCI_Project.utils
         private static readonly List<TrainLine> TrainLines = new List<TrainLine>();
         private static readonly List<TrainTimeTable> TimeTables = new List<TrainTimeTable>();
         private static readonly List<TimeTableConfiguration> Configurations = new List<TimeTableConfiguration>();
-        private static User LoggedInUser;
+        public static User LoggedInUser { get; private set; }
 
         private static readonly List<String> TrainLinesString = new List<string>();
         private static readonly List<String> TrainLinesStringWithID = new List<string>();
@@ -64,6 +64,13 @@ namespace HCI_Project.utils
             return TimeTables.FirstOrDefault(x => x.Configuration.ID == config.ID &&
                                                   x.DepartureDate.Date == date.Date &&
                                                   !x.Deleted);
+        }
+
+        // Tickets
+        public static void AddTicket(double price, int seat, string seatClass, bool bought, TrainTimeTable selectedTime)
+        {
+            int id = Tickets.Count == 0 ? -1 : Tickets.OrderByDescending(x => x.ID).First().ID;
+            Tickets.Add(new Ticket(++id, LoggedInUser, price, seat, seatClass, bought, selectedTime));
         }
 
         // Train CRUD
@@ -319,7 +326,7 @@ namespace HCI_Project.utils
 
         // diaplays
 
-        private static int GetAvailableSeats(TrainTimeTable timeTable)
+        private static int GetAvailableSeatsCount(TrainTimeTable timeTable)
         {
             return timeTable.Configuration.TrainLine.Train.GetAllSeats() - Tickets.Where(x => x.TrainTime.ID == timeTable.ID).Count();
         }
@@ -327,7 +334,7 @@ namespace HCI_Project.utils
         public static List<TimeTableDisplay> GetTimeTableDisplays()
         {
             var res = new List<TimeTableDisplay>();
-            TimeTables.ForEach(x => res.Add(new TimeTableDisplay(x, "Novi Sad", "Belgrade", GetAvailableSeats(x))));
+            TimeTables.ForEach(x => res.Add(new TimeTableDisplay(x, "Novi Sad", "Belgrade", GetAvailableSeatsCount(x))));
             return res;
         }
 
@@ -337,7 +344,28 @@ namespace HCI_Project.utils
             var timeTables = TimeTables.Where(x => x.DepartureDate.Date.Equals(date.Date) &&
                                               x.TravelsBetween(from, to))
                 .ToList();
-            timeTables.ForEach(x => res.Add(new TimeTableDisplay(x, from, to, GetAvailableSeats(x))));
+            timeTables.ForEach(x => res.Add(new TimeTableDisplay(x, from, to, GetAvailableSeatsCount(x))));
+            return res;
+        }
+
+        public static List<SeatDisplay> GetSeats(TrainTimeTable timeTable)
+        {
+            List<SeatDisplay> res = new List<SeatDisplay>();
+            List<Ticket> tickets = Tickets.Where(x => x.TrainTime.ID == timeTable.ID).ToList();
+
+            Train train = timeTable.TrainLine.Train;
+            for (int i = 1; i <= train.FirstClassCapacity; i++)
+                if (tickets.Any(x => x.Seat == i && x.SeatClass == "first" && !x.Deleted))
+                    res.Add(new SeatDisplay(i, "first", true));
+                else
+                    res.Add(new SeatDisplay(i, "first", false));
+
+            for (int i = 1; i <= train.SecondClassCapacity; i++)
+                if (tickets.Any(x => x.Seat == i && x.SeatClass == "second" && !x.Deleted))
+                    res.Add(new SeatDisplay(train.FirstClassCapacity + i, "second", true));
+                else
+                    res.Add(new SeatDisplay(train.FirstClassCapacity + i, "second", false));
+
             return res;
         }
 

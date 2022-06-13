@@ -18,6 +18,8 @@
         <CommandBinding Command="cmd:RoutedCommands.FormatHistoryReservations" CanExecute="HistoryReservations_CanExecute" Executed="HistoryReservations_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatTutorial" CanExecute="Tutorial_CanExecute" Executed="Tutorial_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatCancelTutorial" CanExecute="CancelTutorial_CanExecute" Executed="CancelTutorial_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatPurchaseTicket" CanExecute="Purchase_CanExecute" Executed="Purchase_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FormatReserveTicket" CanExecute="Reserve_CanExecute" Executed="Reserve_Executed"></CommandBinding>
     </Page.CommandBindings>
 
     <Grid>
@@ -40,6 +42,10 @@
             <MenuItem x:Name="MenuItemSerach" Header="Search"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="TrainLine" Command="cmd:RoutedCommands.FormatSearchTrainLine" FontFamily="Bahnschrift Light"/>
                 <MenuItem x:Name="TimeTableBtn" Header="Timetable" Command="cmd:RoutedCommands.FormatSearchTrainTable" FontFamily="Bahnschrift Light"/>
+            </MenuItem>
+            <MenuItem x:Name="TicketsBTN" Header="Tickets"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
+                <MenuItem Header="Purchase" Command="cmd:RoutedCommands.FormatPurchaseTicket" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Reserve" Command="cmd:RoutedCommands.FormatReserveTicket" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem x:Name="HistoryBTN" Header="History"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Tickets" Command="cmd:RoutedCommands.FormatHistoryTickets" FontFamily="Bahnschrift Light"/>
