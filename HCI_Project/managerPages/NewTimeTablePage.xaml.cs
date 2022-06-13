@@ -168,19 +168,22 @@ namespace HCI_Project.managerPages
 
         private void TrainLineGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            if (brojac == 0)
+            if (isTutorialCreateTrainTable)
             {
-                string message = "Select two working days";
-                notifications(message, "Information");
+                if (brojac == 0)
+                {
+                    string message = "Select two working days";
+                    notifications(message, "Information");
+                }
+                this.TrainLineGrid.IsEnabled = false;
+                this.FridayCheck.IsEnabled = true;
+                this.MondayCheck.IsEnabled = true;
+                //this.SaturdayCheck.IsEnabled = true;
+                //this.SundayCheck.IsEnabled = true;
+                this.ThursdayCheck.IsEnabled = true;
+                this.TuesdayCheck.IsEnabled = true;
+                this.WednesdayCheck.IsEnabled = true;
             }
-            this.TrainLineGrid.IsEnabled = false;
-            this.FridayCheck.IsEnabled = true;
-            this.MondayCheck.IsEnabled = true;
-            //this.SaturdayCheck.IsEnabled = true;
-            //this.SundayCheck.IsEnabled = true;
-            this.ThursdayCheck.IsEnabled = true;
-            this.TuesdayCheck.IsEnabled = true;
-            this.WednesdayCheck.IsEnabled = true;
         }
 
         private void MondayCheck_Checked(object sender, RoutedEventArgs e)
@@ -217,7 +220,7 @@ namespace HCI_Project.managerPages
         {
             if (isTutorialCreateTrainTable)
             {
-                this.brojac++;
+                brojac++;
                 if (brojac == 2)
                 {
                     string message = "Choose desired time";
