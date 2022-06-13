@@ -34,7 +34,8 @@ namespace HCI_Project.managerPages
                 this.SecondClassField.IsEnabled = false;
                 this.CreateBtn.IsEnabled = false;
                 this.cancelTrain.IsEnabled = false;
-                string message = "U prvom text polju popunjavate zeljeni naziv voza, npr Koja";
+                //string message = "U prvom text polju popunjavate zeljeni naziv voza, npr Koja";
+                string message = "In the first text field you are entering train's name, for example Koja";
                 notifications(message, "Information");
                 this.NameField.Focus();
             }
@@ -54,7 +55,8 @@ namespace HCI_Project.managerPages
                     this.SecondClassField.IsEnabled = true;
                     this.SecondClassField.Focus();
 
-                    string message = "U sledecem polju odredjujete broj sedista druge klase. Unos mora biti ceo broj, npr 33";
+                    //string message = "U sledecem polju odredjujete broj sedista druge klase. Unos mora biti ceo broj, npr 33";
+                    string message = "Text in the next field determines the number of secound class seats, for example 33";
                     notifications(message, "Information");
                 }
             }
@@ -74,7 +76,8 @@ namespace HCI_Project.managerPages
                     this.CreateBtn.IsEnabled = true;
                     //this.cancelTrain.IsEnabled = true;
 
-                    string message = "U ovom koraku potvrdjujemo kreiranje naseg voza klikom na dugme Create";
+                    //string message = "U ovom koraku potvrdjujemo kreiranje naseg voza klikom na dugme Create";
+                    string message = "By clicking the Create button you are confirming the creation of your train";
                     notifications(message, "Information");
                 }
             }
@@ -135,9 +138,10 @@ namespace HCI_Project.managerPages
             Database.AddTrain(TrainName, FirstClass, SecondClass);
             if (isTutorialCreateTrain)
             {
-                string message = "Ovim zavrsavamo Tutorijal za kreiranmje vozova";
+                //string message = "Ovim zavrsavamo Tutorijal za kreiranmje vozova";
+                string message = "This ends the Create Train Tutorial";
                 notifications(message, "Success");
-                new MessageBoxCustom("By clicking the ok button you will be return to the login screen", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                new MessageBoxCustom("By clicking the ok button you will be returned to the last page you were on", MessageType.Success, MessageButtons.Ok).ShowDialog();
                 //MessageBox.Show("Klikom na ok se vracate na login starnicu");
                 this.NavigationService.GoBack();
             }
@@ -167,7 +171,7 @@ namespace HCI_Project.managerPages
             if(isTutorialCreateTrain)
             {
                 this.brojac++;
-                if(this.brojac>=4)
+                if(this.brojac==4)
                 {
                     this.NameField.Text = "Koja";
                     this.NameField.IsEnabled = false;
@@ -175,7 +179,8 @@ namespace HCI_Project.managerPages
                     this.FirstClassField.Focus();
                     this.brojac = 0;
 
-                    string message = "U sledecem polju odredjujete broj sedista prve klase. Unos mora biti ceo broj, npr 23";
+                    //string message = "U sledecem polju odredjujete broj sedista prve klase. Unos mora biti ceo broj, npr 23";
+                    string message = "Text in the next field determines the number of first class seats, for example 23";
                     notifications(message, "Information");
                 }
             }

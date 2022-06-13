@@ -36,7 +36,8 @@ namespace HCI_Project.clientPages
             this.pageNotifier = notifier;
             if (isTutorialLine)
             {
-                string message = "Pritiskom na ComboBox dobijate ponudjene sve moguce Train linije \n Klikom na neku od njih Vam se iscrtava ta linija na mapi sa desne strane";
+                //string message = "Pritiskom na ComboBox dobijate ponudjene sve moguce Train linije \n Klikom na neku od njih Vam se iscrtava ta linija na mapi sa desne strane";
+                string message = "By clicking on the combobox you will be prompted by all the train lines. By clicking on any of the options a line will be drawn on the map";
                 //MessageBox.Show("Pritiskom na ComboBox dobijate ponudjene sve moguce Train linije \n Klikom na neku od njih Vam se iscrtava ta linija na mapi sa desne strane");
                 notifications(message, "Information");
                 this.SearchBar.IsEnabled = false;
@@ -68,8 +69,9 @@ namespace HCI_Project.clientPages
                 // ovde enejblujemo search bar a disejblujemo combobox 
                 this.TrainLineSelect.IsEnabled = false;
                 //MessageBox.Show("Search bar Vam sluzi da detaljnije pretrazujete Train linije.\nU Search bar unosite naziv stanice/a odvojene razmakom.");
-                
-                string message = "Search bar Vam sluzi da detaljnije pretrazujete Train linije.\nU Search bar unosite naziv stanice/a odvojene razmakom.\n npr. belgrade";
+
+                //string message = "Search bar Vam sluzi da detaljnije pretrazujete Train linije.\nU Search bar unosite naziv stanice/a odvojene razmakom.\n npr. belgrade";
+                string message = "Search bar is used for advanced searching the train lines. Here you are typing in the desired station names, for example belgrade";
                 notifications(message, "Information");
                 this.SearchBar.IsEnabled = true;
                 //sad idemo skok na search bar i nakon unosa par slova izbacuemo poruku za enter i enejblujemo message box
@@ -89,7 +91,8 @@ namespace HCI_Project.clientPages
         {
             string enteredValues = SearchBar.Text.ToString().Trim().ToLower();
             string[] stationsNames = enteredValues.Split();
-            var res = Database.findLinesWithStations(stationsNames);
+            //var res = Database.findLinesWithStations(stationsNames);
+            var res = Database.findLinesWithStationsForListBox(stationsNames);
             LB_result.ItemsSource = res;
         }
 
@@ -117,13 +120,14 @@ namespace HCI_Project.clientPages
                 if (isTutorialLine)
                 {
                     //MessageBox.Show("Ovim se zavrsava tutorijal Search Train Lines, za ponovan prolazak pritisnite Ctrl U,T");
-                    string message = "Ovim se zavrsava tutorijal Search Train Lines";
+                    //string message = "Ovim se zavrsava tutorijal Search Train Lines";
+                    string message = "This ends the Search Train Lines Tutorial";
                     notifications(message, "Success");
                     this.isTutorialLine = false;
                     //return; // KAKO MOGU DA SE VRATIM NA POCETNI PROZOR!??!?!? JEDINO DA FORSIRAM LOGOUT??
                     //Thread.Sleep(2000);
                     //MessageBox.Show("Klikom na ok dugme se vracate na login stranicu");
-                    new MessageBoxCustom("By clicking the ok button you will be return to the login screen", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                    new MessageBoxCustom("By clicking the ok button you will be returned to the last page you were on", MessageType.Success, MessageButtons.Ok).ShowDialog();
                     // zasad mora biti koriscen msgbox da bi se prikazala zeljena ruta
                     this.NavigationService.GoBack();
                 }
@@ -142,7 +146,8 @@ namespace HCI_Project.clientPages
                     this.SearchBar.IsEnabled = false;
                     this.LB_result.IsEnabled = true;
                     //MessageBox.Show("Klikom na neku od opcija Vam se prikazuje selektovana linija na mapi pored");
-                    string message = "Klikom na neku od opcija Vam se prikazuje selektovana linija na mapi pored";
+                    //string message = "Klikom na neku od opcija Vam se prikazuje selektovana linija na mapi pored";
+                    string message = "By clicking on any option a line on the map will be presented to you";
                     notifications(message, "Information");
                 }
                 this.Button_Click(sender, e);
@@ -157,7 +162,8 @@ namespace HCI_Project.clientPages
                 //MessageBox.Show("Pritiskom na dugme ENTER u listboxu ispod search bara ce Vam se prikazati sve linije koje sadrze unetu stanicu");
                 if (this.brojac % 8 == 0)
                 {
-                    string message = "Pritiskom na dugme ENTER u listboxu ispod search bara ce Vam se prikazati sve linije koje sadrze unetu stanicu";
+                    //string message = "Pritiskom na dugme ENTER u listboxu ispod search bara ce Vam se prikazati sve linije koje sadrze unetu stanicu";
+                    string message = "By pressing the Enter key the listbox down below will show you all the lines that contain the entered stations";
                     notifications(message, "Information");
                     this.brojac = 0;
                 }

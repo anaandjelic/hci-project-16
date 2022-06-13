@@ -16,11 +16,11 @@ namespace HCI_Project.utils.display
         public int AvailableSeats { get; private set; }
         public TimeTableDisplay(TrainTimeTable timeTable, string from, string to, int availableSeats)
         {
-            Train = $"{timeTable.TrainLine.Train.Name}.{timeTable.TrainLine.Train.ID}";
-            Departure = timeTable.DepartureDate.Date + timeTable.Configuration.DepartureTime + timeTable.TrainLine.getStationByName(from).Offset;
-            Arrival = timeTable.DepartureDate.Date + timeTable.Configuration.DepartureTime + timeTable.TrainLine.getStationByName(to).Offset;
+            Train = $"{timeTable.Configuration.TrainLine.Train.Name}.{timeTable.Configuration.TrainLine.Train.ID}";
+            Departure = timeTable.DepartureDate.Date + timeTable.Configuration.DepartureTime + timeTable.Configuration.TrainLine.getStationByName(from).Offset;
+            Arrival = timeTable.DepartureDate.Date + timeTable.Configuration.DepartureTime + timeTable.Configuration.TrainLine.getStationByName(to).Offset;
             TravelTime = Arrival - Departure;
-            Price = timeTable.TrainLine.getStationByName(to).Price - timeTable.TrainLine.getStationByName(from).Price;
+            Price = timeTable.Configuration.TrainLine.getStationByName(to).Price - timeTable.Configuration.TrainLine.getStationByName(from).Price;
             AvailableSeats = availableSeats > -1 ? availableSeats : 0;
         }
     }

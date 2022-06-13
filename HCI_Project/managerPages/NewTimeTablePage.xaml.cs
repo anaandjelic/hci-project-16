@@ -84,7 +84,7 @@ namespace HCI_Project.managerPages
             {
                 string message = "This marks the end of Tutorial";
                 notifications(message, "Success");
-                new MessageBoxCustom("You have sucessfully created a new timetable.\n By clicking the ok button you will be return to the login screen", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                new MessageBoxCustom("You have sucessfully created a new timetable.\n By clicking the ok button you will be returned to the last page you were on", MessageType.Success, MessageButtons.Ok).ShowDialog();
                 this.NavigationService.GoBack();
             }
             else

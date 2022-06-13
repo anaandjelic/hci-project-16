@@ -22,8 +22,8 @@ namespace HCI_Project.clientPages
 
         private void SearchClick(object sender, RoutedEventArgs e)
         {
-            string from = From.Text;
-            string to = To.Text;
+            string from = From.Text.ToLower();
+            string to = To.Text.ToLower();
             DateTime date = DP.SelectedDate ?? DateTime.Now.Date;
             List<TimeTableDisplay> searchRes = Database.GetTimeTableDisplays(from, to, date);
 

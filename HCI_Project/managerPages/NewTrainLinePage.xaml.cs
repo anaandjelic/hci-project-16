@@ -45,7 +45,8 @@ namespace HCI_Project.managerPages
                 this.MyMap.IsEnabled = false;
                 this.CreateBtn.IsEnabled = false;
                 this.cancelBTN.IsEnabled = false;
-                string message = "Klikom na combobox dobijate mogucnost odabira voza za vasu rutu";
+                //string message = "Klikom na combobox dobijate mogucnost odabira voza za vasu rutu";
+                string message = "By clicking on the combobox you will be given a choice ov your desired route";
                 this.TrainsCombobox.Focus();
                 notifications(message, "Information");
             }
@@ -115,13 +116,15 @@ namespace HCI_Project.managerPages
 
             if (this.isTutorialCreateTrainLine && this.Stations.Count() == 1)
             {
-                string message = "Pin mozete da kliknete i prevucete na mapu";
+                //string message = "Pin mozete da kliknete i prevucete na mapu";
+                string message = "You can click and drag the pin on top of the map";
                 notifications(message, "Information");
             }
             else if (this.isTutorialCreateTrainLine && this.Stations.Count()==2)
             {
                 MyMap.IsEnabled = false;
-                string message = "Klikom na Confirm dugme kreirate novi train line";
+                string message = "By clicking on the Confirm button you will create a new train line";
+                //string message = "Klikom na Confirm dugme kreirate novi train line";
                 notifications(message, "Information");
                 this.CreateBtn.IsEnabled = true;
             }
@@ -158,10 +161,11 @@ namespace HCI_Project.managerPages
             StationGrid.ItemsSource = Stations;
             if(this.isTutorialCreateTrainLine)
             {
-                string message = "Ovim se zavrsava tutorija za kreiranje train linova";
+                //string message = "Ovim se zavrsava tutorija za kreiranje train linova";
+                string message = "This ends the Create Train Line Tutorial";
                 notifications(message, "Success");
                 //MessageBox.Show("Klikom na ok se vracate na login page");
-                new MessageBoxCustom("By clicking the ok button you will be return to the login screen", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                new MessageBoxCustom("By clicking the ok button you will be returned to the last page you were on", MessageType.Success, MessageButtons.Ok).ShowDialog();
                 this.NavigationService.GoBack();
             }
         }
@@ -235,9 +239,11 @@ namespace HCI_Project.managerPages
             {
                 this.TrainsCombobox.IsEnabled = false;
                 this.MyMap.IsEnabled = true;
-                string message = "Pin mozete da kliknete i prevucete na mapu";
+                //string message = "Pin mozete da kliknete i prevucete na mapu";
+                string message = "You can click and drag and drop the Pin on top of the map";
                 notifications(message, "Information");
-                message = "Zatim pustanjem pina dobijate stanicu";
+                //message = "Zatim pustanjem pina dobijate stanicu";
+                message = "By dropping the pin on the map you will be prompted by a station creation window";
                 notifications(message, "Information");
             }
         }

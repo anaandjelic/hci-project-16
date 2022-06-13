@@ -20,8 +20,8 @@ namespace HCI_Project.utils
         
         public bool TravelsBetween(string from, string to)
         {
-            int stationFrom = TrainLine.GetStationIndex(from);
-            int stationTo = TrainLine.GetStationIndex(to);
+            int stationFrom = Configuration.TrainLine.GetStationIndex(from);
+            int stationTo = Configuration.TrainLine.GetStationIndex(to);
             return stationFrom != -1 && stationTo != -1 && stationFrom < stationTo;
         }
     }

@@ -261,7 +261,7 @@ namespace HCI_Project.managerPages
             string message = "This will end the Tutorial";
             this.notifier.ShowWarning(message, optionsMax);
             //MessageBox.Show("Klikom na ok se vracate na login screen");
-            new MessageBoxCustom("By clicking the ok button you will be return to the login screen", MessageType.Confirmation, MessageButtons.Ok).ShowDialog();
+            new MessageBoxCustom("By clicking the ok button you will be returned to the last page you were on", MessageType.Confirmation, MessageButtons.Ok).ShowDialog();
             this.NavigationService.GoBack();
         }
 

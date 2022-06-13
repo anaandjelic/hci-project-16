@@ -276,11 +276,34 @@ namespace HCI_Project.utils
             return TempTrainLines;
         }
 
+        //dodato
+        public static List<string> findLinesWithStationsForListBox(string[] stationNames)
+        {
+            List<string> toReturn = new List<string>();
+            foreach (var trainLine in TrainLines)
+            {
+                bool doesOccur = false;
+                foreach (string inputStation in stationNames)
+                {
+                    
+                    if (trainLine.stationsToStringWithID().ToLower().Contains(inputStation.ToLower()))
+                    {
+                        doesOccur = true;
+                        break;
+                    }
+                }
+                if (doesOccur)
+                    toReturn.Add(trainLine.stationsToStringWithID());
+            }
+            
+            return toReturn;
+        }
+
         // diaplays
 
         private static int GetAvailableSeats(TrainTimeTable timeTable)
         {
-            return timeTable.TrainLine.Train.GetAllSeats() - Tickets.Where(x => x.TrainTime.ID == timeTable.ID).Count();
+            return timeTable.Configuration.TrainLine.Train.GetAllSeats() - Tickets.Where(x => x.TrainTime.ID == timeTable.ID).Count();
         }
 
         public static List<TimeTableDisplay> GetTimeTableDisplays()
