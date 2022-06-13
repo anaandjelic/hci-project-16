@@ -16,6 +16,7 @@ namespace HCI_Project.utils
             Deleted = false;
             DepartureDate = departureDate;
             Configuration = configuration;
+            TrainLine = configuration.TrainLine;
         }
         
         public bool TravelsBetween(string from, string to)

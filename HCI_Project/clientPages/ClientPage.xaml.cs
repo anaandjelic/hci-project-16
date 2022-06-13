@@ -135,6 +135,34 @@ namespace HCI_Project.clientPages
             // tu i dalje ostaje ovo stanje sa menu itemima, a korisnika teramo da unese npr beograd u search bar i da pritisne enter za pretragu
         }
 
+        private void Purchase_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        {
+            if (isTutorialLine)
+                e.CanExecute = false;
+            else
+                e.CanExecute = true;
+        }
+
+        private void Purchase_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            ClientFrame.Content = new PurchasePage(ClientFrame);
+            ClientFrame.Focus();
+        }
+
+        private void Reserve_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        {
+            if (isTutorialLine)
+                e.CanExecute = false;
+            else
+                e.CanExecute = true;
+        }
+
+        private void Reserve_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            ClientFrame.Content = new SearchPage();
+            ClientFrame.Focus();
+        }
+
         //  NOTIFIKACIJE (zamena za msgbox) 
         // vrv mogu da ga prosledjujem po pageovima za njegovo prikazivanje
         Notifier notifier = new Notifier(cfg =>
