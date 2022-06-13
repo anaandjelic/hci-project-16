@@ -1,0 +1,105 @@
+﻿<Page x:Class="HCI_Project.clientPages.ConfirmPurchasePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HCI_Project.clientPages" 
+      xmlns:local1="clr-namespace:HCI_Project"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" Background="White"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Search">
+
+    <Page.Resources>
+        <local1:MyFontSizeConverter x:Key="fontSizeConverter" />
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Button -->
+        <Button Click="Cancel" Content="Cancel" FontSize="35" Height="50" Grid.Row="11"
+                Style="{StaticResource MaterialDesignFlatMidBgButton}"  Foreground="White" materialDesign:ButtonAssist.CornerRadius="5" RenderTransformOrigin="0.562,0.562" Margin="25 0 5 0"/>
+
+        <Viewbox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="2" HorizontalAlignment="Center">
+            <TextBlock Text="Ticket Information" Foreground="Gray"/>
+        </Viewbox>
+        
+        <Viewbox Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">
+            <TextBlock Text="FROM:" Foreground="Gray"/>
+        </Viewbox>
+        <Viewbox Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right">
+            <TextBlock Text="TO:" Foreground="Gray"/>
+        </Viewbox>
+        <Viewbox Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right">
+            <TextBlock Text="DATE:" Foreground="Gray"/>
+        </Viewbox>
+        <Viewbox Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right">
+            <TextBlock Text="DEPARTURE:" Foreground="Gray"/>
+        </Viewbox>
+        <Viewbox Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right">
+            <TextBlock Text="ARIVE:" Foreground="Gray"/>
+        </Viewbox>
+        <Viewbox Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right">
+            <TextBlock Text="SEAT:" Foreground="Gray"/>
+        </Viewbox>
+        <Viewbox Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right">
+            <TextBlock Text="TRAIN:" Foreground="Gray"/>
+        </Viewbox>
+        <Viewbox Grid.Column="0" Grid.Row="9" HorizontalAlignment="Right">
+            <TextBlock Text="PRICE:" Foreground="Gray"/>
+        </Viewbox>
+
+        <Viewbox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Left" Margin="30 0">
+            <TextBlock x:Name="From" Text="FROM" Foreground="Black"/>
+        </Viewbox>
+        <Viewbox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Left" Margin="30 0">
+            <TextBlock x:Name="To" Text="TO" Foreground="Black"/>
+        </Viewbox>
+        <Viewbox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" HorizontalAlignment="Left" Margin="30 0">
+            <TextBlock x:Name="Date" Text="DATE" Foreground="Black"/>
+        </Viewbox>
+        <Viewbox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" HorizontalAlignment="Left" Margin="30 0">
+            <TextBlock x:Name="Departure" Text="DEPARTURE" Foreground="Black"/>
+        </Viewbox>
+        <Viewbox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" HorizontalAlignment="Left" Margin="30 0">
+            <TextBlock x:Name="Arive" Text="ARIVE" Foreground="Black"/>
+        </Viewbox>
+        <Viewbox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" HorizontalAlignment="Left" Margin="30 0">
+            <TextBlock x:Name="Seat" Text="SEAT" Foreground="Black"/>
+        </Viewbox>
+        <Viewbox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" HorizontalAlignment="Left" Margin="30 0">
+            <TextBlock x:Name="TrainName" Text="TRAIN" Foreground="Black"/>
+        </Viewbox>
+        <Viewbox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="9" HorizontalAlignment="Left" Margin="30 0">
+            <TextBlock x:Name="Price" Text="PRICE" Foreground="Black"/>
+        </Viewbox>
+
+        <Button Click="ConfirmReserve" Content="Reserve" FontSize="35" Height="50" Grid.Row="11" Grid.Column="2"
+            Style="{StaticResource MaterialDesignFlatMidBgButton}"  Foreground="White" materialDesign:ButtonAssist.CornerRadius="5" RenderTransformOrigin="0.562,0.562" Margin="5 0 5 0"/>
+
+        <Button Click="ConfirmPurchase" Content="Purchase" FontSize="35" Height="50" Grid.Row="11" Grid.Column="3"
+            Style="{StaticResource MaterialDesignFlatMidBgButton}"  Foreground="White" materialDesign:ButtonAssist.CornerRadius="5" RenderTransformOrigin="0.562,0.562" Margin="5 0 25 0"/>
+    </Grid>
+</Page>

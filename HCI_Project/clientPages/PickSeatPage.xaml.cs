@@ -11,7 +11,8 @@ namespace HCI_Project.clientPages
     public partial class PickSeatPage : Page
     {
         TimeTableDisplay SelectedTime;
-        AvailableSeatDisplay SelectedSeat;
+        Station FromStation;
+        Station ToStation;
         Frame ClientFrame;
 
         public PickSeatPage(TimeTableDisplay selection, string from, string to, Frame clientFrame)
@@ -20,9 +21,13 @@ namespace HCI_Project.clientPages
             Style = (Style)FindResource(typeof(Page));
             SelectedTime = selection;
             ClientFrame = clientFrame;
-            
-            From.Text = selection.OriginalTimeTable.TrainLine.getStationByName(from).Name;
-            To.Text = selection.OriginalTimeTable.TrainLine.getStationByName(to).Name;
+
+            FromStation = selection.OriginalTimeTable.TrainLine.getStationByName(from);
+            ToStation = selection.OriginalTimeTable.TrainLine.getStationByName(to);
+
+            From.Text = FromStation.Name;
+            To.Text = ToStation.Name;
+            TrainName.Text = selection.Train;
 
             UpdateSeats();
         }
@@ -35,8 +40,8 @@ namespace HCI_Project.clientPages
                 return;
             }
 
-            AvailableSeatDisplay selectedSeat = (AvailableSeatDisplay) AvailableSeatsTable.SelectedItem;
-            MessageBox.Show($"Odabro si {selectedSeat.number} svaka cast");
+            SeatDisplay selectedSeat = (SeatDisplay) AvailableSeatsTable.SelectedItem;
+            ClientFrame.Content = new ConfirmPurchasePage(SelectedTime, selectedSeat, FromStation, ToStation, ClientFrame);
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
@@ -46,7 +51,7 @@ namespace HCI_Project.clientPages
 
         private void UpdateSeats()
         {
-            List<AvailableSeatDisplay> searchRes = Database.GetAvailableSeats(SelectedTime.OriginalTimeTable);
+            List<SeatDisplay> searchRes = Database.GetSeats(SelectedTime.OriginalTimeTable);
 
             AvailableSeatsTable.ItemsSource = searchRes;
             AvailableSeatsTable.Items.Refresh();
