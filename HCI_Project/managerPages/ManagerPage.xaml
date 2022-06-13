@@ -48,12 +48,12 @@
             </MenuItem>
             <MenuItem x:Name="editItem" Header="Edit" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Train" Command="cmd:RoutedCommands.FormatEditTrain" FontFamily="Bahnschrift Light"/>
-                <MenuItem Header="TrainLine"  Command="cmd:RoutedCommands.FormatEditTrainLine" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Train line"  Command="cmd:RoutedCommands.FormatEditTrainLine" FontFamily="Bahnschrift Light"/>
                 <MenuItem Header="Timetable" Command="cmd:RoutedCommands.FormatEditTrainTable" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem x:Name="newItem" Header="New" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="Train" Command="cmd:RoutedCommands.FormatCreateTrain" FontFamily="Bahnschrift Light"/>
-                <MenuItem Header="TrainLine" Command="cmd:RoutedCommands.FormatCreateTrainLine" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Train line" Command="cmd:RoutedCommands.FormatCreateTrainLine" FontFamily="Bahnschrift Light"/>
                 <MenuItem Header="Timetable" Command="cmd:RoutedCommands.FormatCreateTrainTable" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem x:Name="reportsItem" Header="Reports" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">

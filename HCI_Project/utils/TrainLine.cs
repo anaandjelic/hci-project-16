@@ -8,7 +8,7 @@ namespace HCI_Project.utils
         public int ID { get; private set; }
         public bool Deleted { get; set; }
         public List<Station> Stations { get; private set; }
-        public Train Train { get; private set; }
+        public Train Train { get; set; }
 
 
         public TrainLine(int id, List<Station> stations, Train train)

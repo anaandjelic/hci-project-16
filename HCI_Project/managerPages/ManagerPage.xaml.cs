@@ -121,7 +121,7 @@ namespace HCI_Project.managerPages
 
         private void EditTrainLine_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Edit Train line in development");
+            ManagerFrame.Content = new TrainLineSearch();
         }
 
         private void EditTrainTable_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)

@@ -125,12 +125,25 @@ namespace HCI_Project.utils
             TrainLinesString.Add(new TrainLine(id, stations, train).stationsToString());
             TrainLinesStringWithID.Add(new TrainLine(id, stations, train).stationsToStringWithID());
         }
+
         public static TrainLine GetTrainLine(int ID)
         {
             TrainLine trainLine = TrainLines.Where(x => x.ID == ID && !x.Deleted).FirstOrDefault();
             if (trainLine == null)
                 throw new TrainNotFoundException();
             return trainLine;
+        }
+
+        internal static void DeleteTrainLine(TrainLine trainLine)
+        {
+            var timetables = TimeTables.Where(x => x.TrainLine.ID ==  trainLine.ID &&
+                                                   x.DepartureDate > DateTime.Now.AddDays(5)).ToList();
+            var config = GetConfiguration(trainLine);
+            if (config == null)
+                DeleteTimeTables(timetables);
+            else
+                DeleteConfiguration(config);
+            trainLine.Deleted = true;
         }
 
         // TrainTimeTable CRUD
@@ -146,7 +159,12 @@ namespace HCI_Project.utils
         {
             config.Deleted = true;
             var timetables = TimeTables.Where(x => x.Configuration == config &&
-                                                   x.DepartureDate > DateTime.Now.AddDays(5));
+                                                   x.DepartureDate > DateTime.Now.AddDays(5)).ToList();
+            DeleteTimeTables(timetables);
+        }
+
+        private static void DeleteTimeTables(List<TrainTimeTable> timetables)
+        {
             foreach (var timetable in timetables)
             {
                 Tickets.Where(x => x.TrainTime.ID == timetable.ID).ToList()
@@ -320,6 +338,13 @@ namespace HCI_Project.utils
                                               x.TravelsBetween(from, to))
                 .ToList();
             timeTables.ForEach(x => res.Add(new TimeTableDisplay(x, from, to, GetAvailableSeats(x))));
+            return res;
+        }
+
+        public static List<TrainLineDisplay> GetTrainLineDisplays()
+        {
+            var res = new List<TrainLineDisplay>();
+            TrainLines.Where(x => !x.Deleted).ToList().ForEach(x => res.Add(new TrainLineDisplay(x)));
             return res;
         }
     }

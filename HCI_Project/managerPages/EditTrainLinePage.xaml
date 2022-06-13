@@ -11,7 +11,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EditTrainLinePage">
 
-
     <Page.Resources>
         <ControlTemplate x:Key="CustomPushpinTemplate" TargetType="m:Pushpin">
             <Rectangle Height="70">
@@ -35,73 +34,38 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
 
-            <RowDefinition Height="0.4*"/>
-            <RowDefinition Height="10"/>
-
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="60"/>
 
             <RowDefinition Height="10"/>
-            <RowDefinition Height="0.4*"/>
-
-            <RowDefinition Height="20"/>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="70"/>
+
+            <RowDefinition Height="60"/>
+
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="0 0 5 0">
-            <ComboBox x:Name="TrainLineComboBox" Padding="0"
-                      FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Converter={StaticResource fontSizeConverter}}"/>
-        </Grid>
+        <ComboBox x:Name="TrainsCombobox" Grid.Row="1" Grid.Column="1" Margin="0 0 5 0"
+                      FontSize="30" SelectionChanged="TrainChanged"/>
 
-        <Viewbox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
-            <TextBlock>
-                Drag this pin on the map
-            </TextBlock>
-        </Viewbox>
-        <Viewbox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="0 0 30 0">
-            <TextBlock>
-                to add another stop.
-            </TextBlock>
-        </Viewbox>
-
-        <Image Source="/HCI_Project;component/images/previewPin.png" Margin="10 0 0 0"
-               PreviewMouseLeftButtonDown="MapView_PreviewMouseLeftButtonDown" HorizontalAlignment="Right"
-               MouseMove="Image_MouseMove" Grid.Column="3" Grid.Row="3" Grid.RowSpan="2"/>
-
-        <Grid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Margin="0 0 5 0">
-            <ComboBox x:Name="TrainsCombobox" Padding="0"
-                      FontSize="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Converter={StaticResource fontSizeConverter}}"/>
-        </Grid>
-
-        <DataGrid Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" x:Name="StationGrid" FontFamily="Bahnschrift Light"
-                  CanUserAddRows="True" SelectionUnit="FullRow" CanUserSortColumns="False" FontSize="20"
-                  SelectionMode="Single" ItemsSource="{Binding Source=Stations}" AutoGeneratingColumn="StationGrid_AutoGeneratingColumn"/>
+        <DataGrid Grid.Row="3" Grid.Column="1" x:Name="StationGrid" FontFamily="Bahnschrift Light"
+                  CanUserAddRows="False" SelectionUnit="FullRow" CanUserSortColumns="False" FontSize="30" 
+                  SelectionMode="Single" ItemsSource="{Binding Source=Stations}" AutoGeneratingColumn="StationGrid_AutoGeneratingColumn" CellEditEnding="EditEnding" BeginningEdit="EditBeginning"/>
 
         <m:Map CredentialsProvider="jcN70CoOBDnsrAlWKqWM~KGgDd7HLbAy2iRafyB9ytw~ApXB3OvpKS1Loo6XUCGodM0rf6U6ph0Jtc-kt3pk3FWMZ8zZVBhOxxMSViza80RG"
-               Center="45.2461818273899, 19.85138567223834" ZoomLevel="10" Name="MyMap" Grid.RowSpan="12"
-               AllowDrop="True" DragEnter="MapView_DragEnter" Drop="MapView_Drop" Grid.Column="5"/>
+               Center="45.2461818273899, 19.85138567223834" ZoomLevel="10" Name="MyMap" Grid.RowSpan="12" Grid.Column="5"/>
 
-        <Button Grid.Row="10" Grid.Column="1" Margin="0 0 5 0"
+        <Button Grid.Row="5" Grid.Column="1" Margin="0 0 5 0"
                 Click="DeleteTrainLine" FontFamily="Bahnschrift Light"
                 Style="{StaticResource RedButton}" materialDesign:ButtonAssist.CornerRadius="5"
                 FontSize="35" Content="Delete" Height="50"/>
-
-        <Button  Name="ChangeBtn" Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="2" Margin="5 0 0 0"
-                Click="ChangeTrainLine" IsDefault="True"
-                Style="{StaticResource MaterialDesignFlatMidBgButton}" Foreground="White" materialDesign:ButtonAssist.CornerRadius="5" FontFamily="Bahnschrift Light"
-                FontSize="35" Content="Change" Height="50"/>
 
     </Grid>
 </Page>

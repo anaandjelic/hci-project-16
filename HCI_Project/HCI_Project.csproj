@@ -111,6 +111,9 @@
     <Compile Include="managerPages\NewTrainPage.xaml.cs">
       <DependentUpon>NewTrainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="managerPages\TrainLineSearch.xaml.cs">
+      <DependentUpon>TrainLineSearch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="popups\MessageBoxCustom.xaml.cs">
       <DependentUpon>MessageBoxCustom.xaml</DependentUpon>
     </Compile>
@@ -201,6 +204,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="managerPages\NewTrainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="managerPages\TrainLineSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

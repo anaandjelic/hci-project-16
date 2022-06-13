@@ -6,11 +6,11 @@ namespace HCI_Project.utils
 {
     public class Station
     {
-        public string Name { get; private set; }
-        public double Price { get; private set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
         public double Latitude { get; private set; }
         public double Longitude { get; private set; }
-        public TimeSpan Offset { get; private set; }
+        public TimeSpan Offset { get; set; }
 
         public Station() { }
         public Station(string name, double price, double latitude, double longitude, TimeSpan offset)
