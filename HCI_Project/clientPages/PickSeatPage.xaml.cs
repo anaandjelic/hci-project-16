@@ -41,6 +41,13 @@ namespace HCI_Project.clientPages
             }
 
             SeatDisplay selectedSeat = (SeatDisplay) AvailableSeatsTable.SelectedItem;
+
+            if (selectedSeat.Occupied)
+            {
+                MessageBox.Show("The seat you selected is taken! Please select another seat.");
+                return;
+            }
+
             ClientFrame.Content = new ConfirmPurchasePage(SelectedTime, selectedSeat, FromStation, ToStation, ClientFrame);
         }
 

@@ -361,7 +361,7 @@ namespace HCI_Project.utils
                     res.Add(new SeatDisplay(i, "first", false));
 
             for (int i = 1; i <= train.SecondClassCapacity; i++)
-                if (tickets.Any(x => x.Seat == i && x.SeatClass == "second" && !x.Deleted))
+                if (tickets.Any(x => x.Seat == train.FirstClassCapacity + i && x.SeatClass == "second" && !x.Deleted))
                     res.Add(new SeatDisplay(train.FirstClassCapacity + i, "second", true));
                 else
                     res.Add(new SeatDisplay(train.FirstClassCapacity + i, "second", false));
