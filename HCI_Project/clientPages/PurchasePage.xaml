@@ -61,12 +61,11 @@
         <Button Click="SearchClick" Content="Search" IsDefault="True" FontSize="35" Height="50" Grid.Row="8"
                 Style="{StaticResource MaterialDesignFlatMidBgButton}"  Foreground="White" materialDesign:ButtonAssist.CornerRadius="5" RenderTransformOrigin="0.562,0.562" Margin="25 0 5 0"/>
 
-        <TextBlock Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Center" Text="Select your" Foreground="Gray" FontSize="30" Margin="0 10"/>
+        <TextBlock Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Center" Text="Select your desired time" Foreground="Gray" FontSize="30" Margin="0 10"/>
 
 
-        <DataGrid Grid.RowSpan="6" Grid.Column="1"  Grid.Row="2" Margin="0,9,10,0" x:Name="TicketsTable" FontFamily="Bahnschrift Light"
+        <DataGrid Grid.RowSpan="6" Grid.Column="1"  Grid.Row="2" Margin="0,9,10,0" x:Name="AvailableTimesTable" FontFamily="Bahnschrift Light"
                   CanUserAddRows="False" SelectionUnit="FullRow" FontSize="25"
-                  SelectedCellsChanged="SelectionChanged" 
                   SelectionMode="Single" 
                   ItemsSource="{Binding Source=SearchResult}"
                   AutoGeneratingColumn="OnAutoGeneratingColumn"/>

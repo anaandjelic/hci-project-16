@@ -125,6 +125,7 @@
     </Compile>
     <Compile Include="utils\Database.cs" />
     <Compile Include="utils\BingMapRESTServices.cs" />
+    <Compile Include="utils\display\AvailableSeatDisplay.cs" />
     <Compile Include="utils\display\TimeTableDisplay.cs" />
     <Compile Include="utils\display\TrainLineDisplay.cs" />
     <Compile Include="utils\Exceptions.cs" />

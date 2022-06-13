@@ -12,7 +12,6 @@ namespace HCI_Project.clientPages
 {
     public partial class PurchasePage : Page
     {
-        private TimeTableDisplay Selection;
         private Frame ClientFrame;
 
         public PurchasePage(Frame clientFrame)
@@ -21,7 +20,7 @@ namespace HCI_Project.clientPages
             Style = (Style)FindResource(typeof(Page));
             ClientFrame = clientFrame;
 
-            TicketsTable.ItemsSource = new ObservableCollection<TimeTableDisplay>();
+            AvailableTimesTable.ItemsSource = new ObservableCollection<TimeTableDisplay>();
         }
 
         private void SearchClick(object sender, RoutedEventArgs e)
@@ -31,23 +30,20 @@ namespace HCI_Project.clientPages
             DateTime date = DP.SelectedDate ?? DateTime.Now.Date;
             List<TimeTableDisplay> searchRes = Database.GetTimeTableDisplays(from, to, date);
 
-            TicketsTable.ItemsSource = searchRes;
-            TicketsTable.Items.Refresh();
-        }
-        private void SelectionChanged(object sender, SelectedCellsChangedEventArgs e)
-        {
-            Selection = (TimeTableDisplay)TicketsTable.SelectedItem;
-            MessageBox.Show("selection changed");
+            AvailableTimesTable.ItemsSource = searchRes;
+            AvailableTimesTable.Items.Refresh();
         }
 
         private void ContinueClick(object sender, RoutedEventArgs e)
         {
-            if (Selection == null)
+            if (AvailableTimesTable.SelectedItem == null)
             {
                 MessageBox.Show("You must select the time before proceeding.");
                 return;
             }
-            ClientFrame.Content = new PickSeatPage(Selection);
+
+            TimeTableDisplay selectedTime = (TimeTableDisplay)AvailableTimesTable.SelectedItem;
+            ClientFrame.Content = new PickSeatPage(selectedTime, From.Text, To.Text, ClientFrame);
         }
 
         private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

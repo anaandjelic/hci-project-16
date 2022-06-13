@@ -278,7 +278,7 @@ namespace HCI_Project.utils
 
         // diaplays
 
-        private static int GetAvailableSeats(TrainTimeTable timeTable)
+        private static int GetAvailableSeatsCount(TrainTimeTable timeTable)
         {
             return timeTable.TrainLine.Train.GetAllSeats() - Tickets.Where(x => x.TrainTime.ID == timeTable.ID).Count();
         }
@@ -286,7 +286,7 @@ namespace HCI_Project.utils
         public static List<TimeTableDisplay> GetTimeTableDisplays()
         {
             var res = new List<TimeTableDisplay>();
-            TimeTables.ForEach(x => res.Add(new TimeTableDisplay(x, "Novi Sad", "Belgrade", GetAvailableSeats(x))));
+            TimeTables.ForEach(x => res.Add(new TimeTableDisplay(x, "Novi Sad", "Belgrade", GetAvailableSeatsCount(x))));
             return res;
         }
 
@@ -296,7 +296,24 @@ namespace HCI_Project.utils
             var timeTables = TimeTables.Where(x => x.DepartureDate.Date.Equals(date.Date) &&
                                               x.TravelsBetween(from, to))
                 .ToList();
-            timeTables.ForEach(x => res.Add(new TimeTableDisplay(x, from, to, GetAvailableSeats(x))));
+            timeTables.ForEach(x => res.Add(new TimeTableDisplay(x, from, to, GetAvailableSeatsCount(x))));
+            return res;
+        }
+
+        public static List<AvailableSeatDisplay> GetAvailableSeats(TrainTimeTable timeTable)
+        {
+            List<AvailableSeatDisplay> res = new List<AvailableSeatDisplay>();
+            List<Ticket> tickets = Tickets.Where(x => x.TrainTime.ID == timeTable.ID).ToList();
+
+            Train train = timeTable.TrainLine.Train;
+            for (int i = 1; i <= train.FirstClassCapacity; i++)
+                if (!tickets.Any(x => x.Seat == i && x.SeatClass == "first"))
+                    res.Add(new AvailableSeatDisplay(i, "first"));
+
+            for (int i = 1; i <= train.SecondClassCapacity; i++)
+                if (!tickets.Any(x => x.Seat == i && x.SeatClass == "second"))
+                    res.Add(new AvailableSeatDisplay(train.FirstClassCapacity + i, "second"));
+
             return res;
         }
     }
