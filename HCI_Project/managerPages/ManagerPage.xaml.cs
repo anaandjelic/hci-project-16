@@ -173,7 +173,7 @@ namespace HCI_Project.managerPages
 
         private void PerTableReports_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show(" PerTableReports in development");
+            ManagerFrame.Content = new SoldTicketsByTrainLine();
             //enableTutorial = false;
             ManagerFrame.Focus();
         }

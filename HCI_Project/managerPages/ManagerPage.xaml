@@ -27,6 +27,11 @@
     </Page.CommandBindings>
 
     <Grid>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="../images/background.png"/>
+        </Grid.Background>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
@@ -58,7 +63,7 @@
             </MenuItem>
             <MenuItem x:Name="reportsItem" Header="Reports" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
                 <MenuItem Header="By month" Command="cmd:RoutedCommands.FormatMonthlyReports" FontFamily="Bahnschrift Light"/>
-                <MenuItem Header="By timetable" Command="cmd:RoutedCommands.FormatPerTableReports" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="By train line" Command="cmd:RoutedCommands.FormatPerTableReports" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem x:Name="helpItem" Header="Help" FontFamily="BahnSchrift Light" Background="{DynamicResource PrimaryHueMidBrush}" HorizontalAlignment="Right"
                       Command="cmd:RoutedCommands.FormatManagerHelp"/>
