@@ -120,6 +120,9 @@
     <Compile Include="managerPages\NewTrainPage.xaml.cs">
       <DependentUpon>NewTrainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="managerPages\SoldTicketsByMonthPage.xaml.cs">
+      <DependentUpon>SoldTicketsByMonthPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="managerPages\TrainLineSearch.xaml.cs">
       <DependentUpon>TrainLineSearch.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,7 @@
     <Compile Include="utils\Database.cs" />
     <Compile Include="utils\BingMapRESTServices.cs" />
     <Compile Include="utils\display\SeatDisplay.cs" />
+    <Compile Include="utils\display\SoldTicketDisplay.cs" />
     <Compile Include="utils\display\TicketDisplay.cs" />
     <Compile Include="utils\display\TimeTableDisplay.cs" />
     <Compile Include="utils\display\TrainLineDisplay.cs" />
@@ -229,6 +233,10 @@
     <Page Include="managerPages\NewTrainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="managerPages\SoldTicketsByMonthPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="managerPages\TrainLineSearch.xaml">
       <SubType>Designer</SubType>

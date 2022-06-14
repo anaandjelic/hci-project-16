@@ -82,6 +82,25 @@ namespace HCI_Project.utils
                 .ToList();
         }
 
+        public static List<Ticket> GetSoldTicketsByMonth(int year, int month)
+        {
+            DateTime monthStart = new DateTime(year, month, 1);
+            DateTime monthEnd = new DateTime(year, month + 1, 1).AddDays(-1);
+
+            return Tickets
+                .Where(x => x.Purchased && x.TimeStamp >= monthStart && x.TimeStamp <= monthEnd)
+                .OrderByDescending(x => x.TimeStamp)
+                .ToList();
+        }
+
+        public static List<Ticket> GetSoldTicketsByRide(TrainTimeTable trainTimeTable)
+        {
+            return Tickets
+                .Where(x => x.Purchased && x.TrainTime == trainTimeTable)
+                .OrderByDescending(x => x.TimeStamp)
+                .ToList();
+        }
+
         // Train CRUD
         public static void DeleteTrain(Train train)
         {

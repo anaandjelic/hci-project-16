@@ -1,4 +1,5 @@
-﻿using HCI_Project.help;
+﻿using HCI_Project.clientPages;
+using HCI_Project.help;
 using HCI_Project.popups;
 using HCI_Project.utils;
 using System;
@@ -158,7 +159,7 @@ namespace HCI_Project.managerPages
 
         private void MonthlyReports_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show(" MonthlyReports in development");
+            ManagerFrame.Content = new SoldTicketsByMonthPage();
             enableTutorial = false;
             ManagerFrame.Focus();
         }

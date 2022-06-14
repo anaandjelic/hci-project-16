@@ -57,8 +57,8 @@
                 <MenuItem Header="Timetable" Command="cmd:RoutedCommands.FormatCreateTrainTable" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem x:Name="reportsItem" Header="Reports" FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
-                <MenuItem Header="Monthly" Command="cmd:RoutedCommands.FormatMonthlyReports" FontFamily="Bahnschrift Light"/>
-                <MenuItem Header="Per timetable" Command="cmd:RoutedCommands.FormatPerTableReports" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="By month" Command="cmd:RoutedCommands.FormatMonthlyReports" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="By timetable" Command="cmd:RoutedCommands.FormatPerTableReports" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem x:Name="helpItem" Header="Help" FontFamily="BahnSchrift Light" Background="{DynamicResource PrimaryHueMidBrush}" HorizontalAlignment="Right"
                       Command="cmd:RoutedCommands.FormatManagerHelp"/>
