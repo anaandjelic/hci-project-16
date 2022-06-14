@@ -93,10 +93,10 @@ namespace HCI_Project.utils
                 .ToList();
         }
 
-        public static List<Ticket> GetSoldTicketsByRide(TrainTimeTable trainTimeTable)
+        public static List<Ticket> GetSoldTicketsByRide(TrainLine trainLine)
         {
             return Tickets
-                .Where(x => x.Purchased && x.TrainTime == trainTimeTable)
+                .Where(x => x.Purchased && x.TrainTime.TrainLine.ID == trainLine.ID)
                 .OrderByDescending(x => x.TimeStamp)
                 .ToList();
         }
