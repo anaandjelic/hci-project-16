@@ -28,6 +28,13 @@ namespace HCI_Project.clientPages
             string from = From.Text;
             string to = To.Text;
             DateTime date = DP.SelectedDate ?? DateTime.Now.Date;
+
+            if (date < DateTime.Now.Date)
+            {
+                MessageBox.Show("Please choose a date that is not in the past.");
+                return;
+            }
+
             List<TimeTableDisplay> searchRes = Database.GetTimeTableDisplays(from, to, date);
 
             AvailableTimesTable.ItemsSource = searchRes;

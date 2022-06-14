@@ -372,10 +372,9 @@ namespace HCI_Project.utils
         {
             var res = new List<TimeTableDisplay>();
             var timeTables = TimeTables.Where(x => x.DepartureDate.Date.Equals(date.Date) &&
-                                              x.TravelsBetween(from, to))
-                .ToList();
+                                              x.TravelsBetween(from, to)).ToList();
             timeTables.ForEach(x => res.Add(new TimeTableDisplay(x, from, to, GetAvailableSeatsCount(x))));
-            return res;
+            return res.Where(x => x.Departure > DateTime.Now).ToList();
         }
 
         public static List<SeatDisplay> GetSeats(TrainTimeTable timeTable)

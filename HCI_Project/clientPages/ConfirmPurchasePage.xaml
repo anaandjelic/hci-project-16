@@ -96,7 +96,7 @@
             <TextBlock x:Name="Price" Text="PRICE" Foreground="Black"/>
         </Viewbox>
 
-        <Button Click="ConfirmReserve" Content="Reserve" FontSize="35" Height="50" Grid.Row="11" Grid.Column="2"
+        <Button Click="ConfirmReserve" Content="Reserve" x:Name="ReserveButton" IsEnabled="False" FontSize="35" Height="50" Grid.Row="11" Grid.Column="2"
             Style="{StaticResource MaterialDesignFlatMidBgButton}"  Foreground="White" materialDesign:ButtonAssist.CornerRadius="5" RenderTransformOrigin="0.562,0.562" Margin="5 0 5 0"/>
 
         <Button Click="ConfirmPurchase" Content="Purchase" FontSize="35" Height="50" Grid.Row="11" Grid.Column="3"

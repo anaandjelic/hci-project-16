@@ -39,6 +39,8 @@ namespace HCI_Project.clientPages
             Seat.Text = $"{SelectedSeat.Number}, {SelectedSeat.SeatClass} class";
             TrainName.Text = SelectedTime.Train;
             Price.Text = $"{SelectedTime.Price} RSD";
+
+            ReserveButton.IsEnabled = DateTime.Today < SelectedTime.Departure.Date.AddDays(-1);
         }
 
         private void ConfirmReserve(object sender, RoutedEventArgs e)

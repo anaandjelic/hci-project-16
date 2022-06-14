@@ -15,11 +15,9 @@
         <CommandBinding Command="cmd:RoutedCommands.FormatSearchTrainTable" CanExecute="SearchTrainTable_CanExecute" Executed="SearchTrainTable_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatLogOut" CanExecute="LogOut_CanExecute" Executed="LogOut_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatHistoryTickets" CanExecute="HistoryTickets_CanExecute" Executed="HistoryTickets_Executed"></CommandBinding>
-        <CommandBinding Command="cmd:RoutedCommands.FormatHistoryReservations" CanExecute="HistoryReservations_CanExecute" Executed="HistoryReservations_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatTutorial" CanExecute="Tutorial_CanExecute" Executed="Tutorial_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatCancelTutorial" CanExecute="CancelTutorial_CanExecute" Executed="CancelTutorial_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.FormatPurchaseTicket" CanExecute="Purchase_CanExecute" Executed="Purchase_Executed"></CommandBinding>
-        <CommandBinding Command="cmd:RoutedCommands.FormatReserveTicket" CanExecute="Reserve_CanExecute" Executed="Reserve_Executed"></CommandBinding>
     </Page.CommandBindings>
 
     <Grid>

@@ -118,7 +118,7 @@ namespace HCI_Project.clientPages
 
             string message = "This begins the Train Line Search Tutorial\nTo continue press Ctrl F,L or go to Search -> TrainLine\n To exit the Tutorial press Ctrl T,X";
             this.notifier.ShowWarning(message,optionsMax);
-            this.HistoryBTN.IsEnabled = false;
+            this.TicketsBTN.IsEnabled = false;
             this.MainBar.IsEnabled = false;
             this.TimeTableBtn.IsEnabled = false;
 

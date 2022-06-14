@@ -62,7 +62,7 @@ namespace HCI_Project
             Database.AddConfiguration(Database.GetTrainLine(2), new TimeSpan(9, 30, 0), true, true, true, true, true, true, true);
             Database.AddConfiguration(Database.GetTrainLine(3), new TimeSpan(16, 0, 0), true, true, true, true, true, true, true);
 
-            for (int i = 0; i < 14; i++)
+            for (int i = -14; i < 14; i++)
             {
                 Database.AddTimeTable(DateTime.Now.AddDays(i), Database.GetConfiguration(0));
                 if (i % 2 == 0)
