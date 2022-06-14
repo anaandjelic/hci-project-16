@@ -95,7 +95,7 @@ namespace HCI_Project.clientPages
 
         private void HistoryTickets_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            ClientFrame.Content = new TicketsPage();
+            ClientFrame.Content = new TicketsPage(MainFrame);
             ClientFrame.Focus();
         }
 

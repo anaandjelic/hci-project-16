@@ -12,9 +12,14 @@ namespace HCI_Project.utils
         public int Seat { get; private set; }
         public String SeatClass { get; private set; }
         public DateTime TimeStamp { get; set; }
+        public Station FromStation { get; set; }
+        public Station ToStation { get; set; }
+        public DateTime Departure { get; set; }
+        public DateTime Arrival { get; set; }
         public TrainTimeTable TrainTime { get; private set; }
 
-        public Ticket(int iD, User client, double price, int seat, String seatClass, bool bought, TrainTimeTable trainTime)
+        public Ticket(int iD, User client, double price, int seat, String seatClass, bool bought, 
+            Station from, Station to, DateTime departure, DateTime arrival, TrainTimeTable trainTime)
         {
             ID = iD;
             Deleted = false;
@@ -24,6 +29,10 @@ namespace HCI_Project.utils
             SeatClass = seatClass;
             TimeStamp = DateTime.Now;
             TrainTime = trainTime;
+            FromStation = from;
+            ToStation = to;
+            Departure = departure;
+            Arrival = arrival;
             Bought = bought;
         }
     }

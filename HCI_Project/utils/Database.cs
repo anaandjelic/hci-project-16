@@ -67,10 +67,16 @@ namespace HCI_Project.utils
         }
 
         // Tickets
-        public static void AddTicket(double price, int seat, string seatClass, bool bought, TrainTimeTable selectedTime)
+        public static void AddTicket(double price, int seat, string seatClass, bool bought, 
+            Station from, Station to, DateTime departure, DateTime arrival, TrainTimeTable selectedTime)
         {
             int id = Tickets.Count == 0 ? -1 : Tickets.OrderByDescending(x => x.ID).First().ID;
-            Tickets.Add(new Ticket(++id, LoggedInUser, price, seat, seatClass, bought, selectedTime));
+            Tickets.Add(new Ticket(++id, LoggedInUser, price, seat, seatClass, bought, from, to, departure, arrival, selectedTime));
+        }
+
+        public static List<Ticket> GetUserTickets()
+        {
+            return Tickets.Where(x => x.Client.Equals(LoggedInUser) & !x.Deleted).OrderByDescending(x => x.TrainTime.DepartureDate).ToList();
         }
 
         // Train CRUD
@@ -355,16 +361,16 @@ namespace HCI_Project.utils
 
             Train train = timeTable.TrainLine.Train;
             for (int i = 1; i <= train.FirstClassCapacity; i++)
-                if (tickets.Any(x => x.Seat == i && x.SeatClass == "first" && !x.Deleted))
-                    res.Add(new SeatDisplay(i, "first", true));
+                if (tickets.Any(x => x.Seat == i && x.SeatClass == "1st" && !x.Deleted))
+                    res.Add(new SeatDisplay(i, "1st", true));
                 else
-                    res.Add(new SeatDisplay(i, "first", false));
+                    res.Add(new SeatDisplay(i, "1st", false));
 
             for (int i = 1; i <= train.SecondClassCapacity; i++)
-                if (tickets.Any(x => x.Seat == train.FirstClassCapacity + i && x.SeatClass == "second" && !x.Deleted))
-                    res.Add(new SeatDisplay(train.FirstClassCapacity + i, "second", true));
+                if (tickets.Any(x => x.Seat == train.FirstClassCapacity + i && x.SeatClass == "2nd" && !x.Deleted))
+                    res.Add(new SeatDisplay(train.FirstClassCapacity + i, "2nd", true));
                 else
-                    res.Add(new SeatDisplay(train.FirstClassCapacity + i, "second", false));
+                    res.Add(new SeatDisplay(train.FirstClassCapacity + i, "2nd", false));
 
             return res;
         }

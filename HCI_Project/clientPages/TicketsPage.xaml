@@ -9,7 +9,9 @@
       Title="Tickets">
 
     <Grid>
-        <DataGrid Name="DataTable" Grid.Row="1" CanUserResizeRows="False" IsReadOnly="True" BorderThickness="0" RowHeight="35" Padding="30">
+        <DataGrid Name="TicketsTable" Grid.Row="1" CanUserResizeRows="False" IsReadOnly="True" BorderThickness="0" RowHeight="35" Padding="30"
+                  SelectionMode="Single"
+                  AutoGenerateColumns="False">
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="DodgerBlue"/>
@@ -22,15 +24,18 @@
                 </Style>
                 <Style TargetType="DataGridRow">
                     <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="FontSize" Value="20"/>
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Price" Width="3*" Binding="{Binding Price}"/>
-                <DataGridTextColumn Header="Seat" Width="3*" Binding="{Binding Seat}"/>
-                <DataGridTextColumn Header="Dep. time" Width="4*" Binding="{Binding TrainTimeTable.Departure}"/>
-                <DataGridTextColumn Header="Departure" Width="6*" Binding="{Binding TrainTimeTable.TrainLine.Departure}"/>
-                <DataGridTextColumn Header="Arr. time" Width="4*" Binding="{Binding TrainTimeTable.Destination}"/>
-                <DataGridTextColumn Header="Destination" Width="6*" Binding="{Binding TrainTimeTable.TrainLine.Destination}"/>
+                <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Date}"/>
+                <DataGridTextColumn Header="Departure → Destination" Width="3*" Binding="{Binding DepartureDestination}"/>
+                <DataGridTextColumn Header="Leaves at" Width="*" Binding="{Binding LeavesAt}"/>
+                <DataGridTextColumn Header="Arrives at" Width="*" Binding="{Binding ArrivesAt}"/>
+                <DataGridTextColumn Header="Seat" Width="*" Binding="{Binding Seat}"/>
+                <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Bought" Width="*" Binding="{Binding Bought}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

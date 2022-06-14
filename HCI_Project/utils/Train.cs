@@ -18,7 +18,7 @@
 
         public override string ToString()
         {
-            return $"{Name}.{ID} - {FirstClassCapacity + SecondClassCapacity} seats";
+            return Name;
         }
         public int GetAllSeats()
         {

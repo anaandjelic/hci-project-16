@@ -129,7 +129,7 @@ namespace HCI_Project.commands
 
             //fullscreen
             inputGestures = new InputGestureCollection();
-            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.F }, ModifierKeys.Control, "Ctrl+F"));
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.F, Key.LeftShift }, ModifierKeys.Control, "Ctrl+F"));
             FormatFullScreen = new RoutedUICommand("Format FullScreen", "FormatFullScreen", typeof(RoutedCommands), inputGestures);
 
             //tutorial

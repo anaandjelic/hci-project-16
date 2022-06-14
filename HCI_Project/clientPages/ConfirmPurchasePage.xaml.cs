@@ -43,17 +43,19 @@ namespace HCI_Project.clientPages
 
         private void ConfirmReserve(object sender, RoutedEventArgs e)
         { 
-            Database.AddTicket(SelectedTime.Price, SelectedSeat.Number, SelectedSeat.SeatClass, false, SelectedTime.OriginalTimeTable);
+            Database.AddTicket(SelectedTime.Price, SelectedSeat.Number, SelectedSeat.SeatClass, false, 
+                FromStation, ToStation, SelectedTime.Departure, SelectedTime.Arrival, SelectedTime.OriginalTimeTable);
             MessageBox.Show("Reservation successful!");
 
-            ClientFrame.Content = new TicketsPage();
+            ClientFrame.Content = new TicketsPage(ClientFrame);
         }
 
         private void ConfirmPurchase(object sender, RoutedEventArgs e)
         {
-            Database.AddTicket(SelectedTime.Price, SelectedSeat.Number, SelectedSeat.SeatClass, true, SelectedTime.OriginalTimeTable);
+            Database.AddTicket(SelectedTime.Price, SelectedSeat.Number, SelectedSeat.SeatClass, true,
+                FromStation, ToStation, SelectedTime.Departure, SelectedTime.Arrival, SelectedTime.OriginalTimeTable);
             MessageBox.Show("Purchase successful!");
-            ClientFrame.Content = new TicketsPage();
+            ClientFrame.Content = new TicketsPage(ClientFrame);
         }
 
         private void Cancel(object sender, RoutedEventArgs e)

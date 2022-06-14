@@ -18,7 +18,7 @@ namespace HCI_Project.utils.display
         
         public TimeTableDisplay(TrainTimeTable timeTable, string from, string to, int availableSeats)
         {
-            Train = $"{timeTable.Configuration.TrainLine.Train.Name}.{timeTable.Configuration.TrainLine.Train.ID}";
+            Train = timeTable.Configuration.TrainLine.Train.Name;
             Departure = timeTable.DepartureDate.Date + timeTable.Configuration.DepartureTime + timeTable.Configuration.TrainLine.getStationByName(from).Offset;
             Arrival = timeTable.DepartureDate.Date + timeTable.Configuration.DepartureTime + timeTable.Configuration.TrainLine.getStationByName(to).Offset;
             TravelTime = Arrival - Departure;
