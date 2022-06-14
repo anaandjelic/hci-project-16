@@ -67,47 +67,61 @@ namespace HCI_Project.managerPages
 
         private void ChangeTrain(object sender, RoutedEventArgs e)
         {
-            if (Validation.GetHasError(NameField) ||
-                Validation.GetHasError(FirstClassField) ||
-                Validation.GetHasError(SecondClassField) ||
-                string.IsNullOrEmpty(TrainComboBox.Text))
+            try
             {
-                new MessageBoxCustom("You have to fill the form correctly.", MessageType.Warning, MessageButtons.Ok).ShowDialog();
-                return;
+                if (Validation.GetHasError(NameField) ||
+                    Validation.GetHasError(FirstClassField) ||
+                    Validation.GetHasError(SecondClassField) ||
+                    string.IsNullOrEmpty(TrainComboBox.Text))
+                {
+                    new MessageBoxCustom("You have to fill the form correctly.", MessageType.Warning, MessageButtons.Ok).ShowDialog();
+                    return;
+                }
+
+                var result = new MessageBoxCustom("You are about to change a train. This action will delete any excess tickets for departures that occur 5 days from now.\nDo you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
+                if ((bool)result)
+                {
+                    var train = TrainComboBox.SelectedItem as Train;
+                    train.Name = TrainName;
+                    train.FirstClassCapacity = FirstClass;
+                    train.SecondClassCapacity = SecondClass;
+                    Database.EditTrain(train);
+
+                    new MessageBoxCustom($"You have successfully changed the train {TrainName}.{train.ID}.", MessageType.Success, MessageButtons.Ok).ShowDialog();
+
+                    TrainComboBox.ItemsSource = new ObservableCollection<Train>();
+                    TrainComboBox.ItemsSource = Trains;
+                }
             }
-
-            var result = new MessageBoxCustom("You are about to change a train. This action will delete any excess tickets for departures that occur 5 days from now.\nDo you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
-            if ((bool)result)
+            catch (Exception ex)
             {
-                var train = TrainComboBox.SelectedItem as Train;
-                train.Name = TrainName;
-                train.FirstClassCapacity = FirstClass;
-                train.SecondClassCapacity = SecondClass;
-                Database.EditTrain(train);
-
-                new MessageBoxCustom($"You have successfully changed the train {TrainName}.{train.ID}.", MessageType.Success, MessageButtons.Ok).ShowDialog();
-
-                TrainComboBox.ItemsSource = new ObservableCollection<Train>();
-                TrainComboBox.ItemsSource = Trains;
+                new MessageBoxCustom("An error has occured.", MessageType.Error, MessageButtons.Ok).ShowDialog();
             }
         }
 
         private void DeleteTrain(object sender, RoutedEventArgs e)
         {
-            var train = TrainComboBox.SelectedItem as Train;
-            if (train == null)
+            try
             {
-                new MessageBoxCustom("You haven't selected any train.", MessageType.Warning, MessageButtons.Ok).ShowDialog();
-            }
-            else
-            {
-                var result = new MessageBoxCustom("You are about to delete a train. This action is irreversible and will be applied only to departures, train lines and tickets that occur 5 days from now.\nDo you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
-                if ((bool)result)
+                var train = TrainComboBox.SelectedItem as Train;
+                if (train == null)
                 {
-                    train.Deleted = true;
-                    Database.DeleteTrain(train);
-                    TrainComboBox.ItemsSource = Database.GetTrains();
+                    new MessageBoxCustom("You haven't selected any train.", MessageType.Warning, MessageButtons.Ok).ShowDialog();
                 }
+                else
+                {
+                    var result = new MessageBoxCustom("You are about to delete a train. This action is irreversible and will be applied only to departures, train lines and tickets that occur 5 days from now.\nDo you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
+                    if ((bool)result)
+                    {
+                        train.Deleted = true;
+                        Database.DeleteTrain(train);
+                        TrainComboBox.ItemsSource = Database.GetTrains();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                new MessageBoxCustom("An error has occured.", MessageType.Error, MessageButtons.Ok).ShowDialog();
             }
         }
 

@@ -69,7 +69,7 @@
         </Grid>
 
         <DataGrid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" x:Name="StationGrid" FontFamily="Bahnschrift Light"
-                  CanUserAddRows="True" SelectionUnit="FullRow" CanUserSortColumns="False" FontSize="20"
+                  CanUserAddRows="False" SelectionUnit="FullRow" CanUserSortColumns="False" FontSize="20" IsReadOnly="True"
                   SelectionMode="Single" ItemsSource="{Binding Source=Stations}" AutoGeneratingColumn="StationGrid_AutoGeneratingColumn"/>
 
         <m:Map CredentialsProvider="jcN70CoOBDnsrAlWKqWM~KGgDd7HLbAy2iRafyB9ytw~ApXB3OvpKS1Loo6XUCGodM0rf6U6ph0Jtc-kt3pk3FWMZ8zZVBhOxxMSViza80RG"

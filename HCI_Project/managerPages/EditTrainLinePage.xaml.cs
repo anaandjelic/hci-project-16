@@ -72,9 +72,9 @@ namespace HCI_Project.managerPages
                 if ((bool)result)
                 {
                     Database.DeleteTrainLine(OriginalTrainLine);
+                    new MessageBoxCustom("You have successfully deleted this train line", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                    NavigationService?.Navigate(new TrainLineSearch());
                 }
-                new MessageBoxCustom("You have successfully deleted this train line", MessageType.Success, MessageButtons.Ok).ShowDialog();
-                NavigationService?.Navigate(new TrainLineSearch());
             }
             catch (Exception ex)
             {
@@ -172,16 +172,23 @@ namespace HCI_Project.managerPages
 
         private bool TimeIsValid(string s, int index)
         {
-            var time = TimeSpan.Parse(s);
-            if (index == 0) return false;
-            var previous = index == 0 ? null : Stations.ElementAt(index - 1);
-            var next = index == Stations.Count - 1 ? null : Stations.ElementAt(index + 1);
+            try
+            {
+                var time = TimeSpan.Parse(s);
+                if (index == 0) return false;
+                var previous = index == 0 ? null : Stations.ElementAt(index - 1);
+                var next = index == Stations.Count - 1 ? null : Stations.ElementAt(index + 1);
 
-            if (index == Stations.Count - 1) return !string.IsNullOrWhiteSpace((s ?? "").ToString()) && time > previous.Offset;
+                if (index == Stations.Count - 1) return !string.IsNullOrWhiteSpace((s ?? "").ToString()) && time > previous.Offset;
 
-            if (!string.IsNullOrWhiteSpace((s ?? "").ToString()) && next.Offset > time && time > previous.Offset)
-                return true;
-            return false;
+                if (!string.IsNullOrWhiteSpace((s ?? "").ToString()) && next.Offset > time && time > previous.Offset)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         private bool PriceIsValid(string s, int index)

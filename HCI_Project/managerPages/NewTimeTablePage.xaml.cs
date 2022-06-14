@@ -50,54 +50,67 @@ namespace HCI_Project.managerPages
 
         private void CreateTimeTable(object sender, RoutedEventArgs e)
         {
-            SelectedTrainLine = (TrainLineDisplay)TrainLineGrid.SelectedItem == null ? null : ((TrainLineDisplay)TrainLineGrid.SelectedItem).OriginalTrainLine;
-            if (SelectedTrainLine == null)
+            try
             {
-                new MessageBoxCustom("You have to choose a train line.", MessageType.Error, MessageButtons.Ok).ShowDialog();
-                return;
+                SelectedTrainLine = (TrainLineDisplay)TrainLineGrid.SelectedItem == null ? null : ((TrainLineDisplay)TrainLineGrid.SelectedItem).OriginalTrainLine;
+                if (SelectedTrainLine == null)
+                {
+                    new MessageBoxCustom("You have to choose a train line.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+                    return;
+                }
+                if (!(bool)MondayCheck.IsChecked && !(bool)TuesdayCheck.IsChecked && 
+                    !(bool)WednesdayCheck.IsChecked && !(bool)ThursdayCheck.IsChecked && 
+                    !(bool)FridayCheck.IsChecked && !(bool)SaturdayCheck.IsChecked && !(bool)SundayCheck.IsChecked)
+                {
+                    new MessageBoxCustom("You have to choose at least one day of the week.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+                    return;
+                }
+
+                var config = Database.AddConfiguration(SelectedTrainLine, new TimeSpan(TimeField.Time.Hour, TimeField.Time.Minute, 0), 
+                    (bool)MondayCheck.IsChecked, (bool)TuesdayCheck.IsChecked, 
+                    (bool)WednesdayCheck.IsChecked, (bool)ThursdayCheck.IsChecked, 
+                    (bool)FridayCheck.IsChecked, (bool)SaturdayCheck.IsChecked, (bool)SundayCheck.IsChecked);
+
+                for (int i = 0; i < 14; i++)
+                {
+                    var date = DateTime.Now.AddDays(i).Date;
+                    var hour = TimeField.Time;
+                    date = date.AddHours(hour.Hour);
+                    date = date.AddMinutes(hour.Minute);
+
+                    if (DateEqualsCheckedDay(date))
+                        Database.AddTimeTable(date, config);
+                }
+
+                if(isTutorialCreateTrainTable)
+                {
+                    string message = "This marks the end of Tutorial";
+                    notifications(message, "Success");
+                    new MessageBoxCustom("You have sucessfully created a new timetable. By clicking the ok button you will be returned to the last page you were on", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                    this.NavigationService.GoBack();
+                }
+                else
+                    new MessageBoxCustom("You have sucessfully created a new timetable.", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                ClearForm();
+                UpdateDataGrid();
             }
-            if (!(bool)MondayCheck.IsChecked && !(bool)TuesdayCheck.IsChecked && 
-                !(bool)WednesdayCheck.IsChecked && !(bool)ThursdayCheck.IsChecked && 
-                !(bool)FridayCheck.IsChecked && !(bool)SaturdayCheck.IsChecked && !(bool)SundayCheck.IsChecked)
+            catch(Exception ex)
             {
-                new MessageBoxCustom("You have to choose at least one day of the week.", MessageType.Error, MessageButtons.Ok).ShowDialog();
-                return;
+                new MessageBoxCustom("There has been an error.", MessageType.Error, MessageButtons.Ok).ShowDialog();
             }
-
-            var config = Database.AddConfiguration(SelectedTrainLine, new TimeSpan(TimeField.Time.Hour, TimeField.Time.Minute, 0), 
-                (bool)MondayCheck.IsChecked, (bool)TuesdayCheck.IsChecked, 
-                (bool)WednesdayCheck.IsChecked, (bool)ThursdayCheck.IsChecked, 
-                (bool)FridayCheck.IsChecked, (bool)SaturdayCheck.IsChecked, (bool)SundayCheck.IsChecked);
-
-            for (int i = 0; i < 14; i++)
-            {
-                var date = DateTime.Now.AddDays(i).Date;
-                var hour = TimeField.Time;
-                date = date.AddHours(hour.Hour);
-                date = date.AddMinutes(hour.Minute);
-
-                if (DateEqualsCheckedDay(date))
-                    Database.AddTimeTable(date, config);
-            }
-
-            if(isTutorialCreateTrainTable)
-            {
-                string message = "This marks the end of Tutorial";
-                notifications(message, "Success");
-                new MessageBoxCustom("You have sucessfully created a new timetable.\n By clicking the ok button you will be returned to the last page you were on", MessageType.Success, MessageButtons.Ok).ShowDialog();
-                this.NavigationService.GoBack();
-            }
-            else
-                new MessageBoxCustom("You have sucessfully created a new timetable.", MessageType.Success, MessageButtons.Ok).ShowDialog();
-            UpdateDataGrid();
         }
 
         private void CancelTimeTable(object sender, RoutedEventArgs e)
         {
-            var result = new MessageBoxCustom("This action will undo all your changes.\nDo you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
+            var result = new MessageBoxCustom("This action will undo all your changes.Do you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
             if (!(bool)result)
                 return;
 
+            ClearForm();
+        }
+
+        private void ClearForm()
+        {
             TimeField.Time = new DateTime();
             MondayCheck.IsChecked = false;
             TuesdayCheck.IsChecked = false;

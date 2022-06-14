@@ -19,7 +19,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="txtMessage" Grid.Row="0" Margin="5" FontSize="18" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="txtMessage" Grid.Row="0" Margin="5" FontSize="18" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center"/>
           
         <Grid Grid.Row="1" Margin="0,20,0,5">
             <Grid.ColumnDefinitions>

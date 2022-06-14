@@ -23,60 +23,67 @@ namespace HCI_Project.managerPages
 
         private void ChangeTimeTable(object sender, RoutedEventArgs e)
         {
-            var result = new MessageBoxCustom("This change will be applied on departures that leave at least 5 days from now. Do you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
-            if (!(bool)result) { return; }
-
-
-            SelectedTrainLine = (TrainLineDisplay)TrainLineGrid.SelectedItem == null ? null : ((TrainLineDisplay)TrainLineGrid.SelectedItem).OriginalTrainLine;
-            if (SelectedTrainLine == null)
+            try
             {
-                new MessageBoxCustom("You have to choose a train line.", MessageType.Error, MessageButtons.Ok).ShowDialog();
-                return;
+                var result = new MessageBoxCustom("This change will be applied on departures that leave at least 5 days from now. Do you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
+                if (!(bool)result) { return; }
+
+
+                SelectedTrainLine = (TrainLineDisplay)TrainLineGrid.SelectedItem == null ? null : ((TrainLineDisplay)TrainLineGrid.SelectedItem).OriginalTrainLine;
+                if (SelectedTrainLine == null)
+                {
+                    new MessageBoxCustom("You have to choose a train line.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+                    return;
+                }
+                if (!(bool)MondayCheck.IsChecked && !(bool)TuesdayCheck.IsChecked &&
+                    !(bool)WednesdayCheck.IsChecked && !(bool)ThursdayCheck.IsChecked &&
+                    !(bool)FridayCheck.IsChecked && !(bool)SaturdayCheck.IsChecked && !(bool)SundayCheck.IsChecked)
+                {
+                    new MessageBoxCustom("You have to choose at least one day of the week.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+                    return;
+                }
+
+                var originalTime = Database.GetConfiguration(SelectedTrainLine).DepartureTime;
+                var config = Database.AddConfiguration(SelectedTrainLine, new TimeSpan(TimeField.Time.Hour, TimeField.Time.Minute, 0),
+                    (bool)MondayCheck.IsChecked, (bool)TuesdayCheck.IsChecked,
+                    (bool)WednesdayCheck.IsChecked, (bool)ThursdayCheck.IsChecked,
+                    (bool)FridayCheck.IsChecked, (bool)SaturdayCheck.IsChecked, (bool)SundayCheck.IsChecked);
+
+                for (int i = 0; i < 14; i++)
+                {
+                    var date = DateTime.Now.AddDays(i).Date;
+                    var time = TimeField.Time;
+                    date = date.AddHours(time.Hour);
+                    date = date.AddMinutes(time.Minute);
+
+                    TrainTimeTable timetable = Database.GetTimeTable(config, date);
+
+                    // new timetable is added
+                    if (timetable == null && DateEqualsCheckedDay(date))
+                    {
+                        Database.AddTimeTable(date, config);
+                    }
+                    // timetable changes
+                    else if (timetable != null && DateEqualsCheckedDay(date))
+                    {
+                        timetable.DepartureDate = date;
+                        Database.ChangeTimeTable(timetable, time - originalTime);
+                    }
+                    // timetable is deleted
+                    else if (timetable != null && DateDoesntEqualCheckedDay(date))
+                    {
+                        Database.DeleteTimetable(timetable);
+                    }
+                }
+
+
+                new MessageBoxCustom("You have sucessfully updated this timetable.", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                UpdateDataGrid();
             }
-            if (!(bool)MondayCheck.IsChecked && !(bool)TuesdayCheck.IsChecked &&
-                !(bool)WednesdayCheck.IsChecked && !(bool)ThursdayCheck.IsChecked &&
-                !(bool)FridayCheck.IsChecked && !(bool)SaturdayCheck.IsChecked && !(bool)SundayCheck.IsChecked)
+            catch (Exception ex)
             {
-                new MessageBoxCustom("You have to choose at least one day of the week.", MessageType.Error, MessageButtons.Ok).ShowDialog();
-                return;
+                new MessageBoxCustom("An error has occured.", MessageType.Error, MessageButtons.Ok).ShowDialog();
             }
-
-            var originalTime = Database.GetConfiguration(SelectedTrainLine).DepartureTime;
-            var config = Database.AddConfiguration(SelectedTrainLine, new TimeSpan(TimeField.Time.Hour, TimeField.Time.Minute, 0),
-                (bool)MondayCheck.IsChecked, (bool)TuesdayCheck.IsChecked,
-                (bool)WednesdayCheck.IsChecked, (bool)ThursdayCheck.IsChecked,
-                (bool)FridayCheck.IsChecked, (bool)SaturdayCheck.IsChecked, (bool)SundayCheck.IsChecked);
-
-            for (int i = 0; i < 14; i++)
-            {
-                var date = DateTime.Now.AddDays(i).Date;
-                var time = TimeField.Time;
-                date = date.AddHours(time.Hour);
-                date = date.AddMinutes(time.Minute);
-
-                TrainTimeTable timetable = Database.GetTimeTable(config, date);
-
-                // new timetable is added
-                if (timetable == null && DateEqualsCheckedDay(date))
-                {
-                    Database.AddTimeTable(date, config);
-                }
-                // timetable changes
-                else if (timetable != null && DateEqualsCheckedDay(date))
-                {
-                    timetable.DepartureDate = date;
-                    Database.ChangeTimeTable(timetable, time - originalTime);
-                }
-                // timetable is deleted
-                else if (timetable != null && DateDoesntEqualCheckedDay(date))
-                {
-                    Database.DeleteTimetable(timetable);
-                }
-            }
-
-
-            new MessageBoxCustom("You have sucessfully updated this timetable.", MessageType.Success, MessageButtons.Ok).ShowDialog();
-            UpdateDataGrid();
         }
 
         private bool DateEqualsCheckedDay(DateTime date)
@@ -130,14 +137,21 @@ namespace HCI_Project.managerPages
 
         private void DeleteTimeTable(object sender, RoutedEventArgs e)
         {
-            var result = new MessageBoxCustom("This action is irreversible and will impact tickets and departures 5 days from now.Do you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
-            if (!(bool)result) { return; }
+            try
+            {
+                var result = new MessageBoxCustom("This action is irreversible and will impact tickets and departures 5 days from now.Do you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
+                if (!(bool)result) { return; }
 
-            SelectedTrainLine = ((TrainLineDisplay)TrainLineGrid.SelectedItem).OriginalTrainLine;
-            var config = Database.GetConfiguration(SelectedTrainLine);
-            Database.DeleteConfiguration(config);
-            UpdateDataGrid();
-            FillForm();
+                SelectedTrainLine = ((TrainLineDisplay)TrainLineGrid.SelectedItem).OriginalTrainLine;
+                var config = Database.GetConfiguration(SelectedTrainLine);
+                Database.DeleteConfiguration(config);
+                UpdateDataGrid();
+                FillForm();
+            }
+            catch (Exception ex)
+            {
+                new MessageBoxCustom("An error has occured.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+            }
         }
 
         private void SelectionChanged(object sender, SelectedCellsChangedEventArgs e)

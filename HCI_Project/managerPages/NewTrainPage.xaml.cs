@@ -129,27 +129,47 @@ namespace HCI_Project.managerPages
 
         private void CreateTrain(object sender, RoutedEventArgs e)
         {
-            if (Validation.GetHasError(NameField) ||
-               Validation.GetHasError(FirstClassField) ||
-               Validation.GetHasError(SecondClassField))
+            try
             {
-                return;
+                if (Validation.GetHasError(NameField) ||
+                   Validation.GetHasError(FirstClassField) ||
+                   Validation.GetHasError(SecondClassField))
+                {
+                    return;
+                }
+                Database.AddTrain(TrainName, FirstClass, SecondClass);
+                new MessageBoxCustom("You have successfully created a train.", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                if (isTutorialCreateTrain)
+                {
+                    //string message = "Ovim zavrsavamo Tutorijal za kreiranmje vozova";
+                    string message = "This ends the Create Train Tutorial";
+                    notifications(message, "Success");
+                    new MessageBoxCustom("By clicking the ok button you will be returned to the last page you were on", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                    //MessageBox.Show("Klikom na ok se vracate na login starnicu");
+                    this.NavigationService.GoBack();
+                }
+                ClearForm();
             }
-            Database.AddTrain(TrainName, FirstClass, SecondClass);
-            if (isTutorialCreateTrain)
+            catch(Exception ex)
             {
-                //string message = "Ovim zavrsavamo Tutorijal za kreiranmje vozova";
-                string message = "This ends the Create Train Tutorial";
-                notifications(message, "Success");
-                new MessageBoxCustom("By clicking the ok button you will be returned to the last page you were on", MessageType.Success, MessageButtons.Ok).ShowDialog();
-                //MessageBox.Show("Klikom na ok se vracate na login starnicu");
-                this.NavigationService.GoBack();
+                new MessageBoxCustom("There has been an error.", MessageType.Success, MessageButtons.Ok).ShowDialog();
             }
         }
 
         private void CancelTrain(object sender, RoutedEventArgs e)
         {
+            var result = new MessageBoxCustom("You're about to remove all progress made on this page. This action is irreversible.\nDo you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
+            if ((bool)result)
+            {
+                ClearForm();
+            }
+        }
 
+        private void ClearForm()
+        {
+            NameField.Text = "";
+            FirstClassField.Text = "0";
+            SecondClassField.Text = "0";
         }
 
         private void notifications(string message, string tip)
