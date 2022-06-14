@@ -7,7 +7,7 @@ namespace HCI_Project.utils
         public int ID { get; private set; }
         public User Client { get; private set; }
         public bool Deleted { get; set; }
-        public bool Bought { get; set; }
+        public bool Purchased { get; set; }
         public double Price { get; private set; }
         public int Seat { get; private set; }
         public String SeatClass { get; private set; }
@@ -33,7 +33,7 @@ namespace HCI_Project.utils
             ToStation = to;
             Departure = departure;
             Arrival = arrival;
-            Bought = bought;
+            Purchased = bought;
         }
     }
 }

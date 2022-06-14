@@ -53,7 +53,8 @@ namespace HCI_Project.clientPages
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            ClientFrame.Content = new PurchasePage(ClientFrame);
+            if (MessageBox.Show("Are you sure you want to cancel the process of buying/reserving a ticket? Your progress will be lost.", "Confirm cancellation", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                ClientFrame.Content = new PurchasePage(ClientFrame);
         }
 
         private void UpdateSeats()

@@ -14,7 +14,7 @@ namespace HCI_Project.utils.display
         public string ArrivesAt { get; set; }
         public string Seat { get; set; }
         public string Price { get; set; }
-        public string Bought { get; set; }
+        public string Status { get; set; }
         public Ticket OriginalTicket { get; set; }
 
         public TicketDisplay(Ticket ticket)
@@ -23,9 +23,17 @@ namespace HCI_Project.utils.display
             DepartureDestination = $"{ticket.FromStation.Name} → {ticket.ToStation.Name}";
             LeavesAt = ticket.Departure.ToShortTimeString();
             ArrivesAt = ticket.Arrival.ToShortTimeString();
-            Seat = $"{ticket.Seat} ({ticket.SeatClass})";
+            Seat = $"{ticket.Seat} ({ticket.SeatClass} class)";
             Price = $"{ticket.Price} RSD";
-            Bought = ticket.Bought ? "Bought" : "Reserved";
+            OriginalTicket = ticket;
+
+            DateTime now = DateTime.Now;
+            if (ticket.Departure < now && ticket.Arrival > now)
+                Status = "In progress";
+            else if (ticket.Departure < now)
+                Status = "Completed";
+            else
+                Status = ticket.Purchased ? "Purchased" : "Reserved";
         }
     }
 }

@@ -76,7 +76,10 @@ namespace HCI_Project.utils
 
         public static List<Ticket> GetUserTickets()
         {
-            return Tickets.Where(x => x.Client.Equals(LoggedInUser) & !x.Deleted).OrderByDescending(x => x.TrainTime.DepartureDate).ToList();
+            return Tickets
+                .Where(x => x.Client.Equals(LoggedInUser) && !(x.Deleted || (!x.Purchased && x.Departure.Date.AddDays(-1) <= DateTime.Today)))
+                .OrderByDescending(x => x.TrainTime.DepartureDate)
+                .ToList();
         }
 
         // Train CRUD
@@ -334,7 +337,9 @@ namespace HCI_Project.utils
 
         private static int GetAvailableSeatsCount(TrainTimeTable timeTable)
         {
-            return timeTable.Configuration.TrainLine.Train.GetAllSeats() - Tickets.Where(x => x.TrainTime.ID == timeTable.ID).Count();
+
+            return timeTable.Configuration.TrainLine.Train.GetAllSeats() - 
+                Tickets.Where(x => x.TrainTime.ID == timeTable.ID && !(x.Deleted || (!x.Purchased && x.Departure.Date.AddDays(-1) <= DateTime.Today))).Count();
         }
 
         public static List<TimeTableDisplay> GetTimeTableDisplays()
@@ -361,13 +366,13 @@ namespace HCI_Project.utils
 
             Train train = timeTable.TrainLine.Train;
             for (int i = 1; i <= train.FirstClassCapacity; i++)
-                if (tickets.Any(x => x.Seat == i && x.SeatClass == "1st" && !x.Deleted))
+                if (tickets.Any(x => x.Seat == i && x.SeatClass == "1st" && !(x.Deleted || (!x.Purchased && x.Departure.Date.AddDays(-1) <= DateTime.Today))))
                     res.Add(new SeatDisplay(i, "1st", true));
                 else
                     res.Add(new SeatDisplay(i, "1st", false));
 
             for (int i = 1; i <= train.SecondClassCapacity; i++)
-                if (tickets.Any(x => x.Seat == train.FirstClassCapacity + i && x.SeatClass == "2nd" && !x.Deleted))
+                if (tickets.Any(x => x.Seat == train.FirstClassCapacity + i && x.SeatClass == "2nd" && !(x.Deleted || (!x.Purchased && x.Departure.Date.AddDays(-1) <= DateTime.Today))))
                     res.Add(new SeatDisplay(train.FirstClassCapacity + i, "2nd", true));
                 else
                     res.Add(new SeatDisplay(train.FirstClassCapacity + i, "2nd", false));
