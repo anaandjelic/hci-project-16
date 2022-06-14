@@ -152,21 +152,31 @@ namespace HCI_Project.managerPages
 
         private void CreateTrainLine(object sender, RoutedEventArgs e)
         {
-            Train train = TrainsCombobox.SelectedItem as Train;
-            Database.AddTrainLine(Stations.ToList(), train);
-            Stations = new ObservableCollection<Station>();
-            Pins = new List<Pushpin>();
-            MyMap.Children.Clear();
-            IsFirstStation = true;
-            StationGrid.ItemsSource = Stations;
-            if(this.isTutorialCreateTrainLine)
+            try
             {
-                //string message = "Ovim se zavrsava tutorija za kreiranje train linova";
-                string message = "This ends the Create Train Line Tutorial";
-                notifications(message, "Success");
-                //MessageBox.Show("Klikom na ok se vracate na login page");
-                new MessageBoxCustom("By clicking the ok button you will be returned to the last page you were on", MessageType.Success, MessageButtons.Ok).ShowDialog();
-                this.NavigationService.GoBack();
+                Train train = TrainsCombobox.SelectedItem as Train;
+                Database.AddTrainLine(Stations.ToList(), train);
+                Stations = new ObservableCollection<Station>();
+                Pins = new List<Pushpin>();
+                MyMap.Children.Clear();
+                IsFirstStation = true;
+                StationGrid.ItemsSource = Stations;
+                new MessageBoxCustom("You have successfully created a train line.", MessageType.Success, MessageButtons.Ok).ShowDialog();
+
+                if (this.isTutorialCreateTrainLine)
+                {
+                    //string message = "Ovim se zavrsava tutorija za kreiranje train linova";
+                    string message = "This ends the Create Train Line Tutorial";
+                    notifications(message, "Success");
+                    //MessageBox.Show("Klikom na ok se vracate na login page");
+                    new MessageBoxCustom("By clicking the ok button you will be returned to the last page you were on", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                    this.NavigationService.GoBack();
+                }
+                ClearForm();
+            }
+            catch (Exception ex)
+            {
+                new MessageBoxCustom("There has been an error.", MessageType.Error, MessageButtons.Ok).ShowDialog();
             }
         }
 
@@ -175,12 +185,17 @@ namespace HCI_Project.managerPages
             var result = new MessageBoxCustom("You're about to remove all progress made on this page. This action is irreversible.\nDo you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
             if ((bool)result)
             {
-                Stations = new ObservableCollection<Station>();
-                Pins = new List<Pushpin>();
-                MyMap.Children.Clear();
-                IsFirstStation = true;
-                StationGrid.ItemsSource = Stations;
+                ClearForm();
             }
+        }
+
+        private void ClearForm()
+        {
+            Stations = new ObservableCollection<Station>();
+            Pins = new List<Pushpin>();
+            MyMap.Children.Clear();
+            IsFirstStation = true;
+            StationGrid.ItemsSource = Stations;
         }
 
         private void UpdateMap()

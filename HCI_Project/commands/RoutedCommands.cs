@@ -85,28 +85,28 @@ namespace HCI_Project.commands
             //managers
             //create
             inputGestures = new InputGestureCollection();
-            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.C, Key.T }, ModifierKeys.Control, "Ctrl+C, T"));
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.Q }, ModifierKeys.Control | ModifierKeys.Shift, "Ctrl+Shift+Q"));
             FormatCreateTrain = new RoutedUICommand("Format CreateTrain", "FormatCreateTrain", typeof(RoutedCommands), inputGestures);
 
             inputGestures = new InputGestureCollection();
-            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.C, Key.L }, ModifierKeys.Control, "Ctrl+C, L"));
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.W }, ModifierKeys.Control | ModifierKeys.Shift, "Ctrl+Shift+W"));
             FormatCreateTrainLine = new RoutedUICommand("Format CreateTrainLine", "FormatCreateTrainLine", typeof(RoutedCommands), inputGestures);
 
             inputGestures = new InputGestureCollection();
-            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.C, Key.A }, ModifierKeys.Control, "Ctrl+C ,A"));
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.E }, ModifierKeys.Control | ModifierKeys.Shift, "Ctrl+Shift+E"));
             FormatCreateTrainTable = new RoutedUICommand("Format CreateTrainTable", "FormatCreateTrainTable", typeof(RoutedCommands), inputGestures);
 
             //edit
             inputGestures = new InputGestureCollection();
-            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.E, Key.T }, ModifierKeys.Control, "Ctrl+E, T"));
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.F, Key.Q }, ModifierKeys.Control, "Ctrl+F+Q"));
             FormatEditTrain = new RoutedUICommand("Format EditTrain", "FormatEditTrain", typeof(RoutedCommands), inputGestures);
 
             inputGestures = new InputGestureCollection();
-            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.E, Key.L }, ModifierKeys.Control, "Ctrl+E, L"));
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.F, Key.W }, ModifierKeys.Control, "Ctrl+F+W"));
             FormatEditTrainLine = new RoutedUICommand("Format EditTrainLine", "FormatEditTrainLine", typeof(RoutedCommands), inputGestures);
 
             inputGestures = new InputGestureCollection();
-            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.E, Key.A}, ModifierKeys.Control, "Ctrl+E, A"));
+            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.F, Key.E}, ModifierKeys.Control, "Ctrl+F+E"));
             FormatEditTrainTable = new RoutedUICommand("Format EditTrainTable", "FormatEditTrainTable", typeof(RoutedCommands), inputGestures);
 
             //reports

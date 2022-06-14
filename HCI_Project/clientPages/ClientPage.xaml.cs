@@ -22,6 +22,8 @@ namespace HCI_Project.clientPages
         private bool isTutorialLine=false;
         private bool stardedSearchLine = false;
 
+        private bool enableTutorial = true;
+
         public ClientPage(Frame mainFrame)
         {
             InitializeComponent();
@@ -44,6 +46,7 @@ namespace HCI_Project.clientPages
             // ovde bih prosledio da je u pitanju tutorial 
             //ClientFrame.Content = new MapPage();
             ClientFrame.Content = new MapPage(isTutorialLine,MainFrame,notifier);
+            enableTutorial = false;
             ClientFrame.Focus();
             if(isTutorialLine)
                 this.stardedSearchLine = true;
@@ -60,6 +63,7 @@ namespace HCI_Project.clientPages
         private void SearchTrainTable_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             ClientFrame.Content = new SearchPage();
+            enableTutorial = false;
             ClientFrame.Focus();
         }
 
@@ -96,6 +100,7 @@ namespace HCI_Project.clientPages
         private void HistoryTickets_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             ClientFrame.Content = new TicketsPage(MainFrame);
+            enableTutorial = false;
             ClientFrame.Focus();
         }
 
@@ -107,7 +112,7 @@ namespace HCI_Project.clientPages
 
         private void Tutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if(!isTutorialLine)
+            if(!isTutorialLine && enableTutorial)
                 e.CanExecute = true;
             else
                 e.CanExecute = false;
@@ -146,6 +151,7 @@ namespace HCI_Project.clientPages
         private void Purchase_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             ClientFrame.Content = new PurchasePage(ClientFrame);
+            enableTutorial = false;
             ClientFrame.Focus();
         }
 
@@ -160,6 +166,7 @@ namespace HCI_Project.clientPages
         private void Reserve_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             ClientFrame.Content = new SearchPage();
+            enableTutorial = false;
             ClientFrame.Focus();
         }
 
@@ -195,6 +202,7 @@ namespace HCI_Project.clientPages
         private void ClientHelp_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             new HelpViewer("client.html").ShowDialog();
+            enableTutorial = false;
         }
 
         private void CancelTutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)

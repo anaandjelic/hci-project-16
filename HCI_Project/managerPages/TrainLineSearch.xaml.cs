@@ -76,7 +76,7 @@ namespace HCI_Project.managerPages
             }
             catch (Exception ex)
             {
-                new MessageBoxCustom("You have to select a train line.", MessageType.Error, MessageButtons.Ok);
+                new MessageBoxCustom("You have to select a train line.", MessageType.Error, MessageButtons.Ok).ShowDialog();
             }
         }
     }
