@@ -22,7 +22,7 @@ namespace HCI_Project.clientPages
         private bool isTutorialLine=false;
         private bool stardedSearchLine = false;
 
-        private bool enableTutorial = true;
+        //private bool enableTutorial = true;
 
         public ClientPage(Frame mainFrame)
         {
@@ -30,7 +30,7 @@ namespace HCI_Project.clientPages
             MainFrame = mainFrame;
             Style = (Style)FindResource(typeof(Page));
             ClientFrame.Focus();
-         
+
         }
 
         private void SearchTrainLine_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
@@ -46,7 +46,7 @@ namespace HCI_Project.clientPages
             // ovde bih prosledio da je u pitanju tutorial 
             //ClientFrame.Content = new MapPage();
             ClientFrame.Content = new MapPage(isTutorialLine,MainFrame,notifier);
-            enableTutorial = false;
+            //enableTutorial = false;
             ClientFrame.Focus();
             if(isTutorialLine)
                 this.stardedSearchLine = true;
@@ -63,7 +63,7 @@ namespace HCI_Project.clientPages
         private void SearchTrainTable_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             ClientFrame.Content = new SearchPage();
-            enableTutorial = false;
+            //enableTutorial = false;
             ClientFrame.Focus();
         }
 
@@ -92,13 +92,13 @@ namespace HCI_Project.clientPages
         private void HistoryTickets_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             ClientFrame.Content = new TicketsPage(MainFrame);
-            enableTutorial = false;
+            //enableTutorial = false;
             ClientFrame.Focus();
         }
 
         private void Tutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if(!isTutorialLine && enableTutorial)
+            if(!isTutorialLine /*&& enableTutorial*/)
                 e.CanExecute = true;
             else
                 e.CanExecute = false;
@@ -137,7 +137,7 @@ namespace HCI_Project.clientPages
         private void Purchase_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             ClientFrame.Content = new PurchasePage(ClientFrame);
-            enableTutorial = false;
+            //enableTutorial = false;
             ClientFrame.Focus();
         }
 
@@ -171,7 +171,7 @@ namespace HCI_Project.clientPages
         private void ClientHelp_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             new HelpViewer("client.html").ShowDialog();
-            enableTutorial = false;
+            //enableTutorial = false;
         }
 
         private void CancelTutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
@@ -195,7 +195,8 @@ namespace HCI_Project.clientPages
             this.notifier.ShowWarning(message, optionsMax);
             //MessageBox.Show("Klikom na ok se vracate na login screen");
             new MessageBoxCustom("By clicking the ok button you will be returned to the last page you were on", MessageType.Confirmation, MessageButtons.Ok).ShowDialog();
-            this.NavigationService.GoBack();
+            //this.NavigationService.GoBack();
+            MainFrame.Content = new ClientPage(MainFrame);
         }
     }
 }

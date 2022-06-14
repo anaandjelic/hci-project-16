@@ -146,7 +146,8 @@ namespace HCI_Project.managerPages
                     notifications(message, "Success");
                     new MessageBoxCustom("By clicking the ok button you will be returned to the last page you were on", MessageType.Success, MessageButtons.Ok).ShowDialog();
                     //MessageBox.Show("Klikom na ok se vracate na login starnicu");
-                    this.NavigationService.GoBack();
+                    //this.NavigationService.GoBack();
+                    MainFrame.Content = new ManagerPage(MainFrame);
                 }
                 ClearForm();
             }

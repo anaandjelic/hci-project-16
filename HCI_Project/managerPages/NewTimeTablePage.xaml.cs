@@ -43,6 +43,9 @@ namespace HCI_Project.managerPages
                 this.ThursdayCheck.IsEnabled = false;
                 this.TuesdayCheck.IsEnabled = false;
                 this.WednesdayCheck.IsEnabled = false;
+                this.cancelBUTTON.IsEnabled = false;
+                this.SearchTextBox.IsEnabled = false;
+                this.SearchBtn.IsEnabled = false;
                 string message = "Select your train";
                 notifications(message, "Information");
             }
@@ -87,7 +90,8 @@ namespace HCI_Project.managerPages
                     string message = "This marks the end of Tutorial";
                     notifications(message, "Success");
                     new MessageBoxCustom("You have sucessfully created a new timetable. By clicking the ok button you will be returned to the last page you were on", MessageType.Success, MessageButtons.Ok).ShowDialog();
-                    this.NavigationService.GoBack();
+                    //this.NavigationService.GoBack();
+                    MainFrame.Content = new ManagerPage(MainFrame);
                 }
                 else
                     new MessageBoxCustom("You have sucessfully created a new timetable.", MessageType.Success, MessageButtons.Ok).ShowDialog();

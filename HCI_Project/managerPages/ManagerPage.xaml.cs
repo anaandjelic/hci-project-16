@@ -28,7 +28,7 @@ namespace HCI_Project.managerPages
         private bool isTutorialCreateTrainTable = false;
         private bool startedCreatingTrainTable = false;
 
-        private bool enableTutorial = true;
+        //private bool enableTutorial = true;
 
 
         public ManagerPage(Frame mainFrame)
@@ -50,7 +50,7 @@ namespace HCI_Project.managerPages
         private void CreateTrain_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             ManagerFrame.Content = new NewTrainPage(isTutorialCreateTrain,MainFrame,notifier);
-            enableTutorial = false;
+            //enableTutorial = false;
             ManagerFrame.Focus();
             if (isTutorialCreateTrain)
                 this.startedCreatingTrain = true;
@@ -67,7 +67,7 @@ namespace HCI_Project.managerPages
         private void CreateTrainLine_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             ManagerFrame.Content = new NewTrainLinePage(isTutorialCreateTrainLine, MainFrame, notifier);
-            enableTutorial = false;
+            //enableTutorial = false;
             ManagerFrame.Focus();
             if (isTutorialCreateTrainLine)
                 this.startedCreatingTrainLine = true;
@@ -84,7 +84,7 @@ namespace HCI_Project.managerPages
         private void CreateTrainTable_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             ManagerFrame.Content = new NewTimeTablePage(isTutorialCreateTrainTable, MainFrame, notifier);
-            enableTutorial = false;
+            //enableTutorial = false;
             ManagerFrame.Focus();
             if (isTutorialCreateTrainTable)
                 this.startedCreatingTrainTable = true;
@@ -115,7 +115,7 @@ namespace HCI_Project.managerPages
         private void EditTrain_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             ManagerFrame.Content = new EditTrainPage();
-            enableTutorial = false;
+            //enableTutorial = false;
             ManagerFrame.Focus();
         }
 
@@ -130,7 +130,7 @@ namespace HCI_Project.managerPages
         private void EditTrainLine_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             ManagerFrame.Content = new TrainLineSearch();
-            enableTutorial = false;
+            //enableTutorial = false;
         }
 
         private void EditTrainTable_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
@@ -144,7 +144,7 @@ namespace HCI_Project.managerPages
         private void EditTrainTable_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             ManagerFrame.Content = new EditTimeTablePage();
-            enableTutorial = false;
+            //enableTutorial = false;
             ManagerFrame.Focus();
         }
         
@@ -160,7 +160,7 @@ namespace HCI_Project.managerPages
         private void MonthlyReports_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             ManagerFrame.Content = new SoldTicketsByMonthPage();
-            enableTutorial = false;
+            //enableTutorial = false;
             ManagerFrame.Focus();
         }
         private void PerTableReports_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
@@ -174,7 +174,7 @@ namespace HCI_Project.managerPages
         private void PerTableReports_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             MessageBox.Show(" PerTableReports in development");
-            enableTutorial = false;
+            //enableTutorial = false;
             ManagerFrame.Focus();
         }
 
@@ -189,12 +189,12 @@ namespace HCI_Project.managerPages
         private void ManagerHelp_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             new HelpViewer("manager.html").ShowDialog();
-            enableTutorial = false;
+            //enableTutorial = false;
         }
 
         private void CreateTrainTutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (!isTutorialCreateTrain && !isTutorialCreateTrainLine && !isTutorialCreateTrainTable && enableTutorial)
+            if (!isTutorialCreateTrain && !isTutorialCreateTrainLine && !isTutorialCreateTrainTable /*&& enableTutorial*/)
                 e.CanExecute = true;
             else
                 e.CanExecute = false;
@@ -210,7 +210,7 @@ namespace HCI_Project.managerPages
                 UnfreezeOnMouseLeave = true
             };
 
-            string message = "This begins the Train creating Tutorial\nTo continue press Ctrl C,T or go to New -> Train\nTo exit the Tutorial press Ctrl T,X";
+            string message = "This begins the Train creating Tutorial\nTo continue press Ctrl+Shift+Q or go to New -> Train\nTo exit the Tutorial press Ctrl T,X";
             this.notifier.ShowWarning(message, optionsMax);
             this.editItem.IsEnabled = false;
             this.helpItem.IsEnabled = false;
@@ -238,7 +238,7 @@ namespace HCI_Project.managerPages
 
         private void CreateTrainLineTutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (!isTutorialCreateTrain && !isTutorialCreateTrainLine && !isTutorialCreateTrainTable && enableTutorial)
+            if (!isTutorialCreateTrain && !isTutorialCreateTrainLine && !isTutorialCreateTrainTable /*&& enableTutorial*/)
                 e.CanExecute = true;
             else
                 e.CanExecute = false;
@@ -254,7 +254,7 @@ namespace HCI_Project.managerPages
                 UnfreezeOnMouseLeave = true
             };
 
-            string message = "This begins the Train Line creating Tutorial\nTo continue press Ctrl C,L or go to New -> TrainLine\nTo exit the Tutorial press Ctrl T,X";
+            string message = "This begins the Train Line creating Tutorial\nTo continue press Ctrl+Shift+W or go to New -> TrainLine\nTo exit the Tutorial press Ctrl T,X";
             this.notifier.ShowWarning(message, optionsMax);
             this.editItem.IsEnabled = false;
             this.helpItem.IsEnabled = false;
@@ -275,7 +275,8 @@ namespace HCI_Project.managerPages
             this.notifier.ShowWarning(message, optionsMax);
             //MessageBox.Show("Klikom na ok se vracate na login screen");
             new MessageBoxCustom("By clicking the ok button you will be returned to the last page you were on", MessageType.Confirmation, MessageButtons.Ok).ShowDialog();
-            this.NavigationService.GoBack();
+            //this.NavigationService.GoBack();
+            MainFrame.Content = new ManagerPage(MainFrame);
         }
 
         private void CancelTutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
@@ -288,7 +289,7 @@ namespace HCI_Project.managerPages
 
         private void CreateTrainTableTutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {
-            if (!isTutorialCreateTrain && !isTutorialCreateTrainLine && !isTutorialCreateTrainTable && enableTutorial)
+            if (!isTutorialCreateTrain && !isTutorialCreateTrainLine && !isTutorialCreateTrainTable /*&& enableTutorial*/)
                 e.CanExecute = true;
             else
                 e.CanExecute = false;
@@ -304,7 +305,7 @@ namespace HCI_Project.managerPages
                 UnfreezeOnMouseLeave = true
             };
 
-            string message = "This begins the Train Table creating Tutorial\nTo continue press Ctrl C,E or go to New -> Train\nTo exit the Tutorial press Ctrl T,X";
+            string message = "This begins the Train Table creating Tutorial\nTo continue press Ctrl+Shift+E or go to New -> Train\nTo exit the Tutorial press Ctrl T,X";
             this.notifier.ShowWarning(message, optionsMax);
             this.editItem.IsEnabled = false;
             this.helpItem.IsEnabled = false;
