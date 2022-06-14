@@ -59,6 +59,11 @@ namespace HCI_Project.utils
             Users.Add(new User(username, password, firstName, lastName, role));
         }
 
+        internal static Train GetTrain(string train)
+        {
+            return Trains.Where(x => x.Name == train).FirstOrDefault();
+        }
+
         public static TrainTimeTable GetTimeTable(TimeTableConfiguration config, DateTime date)
         {
             return TimeTables.FirstOrDefault(x => x.Configuration.ID == config.ID &&
@@ -72,6 +77,11 @@ namespace HCI_Project.utils
         {
             int id = Tickets.Count == 0 ? -1 : Tickets.OrderByDescending(x => x.ID).First().ID;
             Tickets.Add(new Ticket(++id, LoggedInUser, price, seat, seatClass, bought, from, to, departure, arrival, selectedTime));
+        }
+
+        internal static bool? SeatIsFree(int i, int j, TimeTableDisplay selectedTime)
+        {
+            return Tickets.Where(x => x.Seat == 4 * i + j && x.TrainTime.ID == selectedTime.OriginalTimeTable.ID).Any();
         }
 
         public static List<Ticket> GetUserTickets()

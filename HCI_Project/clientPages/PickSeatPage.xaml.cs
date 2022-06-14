@@ -5,6 +5,8 @@ using HCI_Project.utils;
 using HCI_Project.utils.display;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Windows.Controls.Primitives;
+using System.Linq;
 
 namespace HCI_Project.clientPages
 {
@@ -14,6 +16,7 @@ namespace HCI_Project.clientPages
         Station FromStation;
         Station ToStation;
         Frame ClientFrame;
+        List<ToggleButton> seats = new List<ToggleButton>();
 
         public PickSeatPage(TimeTableDisplay selection, string from, string to, Frame clientFrame)
         {
@@ -29,24 +32,20 @@ namespace HCI_Project.clientPages
             To.Text = ToStation.Name;
             TrainName.Text = selection.Train;
 
-            UpdateSeats();
+            DrawSeats();
         }
 
         private void ContinueClick(object sender, RoutedEventArgs e)
         {
-            if (AvailableSeatsTable.SelectedItem == null)
+            var selected = seats.Where(x => (bool)x.IsChecked).FirstOrDefault() as ToggleButton;
+            if (selected == null)
             {
                 MessageBox.Show("You must select the seat before proceeding.");
                 return;
             }
 
-            SeatDisplay selectedSeat = (SeatDisplay) AvailableSeatsTable.SelectedItem;
+            SeatDisplay selectedSeat = new SeatDisplay(int.Parse(selected.Content.ToString()), int.Parse(selected.Content.ToString()) < SelectedTime.OriginalTimeTable.TrainLine.Train.FirstClassCapacity ? "first" : "second", true);
 
-            if (selectedSeat.Occupied)
-            {
-                MessageBox.Show("The seat you selected is taken! Please select another seat.");
-                return;
-            }
 
             ClientFrame.Content = new ConfirmPurchasePage(SelectedTime, selectedSeat, FromStation, ToStation, ClientFrame);
         }
@@ -57,12 +56,41 @@ namespace HCI_Project.clientPages
                 ClientFrame.Content = new PurchasePage(ClientFrame);
         }
 
-        private void UpdateSeats()
+        private void DrawSeats()
         {
-            List<SeatDisplay> searchRes = Database.GetSeats(SelectedTime.OriginalTimeTable);
+            var train = Database.GetTrain(SelectedTime.Train);
+            int totalSeats = train.FirstClassCapacity + train.SecondClassCapacity;
+            int rows = (int)Math.Ceiling(totalSeats / 4.0);
+            TogglesGrid.RowDefinitions.Clear();
+            TogglesGrid.Children.Clear();
+            int count = 1;
 
-            AvailableSeatsTable.ItemsSource = searchRes;
-            AvailableSeatsTable.Items.Refresh();
+            for (int i = 0; i < rows; i++)
+            {
+                TogglesGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(140) });
+                for (int j = 1; j < 5; j++)
+                {
+                    ToggleButton toggle = new ToggleButton
+                    {
+                        Style = count <= train.FirstClassCapacity ? (Style)FindResource("MaterialDesignFlatPrimaryToggleButton") : (Style)FindResource("MaterialDesignFlatToggleButton"),
+                        Content = count,
+                        IsChecked = Database.SeatIsFree(i, j, SelectedTime),
+                        FontSize = 40,
+                        Height = 120,
+                        Width = 120
+                    };
+
+                    Grid.SetColumn(toggle, j);
+                    Grid.SetRow(toggle, i);
+
+                    seats.Add(toggle);
+                    TogglesGrid.Children.Add(toggle);
+
+                    count++;
+                    if (count > train.FirstClassCapacity + train.SecondClassCapacity)
+                        break;
+                }
+            }
         }
 
         private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
