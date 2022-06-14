@@ -37,7 +37,7 @@ namespace HCI_Project.clientPages
 
         private void ContinueClick(object sender, RoutedEventArgs e)
         {
-            var selected = seats.Where(x => (bool)x.IsChecked).FirstOrDefault() as ToggleButton;
+            var selected = seats.Where(x => !(bool)x.IsChecked).FirstOrDefault() as ToggleButton;
             if (selected == null)
             {
                 MessageBox.Show("You must select the seat before proceeding.");
@@ -74,11 +74,12 @@ namespace HCI_Project.clientPages
                     {
                         Style = count <= train.FirstClassCapacity ? (Style)FindResource("MaterialDesignFlatPrimaryToggleButton") : (Style)FindResource("MaterialDesignFlatToggleButton"),
                         Content = count,
-                        IsChecked = Database.SeatIsFree(i, j, SelectedTime),
+                        IsChecked = !Database.SeatIsFree(i, j, SelectedTime),
                         FontSize = 40,
                         Height = 120,
                         Width = 120
                     };
+                    toggle.Unchecked += OnChecked;
 
                     Grid.SetColumn(toggle, j);
                     Grid.SetRow(toggle, i);
@@ -91,6 +92,16 @@ namespace HCI_Project.clientPages
                         break;
                 }
             }
+        }
+
+        private void OnChecked(object sender, EventArgs e)
+        {
+            foreach (ToggleButton tgl in seats)
+            {
+                if (tgl.Content != ((ToggleButton)sender).Content)
+                    tgl.IsChecked = true;
+            }
+                    
         }
 
         private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

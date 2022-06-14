@@ -72,7 +72,7 @@
               Style="{StaticResource MaterialDesignClockVertical}"/>
         </Viewbox>
 
-        <DataGrid Name="TrainLineGrid" Grid.Row="2" Grid.RowSpan="10" Grid.ColumnSpan="2" Margin="20" FontSize="30" SelectionMode="Single" 
+        <DataGrid Name="TrainLineGrid" Grid.Row="2" Grid.RowSpan="10" Grid.ColumnSpan="2" Margin="20" FontSize="30" SelectionMode="Single"  FontFamily="Bahnschrift Light"
                   ItemsSource="{Binding Path=TrainLines}" SelectedItem="{Binding Path=SelectedTrainLine, Mode=TwoWay}" AutoGeneratingColumn="OnAutoGeneratingColumn" SelectedCellsChanged="TrainLineGrid_SelectedCellsChanged"/>
 
         <Button Name="CreateBtn" Grid.Column="3" Grid.Row="10" Margin="0 0 20 20" FontFamily="Bahnschrift Light"

@@ -66,6 +66,7 @@
         
         <DataGrid Grid.RowSpan="12" Grid.Column="1" Margin="0 50 10 10" x:Name="DataTable" FontFamily="Bahnschrift Light"
                   CanUserAddRows="False" SelectionUnit="FullRow" FontSize="25"
+                  AutoGeneratingColumn="OnAutoGeneratingColumn"
                   SelectionMode="Single" ItemsSource="{Binding Source=SearchResult}"/>
     </Grid>
 </Page>

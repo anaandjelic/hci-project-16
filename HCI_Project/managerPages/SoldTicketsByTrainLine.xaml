@@ -37,7 +37,7 @@
         
 
         <DataGrid Name="TicketsTable" Grid.Row="2" Grid.ColumnSpan="6" CanUserResizeRows="False" IsReadOnly="True" Padding="20"
-                  SelectionMode="Single" FontSize="30"
+                  SelectionMode="Single" FontSize="30" FontFamily="Bahnschrift Light"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Customer" Width="*" Binding="{Binding Customer}"/>

@@ -305,7 +305,9 @@
     <Resource Include="images\previewPin.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="help\client.html" />
+    <Content Include="help\client.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="help\clientHelpImages\searchtrainline1.png" />
     <Resource Include="help\clientHelpImages\searchtraintable.png" />
     <Content Include="help\manager.html">

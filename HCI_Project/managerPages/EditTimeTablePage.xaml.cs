@@ -139,7 +139,7 @@ namespace HCI_Project.managerPages
         {
             try
             {
-                var result = new MessageBoxCustom("This action is irreversible and will impact tickets and departures 5 days from now.Do you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
+                var result = new MessageBoxCustom("This action is irreversible and will impact tickets and departures 5 days from now. Do you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
                 if (!(bool)result) { return; }
 
                 SelectedTrainLine = ((TrainLineDisplay)TrainLineGrid.SelectedItem).OriginalTrainLine;

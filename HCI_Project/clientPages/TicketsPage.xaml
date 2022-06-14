@@ -21,27 +21,11 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        
+
         <DataGrid Name="TicketsTable" Grid.Row="1" Grid.ColumnSpan="3" CanUserResizeRows="False" IsReadOnly="True" BorderThickness="0" RowHeight="35" Padding="10"
                   SelectionMode="Single"
                   AutoGenerateColumns="False"
                   SelectedCellsChanged="SelectionChanged">
-            <DataGrid.Resources>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Background" Value="DodgerBlue"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="BorderBrush" Value="#1668b8"/>
-                    <Setter Property="BorderThickness" Value="1"/>
-                    <Setter Property="FontSize" Value="20"/>
-                    <Setter Property="Height" Value="35"/>
-                    <Setter Property="Padding" Value="5,0"/>
-                </Style>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="White"/>
-                    <Setter Property="Foreground" Value="Black"/>
-                    <Setter Property="FontSize" Value="20"/>
-                </Style>
-            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Date}"/>
                 <DataGridTextColumn Header="Departure → Destination" Width="3*" Binding="{Binding DepartureDestination}"/>

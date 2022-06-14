@@ -78,7 +78,7 @@ namespace HCI_Project.managerPages
                     return;
                 }
 
-                var result = new MessageBoxCustom("You are about to change a train. This action will delete any excess tickets for departures that occur 5 days from now.\nDo you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
+                var result = new MessageBoxCustom("You are about to change a train. This action will delete any excess tickets for departures that occur 5 days from now. Do you want to continue?", MessageType.Warning, MessageButtons.YesNo).ShowDialog();
                 if ((bool)result)
                 {
                     var train = TrainComboBox.SelectedItem as Train;

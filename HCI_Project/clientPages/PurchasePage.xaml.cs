@@ -36,7 +36,7 @@ namespace HCI_Project.clientPages
             }
 
             List<TimeTableDisplay> searchRes = Database.GetTimeTableDisplays(from, to, date);
-
+            
             AvailableTimesTable.ItemsSource = searchRes;
             AvailableTimesTable.Items.Refresh();
         }

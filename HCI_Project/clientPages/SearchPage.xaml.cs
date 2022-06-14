@@ -43,6 +43,9 @@ namespace HCI_Project.clientPages
                 case "AvailableSeats":
                     e.Column.Header = "Available seats";
                     break;
+                case "OriginalTimeTable":
+                    e.Column.Visibility = Visibility.Hidden;
+                    break;
             }
         }
     }
