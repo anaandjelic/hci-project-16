@@ -18,10 +18,10 @@ namespace HCI_Project
             MainFrame.Content = new LogInPage(MainFrame);
             Database.AddUser("pera", "pera", "Pera", "Peric", UserRole.CLIENT);
             Database.AddUser("maja", "maja", "Maja", "Majic", UserRole.MANAGER);
-            Database.AddTrain("Vrabac", 3, 4);
+            Database.AddTrain("Vrabac", 3, 10);
             Database.AddTrain("Roda", 2, 5);
-            Database.AddTrain("Noj", 7, 3);
-            Database.AddTrain("Gavran", 4, 3);
+            Database.AddTrain("Noj", 3, 7);
+            Database.AddTrain("Gavran", 4, 8);
             List<Station> stations1 = new List<Station>()
             {
                 new Station("Sombor", 0, 45.773979, 19.118759, new TimeSpan(0)),
@@ -34,14 +34,14 @@ namespace HCI_Project
                 new Station("Subotica", 100, 46.094150, 19.66, new TimeSpan(0)),
                 new Station("Novi Sad", 500, 45.254410, 19.842550, new TimeSpan(2, 0, 0)),
                 new Station("Belgrade", 1000, 44.794043, 20.461006, new TimeSpan(3, 20, 0)),
-                new Station("Valjevo", 980, 44.273660, 19.884121, new TimeSpan(3, 30, 0))
+                new Station("Valjevo", 1300, 44.273660, 19.884121, new TimeSpan(3, 30, 0))
             };
             List<Station> stations3 = new List<Station>()
             {
                 new Station("Sabac", 100, 44.7553, 19.6923, new TimeSpan(0)),
                 new Station("Zagreb", 450, 45.8150, 15.9819, new TimeSpan(1, 25, 0)),
                 new Station("Belgrade", 1000, 44.794043, 20.461006, new TimeSpan(3, 20, 0)),
-                new Station("Valjevo", 980, 44.273660, 19.884121, new TimeSpan(3, 30, 0))
+                new Station("Valjevo", 1300, 44.273660, 19.884121, new TimeSpan(3, 30, 0))
             };
 
             List<Station> stations4 = new List<Station>()
@@ -57,21 +57,21 @@ namespace HCI_Project
             Database.AddTrainLine(stations3, Database.GetTrain(2));
             Database.AddTrainLine(stations4, Database.GetTrain(3));
 
-            Database.AddConfiguration(Database.GetTrainLine(0), new TimeSpan(13, 0, 0), true, true, true, true, true, true, true);
-            Database.AddConfiguration(Database.GetTrainLine(1), new TimeSpan(13, 0, 0), true, true, true, true, true, true, true);
-            Database.AddConfiguration(Database.GetTrainLine(2), new TimeSpan(13, 0, 0), true, true, true, true, true, true, true);
-            Database.AddConfiguration(Database.GetTrainLine(3), new TimeSpan(13, 0, 0), true, true, true, true, true, true, true);
+            Database.AddConfiguration(Database.GetTrainLine(0), new TimeSpan(7, 0, 0), true, true, true, true, true, true, true);
+            Database.AddConfiguration(Database.GetTrainLine(1), new TimeSpan(8, 30, 0), true, true, true, true, true, true, true);
+            Database.AddConfiguration(Database.GetTrainLine(2), new TimeSpan(9, 30, 0), true, true, true, true, true, true, true);
+            Database.AddConfiguration(Database.GetTrainLine(3), new TimeSpan(16, 0, 0), true, true, true, true, true, true, true);
 
-            Database.AddTimeTable(DateTime.Now, Database.GetConfiguration(0));
-            Database.AddTimeTable(DateTime.Now, Database.GetConfiguration(1));
-            Database.AddTimeTable(DateTime.Now, Database.GetConfiguration(2));
-            Database.AddTimeTable(DateTime.Now, Database.GetConfiguration(3));
-
-            Database.AddTimeTable(DateTime.Now.AddDays(1), Database.GetConfiguration(0));
-            Database.AddTimeTable(DateTime.Now.AddDays(1), Database.GetConfiguration(1));
-            Database.AddTimeTable(DateTime.Now.AddDays(1), Database.GetConfiguration(2));
-            Database.AddTimeTable(DateTime.Now.AddDays(1), Database.GetConfiguration(3));
-            
+            for (int i = 0; i < 14; i++)
+            {
+                Database.AddTimeTable(DateTime.Now.AddDays(i), Database.GetConfiguration(0));
+                if (i % 2 == 0)
+                    Database.AddTimeTable(DateTime.Now.AddDays(i), Database.GetConfiguration(1));
+                if (i % 3 == 0)
+                    Database.AddTimeTable(DateTime.Now.AddDays(i), Database.GetConfiguration(2));
+                if (i % 4 != 0)
+                    Database.AddTimeTable(DateTime.Now.AddDays(i), Database.GetConfiguration(3));
+            }
         }
 
         private void FullScreen_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)

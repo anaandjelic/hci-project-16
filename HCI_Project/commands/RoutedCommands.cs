@@ -16,7 +16,6 @@ namespace HCI_Project.commands
         public static readonly ICommand FormatHistoryTickets;
         public static readonly ICommand FormatHistoryReservations;
         public static readonly ICommand FormatPurchaseTicket;
-        public static readonly ICommand FormatReserveTicket;
 
         //managers
         public static readonly ICommand FormatCreateTrain;
@@ -77,10 +76,6 @@ namespace HCI_Project.commands
             inputGestures = new InputGestureCollection();
             inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.P }, ModifierKeys.Control, "Ctrl+P"));
             FormatPurchaseTicket = new RoutedUICommand("Format PurchaseTicket", "FormatPurchaseTicket", typeof(RoutedCommands), inputGestures);
-
-            inputGestures = new InputGestureCollection();
-            inputGestures.Add(new MultiKey.MultiKeyGesture(new Key[] { Key.R }, ModifierKeys.Control, "Ctrl+R"));
-            FormatReserveTicket = new RoutedUICommand("Format ReserveTicket", "FormatReserveTicket", typeof(RoutedCommands), inputGestures);
 
             //managers
             //create

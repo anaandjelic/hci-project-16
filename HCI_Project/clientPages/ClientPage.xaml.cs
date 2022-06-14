@@ -83,14 +83,6 @@ namespace HCI_Project.clientPages
                 e.CanExecute = true;
         }
 
-        private void HistoryReservations_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
-        {
-            if (isTutorialLine)
-                e.CanExecute = false;
-            else
-                e.CanExecute = true;
-        }
-
         private void LogOut_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
             Database.LogOut();
@@ -102,12 +94,6 @@ namespace HCI_Project.clientPages
             ClientFrame.Content = new TicketsPage(MainFrame);
             enableTutorial = false;
             ClientFrame.Focus();
-        }
-
-        private void HistoryReservations_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
-        {
-            // ClientFrame.Content = new ReservationsPage();
-            MessageBox.Show("Reservation window is development");
         }
 
         private void Tutorial_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
@@ -155,21 +141,6 @@ namespace HCI_Project.clientPages
             ClientFrame.Focus();
         }
 
-        private void Reserve_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
-        {
-            if (isTutorialLine)
-                e.CanExecute = false;
-            else
-                e.CanExecute = true;
-        }
-
-        private void Reserve_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
-        {
-            ClientFrame.Content = new SearchPage();
-            enableTutorial = false;
-            ClientFrame.Focus();
-        }
-
         //  NOTIFIKACIJE (zamena za msgbox) 
         // vrv mogu da ga prosledjujem po pageovima za njegovo prikazivanje
         Notifier notifier = new Notifier(cfg =>
@@ -188,8 +159,6 @@ namespace HCI_Project.clientPages
 
             cfg.DisplayOptions.Width = Application.Current.MainWindow.Width /3;
         });
-
-
 
         private void ClientHelp_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
         {

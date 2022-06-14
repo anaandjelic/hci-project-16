@@ -44,12 +44,8 @@
                 <MenuItem x:Name="TimeTableBtn" Header="Timetable" Command="cmd:RoutedCommands.FormatSearchTrainTable" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem x:Name="TicketsBTN" Header="Tickets"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
-                <MenuItem Header="Purchase" Command="cmd:RoutedCommands.FormatPurchaseTicket" FontFamily="Bahnschrift Light"/>
-                <MenuItem Header="Reserve" Command="cmd:RoutedCommands.FormatReserveTicket" FontFamily="Bahnschrift Light"/>
-            </MenuItem>
-            <MenuItem x:Name="HistoryBTN" Header="History"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
-                <MenuItem Header="Tickets" Command="cmd:RoutedCommands.FormatHistoryTickets" FontFamily="Bahnschrift Light"/>
-                <MenuItem Header="Reservations" Command="cmd:RoutedCommands.FormatHistoryReservations" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Purchase/Reserve" Command="cmd:RoutedCommands.FormatPurchaseTicket" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="History" Command="cmd:RoutedCommands.FormatHistoryTickets" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem x:Name="helpItem" Header="Help" FontFamily="BahnSchrift Light" Background="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Center" HorizontalAlignment="Right" Command="cmd:RoutedCommands.FormatClientHelp"/>
         </Menu>
