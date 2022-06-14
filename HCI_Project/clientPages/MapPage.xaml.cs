@@ -123,13 +123,15 @@ namespace HCI_Project.clientPages
                     //string message = "Ovim se zavrsava tutorijal Search Train Lines";
                     string message = "This ends the Search Train Lines Tutorial";
                     notifications(message, "Success");
-                    this.isTutorialLine = false;
                     //return; // KAKO MOGU DA SE VRATIM NA POCETNI PROZOR!??!?!? JEDINO DA FORSIRAM LOGOUT??
                     //Thread.Sleep(2000);
                     //MessageBox.Show("Klikom na ok dugme se vracate na login stranicu");
                     new MessageBoxCustom("By clicking the ok button you will be returned to the last page you were on", MessageType.Success, MessageButtons.Ok).ShowDialog();
                     // zasad mora biti koriscen msgbox da bi se prikazala zeljena ruta
-                    this.NavigationService.GoBack();
+                    //this.NavigationService?.Navigate(new ClientPage(MainFrame));
+                    MainFrame.Content = new ClientPage(MainFrame);
+
+                    // da su sve tabele iste mora biti style bez plave
                 }
             }
         }

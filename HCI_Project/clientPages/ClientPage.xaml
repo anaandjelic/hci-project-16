@@ -43,7 +43,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem x:Name="MenuItemSerach" Header="Search"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">
-                <MenuItem Header="TrainLine" Command="cmd:RoutedCommands.FormatSearchTrainLine" FontFamily="Bahnschrift Light"/>
+                <MenuItem Header="Train line" Command="cmd:RoutedCommands.FormatSearchTrainLine" FontFamily="Bahnschrift Light"/>
                 <MenuItem x:Name="TimeTableBtn" Header="Timetable" Command="cmd:RoutedCommands.FormatSearchTrainTable" FontFamily="Bahnschrift Light"/>
             </MenuItem>
             <MenuItem x:Name="TicketsBTN" Header="Tickets"  FontFamily="Bahnschrift Light" Background="{DynamicResource PrimaryHueMidBrush}">

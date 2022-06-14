@@ -58,10 +58,10 @@ namespace HCI_Project.popups
             {
                 if(isTutorialCreateTrainLine)
                 {
-                    string message = "Uneti naziv stanice";
+                    string message = "Enter stations name";
                     notifications(message, "Information");
 
-                    message = "Pritisnuti Confirm dugme za nastavak";
+                    message = "Press Confirm to continue";
                     notifications(message, "Information");
                 }
                 TimeField.IsEnabled = false;
@@ -76,10 +76,11 @@ namespace HCI_Project.popups
             {
                 if(isTutorialCreateTrainLine)
                 {
-                    string message = "Uneti naziv stanice, cenu puta i vreme trajanja voznje";
+                    //string message = "Uneti naziv stanice, cenu puta i vreme trajanja voznje";
+                    string message = "Type in stations name, price and required time";
                     notifications(message, "Information");
 
-                    message = "Pritisnuti Confirm dugme za nastavak";
+                    message = "Press Confirm to continue";
                     notifications(message, "Information");
                 }
             }
@@ -108,7 +109,7 @@ namespace HCI_Project.popups
         {
             var optionsMax = new MessageOptions
             {
-                FontSize = 25,
+                FontSize = 30,
                 FreezeOnMouseEnter = true,
                 UnfreezeOnMouseLeave = true
             };
